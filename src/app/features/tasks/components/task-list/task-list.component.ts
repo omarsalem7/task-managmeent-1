@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 
 export interface PeriodicElement {
@@ -25,11 +26,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [MatTableModule, ListHeaderComponent],
+  imports: [MatTableModule, ListHeaderComponent, MatPaginatorModule],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+  onPageChange(event: any) {
+    console.log(event);
+    // pageIndex , pageSize
+  }
 }
