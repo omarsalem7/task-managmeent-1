@@ -1,0 +1,7 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div>
+    <input formControlName="title" placeholder="Task Title" />
+    <app-form-error [control]="taskForm.get('title')"></app-form-error>
+  </div>
+  <!-- Other form fields -->
+</form>
