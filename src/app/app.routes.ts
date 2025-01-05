@@ -34,6 +34,6 @@ export const routes: Routes = [
       import('./shared/ui/not-found/not-found.component').then(
         (m) => m.NotFoundComponent
       ),
-    title: '404 - Not Found',
+    // title: '404 - Not Found',
   },
 ];

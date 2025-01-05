@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private router: Router) {
     // Check localStorage on service initialization
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = localStorage.getItem('currentUser') || 'true';
     if (storedUser) {
       this.currentUserSubject.next(JSON.parse(storedUser));
     }
