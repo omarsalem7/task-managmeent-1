@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .custom-button {
+    @apply bg-white text-primary py-2 px-6 rounded-full shadow hover:border-white;
+  }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100..900&display=swap");
 
 [dir="rtl"] {

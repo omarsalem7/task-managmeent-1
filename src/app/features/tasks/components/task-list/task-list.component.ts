@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 
 export interface PeriodicElement {
   name: string;
@@ -24,7 +25,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, ListHeaderComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
