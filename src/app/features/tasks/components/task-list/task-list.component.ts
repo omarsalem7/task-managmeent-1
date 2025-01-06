@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MenuModule } from 'primeng/menu';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
@@ -56,6 +57,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     FilterListComponent,
     FormsModule,
     MatDialogModule,
+    MenuModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -75,7 +77,7 @@ export class TaskListComponent {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '35vw',
       data: {
-        record: 'panda',
+        record: this.record,
       },
     });
 
@@ -95,7 +97,7 @@ export class TaskListComponent {
         this.dataSource = results;
       });
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
 
   dataSource = ELEMENT_DATA;
   private searchSubject = new Subject<string>();
@@ -104,6 +106,19 @@ export class TaskListComponent {
     this.searchSubject.next(value);
     this.filters.searchValue = value;
   }
+  newRecord() {
+    this.record = null;
+    this.openDialog();
+  }
+
+  items = [
+    {
+      label: 'حذف',
+      icon: 'pi pi-trash',
+      command: () => {},
+    },
+    { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
+  ];
 
   onPageChange(event: any) {
     console.log(event);
@@ -112,6 +127,11 @@ export class TaskListComponent {
 
   fetchResults() {
     return of();
+  }
+
+  record: any;
+  editTask(record: any) {
+    this.record = record;
   }
 
   filterHandler() {

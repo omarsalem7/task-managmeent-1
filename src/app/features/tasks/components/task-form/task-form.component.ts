@@ -14,6 +14,9 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-task-form',
@@ -25,6 +28,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
+    InputTextModule,
+    InputTextareaModule,
+    CalendarModule,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
@@ -36,9 +42,12 @@ export class TaskFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.taskForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      // description: ['', Validators.required],
-      // dueDate: [null, Validators.required],
+      subject: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', Validators.required],
+      employee: ['', Validators.required],
+      company: ['', Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
     });
   }
 

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>اضافه مهمه</h2>
+<h2 mat-dialog-title>{{ data.record ? "تعديل" : "اضافه" }}</h2>
 <mat-dialog-content class="mat-typography">
   <form
     id="myForm"
@@ -7,20 +7,56 @@
     class="font-arabic"
   >
     <div class="mb-3">
-      <mat-form-field class="example-full-width">
-        <mat-label>Favorite food</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi" />
-      </mat-form-field>
-
-      <app-form-error [control]="taskForm.get('title')"></app-form-error>
+      <label for="subject">موضوع المهمة</label>
+      <input type="text" id="subject" pInputText formControlName="subject" />
+      <app-form-error [control]="taskForm.get('subject')"></app-form-error>
     </div>
-
     <div class="mb-3">
-      <mat-form-field class="example-full-width">
-        <mat-label>Leave a comment</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-      <app-form-error [control]="taskForm.get('title')"></app-form-error>
+      <label for="company">اسم الشركة</label>
+      <input type="text" id="company" pInputText formControlName="company" />
+      <app-form-error [control]="taskForm.get('company')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="employee">اسم الموظف</label>
+      <input type="text" id="employee" pInputText formControlName="employee" />
+      <app-form-error [control]="taskForm.get('employee')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="description">وصف المهمه</label>
+      <textarea
+        formControlName="description"
+        rows="3"
+        id="description"
+        [autoResize]="true"
+        pInputTextarea
+      ></textarea>
+      <app-form-error [control]="taskForm.get('description')"></app-form-error>
+    </div>
+    <div class="flex gap-5">
+      <div class="flex flex-col gap-1 w-full">
+        <label for="startDate">تاريخ الانشاء</label>
+        <p-calendar
+          id="startDate"
+          formControlName="startDate"
+          [style]="{ minWidth: '100%' }"
+          [showButtonBar]="true"
+          appendTo="body"
+          class="w-full"
+        />
+        <app-form-error [control]="taskForm.get('startDate')"></app-form-error>
+      </div>
+      <div class="flex flex-col gap-1 w-full">
+        <label for="endDate">تاريخ الانتهاء</label>
+        <p-calendar
+          id="endDate"
+          formControlName="endDate"
+          [style]="{ minWidth: '100%' }"
+          [showButtonBar]="true"
+          appendTo="body"
+          class="w-full"
+        />
+        <app-form-error [control]="taskForm.get('endDate')"></app-form-error>
+      </div>
     </div>
   </form>
 </mat-dialog-content>

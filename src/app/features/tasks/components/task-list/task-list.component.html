@@ -1,5 +1,5 @@
 <app-list-header title="عدد المهام" [count]="5">
-  <button class="custom-button" (click)="openDialog()">اضافة مهمه</button>
+  <button class="custom-button" (click)="newRecord()">اضافة مهمه</button>
   <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>
@@ -61,6 +61,20 @@
     <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
   </ng-container>
 
+  <!-- Edit Action Column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>إجراء</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-button
+        color="primary"
+        (click)="editTask(element); menu.toggle($event)"
+      >
+        <i class="pi pi-ellipsis-v"></i>
+      </button>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
@@ -72,3 +86,4 @@
   (page)="onPageChange($event)"
 >
 </mat-paginator>
+<p-menu #menu [model]="items" [popup]="true" />
