@@ -5091,6 +5091,7 @@ table {
 }
 .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
   font-size: 2rem;
+  padding: 0 8px;
 }
 .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
   margin-left: 1rem;

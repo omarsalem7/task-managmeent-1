@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,6 +23,7 @@ import {
   of,
 } from 'rxjs';
 import { TaskFormComponent } from '../task-form/task-form.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 export interface PeriodicElement {
   name: string;
@@ -45,7 +48,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), ConfirmationService, MessageService],
   imports: [
     CommonModule,
     MatTableModule,
@@ -58,6 +61,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
     FormsModule,
     MatDialogModule,
     MenuModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -86,7 +91,10 @@ export class TaskListComponent {
     });
   }
 
-  constructor() {
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {
     this.searchSubject
       .pipe(
         debounceTime(300),
@@ -112,12 +120,33 @@ export class TaskListComponent {
   }
 
   items = [
+    { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
     {
       label: 'حذف',
       icon: 'pi pi-trash',
-      command: () => {},
+      command: (event: any) => {
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          message: 'هل انت متاكد من حذف المهمه ؟',
+          header: '',
+          icon: 'pi pi-info-circle',
+          acceptButtonStyleClass: 'p-button-danger p-button-text',
+          rejectButtonStyleClass: 'p-button-text p-button-text',
+          acceptLabel: 'نعم انا متاكد',
+          rejectLabel: 'لا اريد ان احذف',
+          acceptIcon: 'none',
+          rejectIcon: 'none',
+
+          accept: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'حذف',
+              detail: 'تم الحذف بنجاح',
+            });
+          },
+        });
+      },
     },
-    { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
   ];
 
   onPageChange(event: any) {
