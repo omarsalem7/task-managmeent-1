@@ -4,12 +4,37 @@
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>
 <app-filter-list title="المهام" (searchChange)="updateSearch($event)">
-  <div class="w-full max-w-sm min-w-[200px]">
-    <input class="custom-input w-64" placeholder="Type here..." />
+  <div class="flex gap-6 mb-4 flex-wrap items-center">
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ البدء</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="filters.startDate"
+      />
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.endDate" />
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <button class="btn-outline" (click)="filterHandler()">بحث</button>
+    </div>
   </div>
-  <div class="w-full max-w-sm min-w-[200px]">
-    <input class="custom-input w-64" placeholder="Type here..." /></div
-></app-filter-list>
+</app-filter-list>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-table">
   <!-- Position Column -->

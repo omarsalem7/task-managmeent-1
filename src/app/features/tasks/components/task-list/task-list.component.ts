@@ -1,10 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { formatDate } from '@angular/common';
+
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 import {
@@ -38,6 +42,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-task-list',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [
     CommonModule,
     MatTableModule,
@@ -45,8 +50,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatPaginatorModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule,
+    MatDatepickerModule,
     FilterListComponent,
+    FormsModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -56,6 +62,8 @@ export class TaskListComponent {
     searchValue: '',
     pageIndex: 0,
     pageSize: 10,
+    startDate: '',
+    endDate: '',
   };
   constructor() {
     this.searchSubject
@@ -69,6 +77,7 @@ export class TaskListComponent {
       });
   }
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
   dataSource = ELEMENT_DATA;
   private searchSubject = new Subject<string>();
 
@@ -84,5 +93,19 @@ export class TaskListComponent {
 
   fetchResults() {
     return of();
+  }
+
+  filterHandler() {
+    this.filters.startDate = formatDate(
+      this.filters.startDate,
+      'yyyy-MM-dd',
+      'en-US'
+    );
+    this.filters.endDate = formatDate(
+      this.filters.endDate,
+      'yyyy-MM-dd',
+      'en-US'
+    );
+    console.log(this.filters);
   }
 }
