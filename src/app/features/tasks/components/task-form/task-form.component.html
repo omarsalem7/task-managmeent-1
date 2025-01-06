@@ -1,7 +1,38 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <div>
-    <input formControlName="title" placeholder="Task Title" />
-    <app-form-error [control]="taskForm.get('title')"></app-form-error>
-  </div>
-  <!-- Other form fields -->
-</form>
+<h2 mat-dialog-title>اضافه مهمه</h2>
+<mat-dialog-content class="mat-typography">
+  <form
+    id="myForm"
+    [formGroup]="taskForm"
+    (ngSubmit)="onSubmit()"
+    class="font-arabic"
+  >
+    <div class="mb-3">
+      <mat-form-field class="example-full-width">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi" />
+      </mat-form-field>
+
+      <app-form-error [control]="taskForm.get('title')"></app-form-error>
+    </div>
+
+    <div class="mb-3">
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+      <app-form-error [control]="taskForm.get('title')"></app-form-error>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="font-arabic">إلغاء</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    type="submit"
+    form="myForm"
+    class="font-arabic"
+  >
+    {{ data.record ? "تعديل" : "اضافه" }}
+  </button>
+</mat-dialog-actions>

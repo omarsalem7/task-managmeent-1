@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { formatDate } from '@angular/common';
 
 import { MatTableModule } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
@@ -18,6 +19,7 @@ import {
   Subject,
   of,
 } from 'rxjs';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 export interface PeriodicElement {
   name: string;
@@ -53,6 +55,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatDatepickerModule,
     FilterListComponent,
     FormsModule,
+    MatDialogModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -65,6 +68,22 @@ export class TaskListComponent {
     startDate: '',
     endDate: '',
   };
+
+  readonly dialog = inject(MatDialog);
+
+  openDialog() {
+    const dialogRef = this.dialog.open(TaskFormComponent, {
+      width: '35vw',
+      data: {
+        record: 'panda',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   constructor() {
     this.searchSubject
       .pipe(
