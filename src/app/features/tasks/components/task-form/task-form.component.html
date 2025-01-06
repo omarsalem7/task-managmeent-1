@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ data.record ? "تعديل" : "اضافه" }}</h2>
+<h2 mat-dialog-title>{{ data ? "تعديل" : "اضافه" }}</h2>
 <mat-dialog-content class="mat-typography">
   <form
     id="myForm"
@@ -69,6 +69,6 @@
     form="myForm"
     class="font-arabic"
   >
-    {{ data.record ? "تعديل" : "اضافه" }}
+    {{ data ? "تعديل" : "اضافه" }}
   </button>
 </mat-dialog-actions>

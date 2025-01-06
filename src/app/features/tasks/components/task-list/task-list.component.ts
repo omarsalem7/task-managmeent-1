@@ -29,20 +29,20 @@ export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
-  symbol: string;
+  subject: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+  { position: 1, name: 'Hydrogen', weight: 1.0079, subject: 'dsdsds' },
+  { position: 2, name: 'Helium', weight: 4.0026, subject: 'He' },
+  { position: 3, name: 'Lithium', weight: 6.941, subject: 'Li' },
+  { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
+  { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
+  { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
+  { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
+  { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
+  { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
 ];
 
 @Component({
@@ -87,7 +87,7 @@ export class TaskListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      console.log(result);
     });
   }
 
@@ -105,7 +105,13 @@ export class TaskListComponent {
         this.dataSource = results;
       });
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'weight',
+    'subject',
+    'edit',
+  ];
 
   dataSource = ELEMENT_DATA;
   private searchSubject = new Subject<string>();

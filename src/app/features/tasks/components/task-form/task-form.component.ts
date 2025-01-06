@@ -36,14 +36,16 @@ import { CalendarModule } from 'primeng/calendar';
   styleUrl: './task-form.component.scss',
 })
 export class TaskFormComponent {
-  data = inject(MAT_DIALOG_DATA);
+  data = inject(MAT_DIALOG_DATA).record;
   taskForm: FormGroup;
   dialogRef = inject(MatDialogRef<TaskFormComponent>);
 
   constructor(private fb: FormBuilder) {
+    const { subject, description, employee, company, startDate, endDate } =
+      this.data || {};
     this.taskForm = this.fb.group({
-      subject: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', Validators.required],
+      subject: [subject ?? '', [Validators.required]],
+      description: [description ?? '', Validators.required],
       employee: ['', Validators.required],
       company: ['', Validators.required],
       startDate: [null, Validators.required],
@@ -60,5 +62,7 @@ export class TaskFormComponent {
       this.taskForm.markAllAsTouched();
     }
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+  }
 }
