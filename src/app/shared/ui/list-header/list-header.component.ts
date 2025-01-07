@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './list-header.component.scss',
 })
 export class ListHeaderComponent {
-  @Input({ required: true }) title!: string;
+  @Input({ required: true }) header!: string;
   @Input({ required: true }) count!: number;
 }

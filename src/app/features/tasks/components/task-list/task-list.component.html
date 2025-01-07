@@ -1,9 +1,9 @@
-<app-list-header title="عدد المهام" [count]="5">
+<app-list-header header="عدد المهام" [count]="5">
   <button class="custom-button" (click)="newRecord()">اضافة مهمه</button>
   <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>
-<app-filter-list title="المهام" (searchChange)="updateSearch($event)">
+<app-filter-list header="المهام" (searchChange)="updateSearch($event)">
   <div class="flex gap-6 mb-4 flex-wrap items-center">
     <mat-form-field>
       <mat-label class="font-arabic">تاريخ البدء</mat-label>

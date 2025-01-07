@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './filter-list.component.scss',
 })
 export class FilterListComponent {
-  @Input() title: string = '';
+  @Input() header: string = '';
   @Output() searchChange = new EventEmitter<string>();
 
   isOpenFilter: boolean = false;
