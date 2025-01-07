@@ -33,15 +33,15 @@ export interface PeriodicElement {
   subject: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
+//   { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
+//   { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
+//   { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
+//   { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
+//   { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
+//   { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
+// ];
 
 @Component({
   selector: 'app-employee-list',
@@ -67,11 +67,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class EmployeeListComponent {
   filters = {
-    searchValue: '',
-    pageIndex: 0,
-    pageSize: 10,
-    startDate: '',
-    endDate: '',
+    SearchTerm: '',
+    PageNumber: 1,
+    PageSize: 5,
+    StartDate: '',
+    EndDate: '',
   };
 
   readonly dialog = inject(MatDialog);
@@ -96,31 +96,34 @@ export class EmployeeListComponent {
   ) {
     this.searchSubject
       .pipe(
-        debounceTime(300),
+        debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.fetchResults())
+        switchMap(() => this.employeeService.getList(this.filters))
       )
-      .subscribe((results) => {
-        this.dataSource = results;
+      .subscribe((results: any) => {
+        console.log(results);
+        this.dataSource = results.data;
+        this.totalCount = results.totalCount;
       });
   }
   displayedColumns: string[] = [
-    'position',
-    'name',
-    'weight',
-    'subject',
-    'asd',
-    'faq',
-    'test',
+    'fullName',
+    'jobNumber',
+    'company',
+    'email',
+    'phoneNumber',
+    'jobTitle',
+    'startDate',
+    'endDate',
     'edit',
   ];
 
-  dataSource = ELEMENT_DATA;
+  dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
   updateSearch(value: string) {
     this.searchSubject.next(value);
-    this.filters.searchValue = value;
+    this.filters.SearchTerm = value;
   }
   newRecord() {
     this.record = null;
@@ -159,6 +162,9 @@ export class EmployeeListComponent {
 
   onPageChange(event: any) {
     console.log(event);
+    this.filters.PageSize = event.pageSize;
+    this.filters.PageNumber = event.pageIndex + 1;
+    this.getList();
     // pageIndex , pageSize
   }
 
@@ -171,23 +177,29 @@ export class EmployeeListComponent {
     this.record = record;
   }
 
-  filterHandler() {
-    this.filters.startDate = formatDate(
-      this.filters.startDate,
+  filterHandler(isRemoved?: boolean) {
+    this.filters.StartDate = formatDate(
+      this.filters.StartDate,
       'yyyy-MM-dd',
       'en-US'
     );
-    this.filters.endDate = formatDate(
-      this.filters.endDate,
+    this.filters.EndDate = formatDate(
+      this.filters.EndDate,
       'yyyy-MM-dd',
       'en-US'
     );
-    console.log(this.filters);
+    if (isRemoved) {
+      this.filters.StartDate = '';
+      this.filters.EndDate = '';
+    }
+    this.getList();
   }
 
+  totalCount: number = 0;
   getList() {
-    this.employeeService.getList().subscribe((res) => {
-      console.log(res);
+    this.employeeService.getList(this.filters).subscribe((res: any) => {
+      this.dataSource = res.data;
+      this.totalCount = res.totalCount;
     });
   }
 

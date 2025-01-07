@@ -19,17 +19,19 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (
       alert('refreshToken interceptor');
       if (error.status === 401 && !req.url.includes('refresh')) {
         let currentUser = localStorage.getItem('currentUser');
-        const refreshToken = currentUser
-          ? JSON.parse(currentUser)['refreshToken']
-          : null;
+        const current = currentUser ? JSON.parse(currentUser) : null;
 
-        if (refreshToken) {
-          return authService.refreshToken(refreshToken).pipe(
+        if (current) {
+          const tokens = {
+            refreshToken: current.refreshToken,
+            token: current.token,
+          };
+          return authService.refreshToken(tokens).pipe(
             switchMap((response: any) => {
+              console.log(response);
               // Save the new access token
-              let tempUser = currentUser ? JSON.parse(currentUser) : null;
-              tempUser = { ...tempUser, token: response.token };
-              localStorage.setItem('currentUser', tempUser);
+              let tempUser = { ...current, token: response.token };
+              localStorage.setItem('currentUser', JSON.stringify(tempUser));
 
               // Retry the original request with the new token
               const clonedReq = req.clone({
@@ -39,6 +41,12 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (
               });
 
               return next(clonedReq);
+            }),
+            catchError((refreshError) => {
+              // Handle refresh token error
+              console.error('Refresh token error', refreshError);
+              authService.logout();
+              return throwError(() => refreshError);
             })
           );
         }
