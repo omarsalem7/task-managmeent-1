@@ -93,6 +93,8 @@
     form="myForm"
     class="font-arabic"
   >
-    {{ data ? "تعديل" : "اضافه" }}
+    <span *ngIf="!loading">{{ data ? "تعديل" : "اضافه" }}</span>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
   </button>
 </mat-dialog-actions>
+<p-toast />

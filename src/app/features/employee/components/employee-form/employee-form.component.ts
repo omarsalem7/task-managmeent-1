@@ -21,12 +21,15 @@ import { TenantsService } from '../../../../core/services/tenants';
 import { EmployeeService } from '../../../../core/services/employee';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    CommonModule,
     FormErrorComponent,
     MatDialogModule,
     MatButtonModule,
@@ -36,6 +39,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextareaModule,
     DropdownModule,
     ToastModule,
+    MatProgressSpinnerModule,
   ],
   providers: [MessageService],
   templateUrl: './employee-form.component.html',
@@ -46,6 +50,7 @@ export class EmployeeFormComponent {
   employeeService = inject(EmployeeService);
   taskForm: FormGroup;
   dialogRef = inject(MatDialogRef<EmployeeFormComponent>);
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -77,8 +82,10 @@ export class EmployeeFormComponent {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.taskForm.valid) {
       this.employeeService.create(this.taskForm.value).subscribe((res) => {
+        //  this.loading = false;
         this.messageService.add({
           severity: 'success',
           summary: 'نجح',
