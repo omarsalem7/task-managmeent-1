@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,13 @@ import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  authService = inject(AuthService);
+  isAuth: boolean = false;
   title = 'task-management-app';
+  ngOnInit(): void {
+    this.authService.isAuthenticated().subscribe((res) => {
+      console.log(res);
+      this.isAuth = res;
+    });
+  }
 }

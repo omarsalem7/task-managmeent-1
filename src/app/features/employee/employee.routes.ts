@@ -4,7 +4,7 @@ import { authGuard } from '../../core/guards/auth.guard';
 export const EMPLOYEE_ROUTES: Routes = [
   {
     path: '',
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     data: { title: 'الموظفين' },
     children: [
       {

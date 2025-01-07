@@ -109,6 +109,9 @@ export class EmployeeListComponent {
     'name',
     'weight',
     'subject',
+    'asd',
+    'faq',
+    'test',
     'edit',
   ];
 

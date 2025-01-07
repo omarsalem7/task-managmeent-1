@@ -5,9 +5,11 @@ import { ErrorService } from '../services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const errorService = inject(ErrorService);
+  const authService = inject(AuthService);
   const router = inject(Router);
 
   return next(req).pipe(
@@ -24,6 +26,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             errorMessage = handleValidationError(error.error);
             break;
           case 401:
+            authService.logout();
             router.navigate(['/auth/login']);
             errorMessage = 'Please log in to continue';
             break;
