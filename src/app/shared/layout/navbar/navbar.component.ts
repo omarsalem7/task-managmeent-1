@@ -7,6 +7,7 @@ import {
   RouterModule,
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +21,8 @@ export class NavbarComponent {
   constructor(
     private titleService: Title,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -46,5 +48,9 @@ export class NavbarComponent {
         this.currentTitle = data['title'] || 'Default Title';
         this.titleService.setTitle(this.currentTitle);
       });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
