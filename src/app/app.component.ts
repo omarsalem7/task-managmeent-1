@@ -17,7 +17,6 @@ export class AppComponent {
   title = 'task-management-app';
   ngOnInit(): void {
     this.authService.isAuthenticated().subscribe((res) => {
-      console.log(res);
       this.isAuth = res;
     });
   }

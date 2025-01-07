@@ -85,7 +85,9 @@ export class EmployeeListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      if (result == 'refresh') {
+        this.getList();
+      }
     });
   }
 

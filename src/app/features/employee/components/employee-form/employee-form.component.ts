@@ -66,10 +66,10 @@ export class EmployeeFormComponent {
     this.taskForm = this.fb.group({
       fullName: [fullName ?? '', [Validators.required]],
       email: [email ?? '', Validators.required],
-      password: [password ?? '', Validators.required],
+      password: [password ?? ''],
       phoneNumber: [phoneNumber ?? '', Validators.required],
       jobNumber: [jobNumber ?? '', Validators.required],
-      identityNumber: [identityNumber ?? '', Validators.required],
+      identityNumber: [identityNumber ?? ''],
       jobTitle: [jobTitle ?? null, Validators.required],
       nationality: [nationality ?? null],
       tenantId: [tenantId ?? null, Validators.required],
@@ -84,7 +84,7 @@ export class EmployeeFormComponent {
           summary: 'نجح',
           detail: 'تم اضافه الموظف بنجاح',
         });
-        this.dialogRef.close(this.taskForm.value);
+        this.dialogRef.close('refresh');
       });
     } else {
       this.taskForm.markAllAsTouched();
