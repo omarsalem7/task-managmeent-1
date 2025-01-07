@@ -14,10 +14,10 @@ export class ErrorService {
   showError(message: string) {
     this.errorSubject.next(message);
     this.snackBar.open(message, 'Close', {
-      duration: 5000,
+      duration: 4000,
       panelClass: ['error-snackbar'],
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
     });
   }
 }

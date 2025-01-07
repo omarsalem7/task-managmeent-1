@@ -35,6 +35,10 @@ export class AuthService {
       );
   }
 
+  refreshToken(refreshToken: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/refresh`, { refreshToken });
+  }
+
   logout(): void {
     // Remove user details and token
     // this.http.post<any>(`${this.baseUrl}/auth/logout`, {});

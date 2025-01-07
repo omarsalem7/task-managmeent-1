@@ -55,8 +55,6 @@ export class TaskFormComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      alert('valid');
-      // Submit form
       this.dialogRef.close(this.taskForm.value);
     } else {
       this.taskForm.markAllAsTouched();
