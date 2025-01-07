@@ -24,6 +24,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'employee',
+    loadChildren: () =>
+      import('./features/employee/employee.routes').then(
+        (m) => m.EMPLOYEE_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

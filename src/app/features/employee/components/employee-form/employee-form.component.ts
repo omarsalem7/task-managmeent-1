@@ -32,13 +32,13 @@ import { CalendarModule } from 'primeng/calendar';
     InputTextareaModule,
     CalendarModule,
   ],
-  templateUrl: './task-form.component.html',
-  styleUrl: './task-form.component.scss',
+  templateUrl: './employee-form.component.html',
+  styleUrl: './employee-form.component.scss',
 })
-export class TaskFormComponent {
+export class EmployeeFormComponent {
   data = inject(MAT_DIALOG_DATA).record;
   taskForm: FormGroup;
-  dialogRef = inject(MatDialogRef<TaskFormComponent>);
+  dialogRef = inject(MatDialogRef<EmployeeFormComponent>);
 
   constructor(private fb: FormBuilder) {
     const { subject, description, employee, company, startDate, endDate } =

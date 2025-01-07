@@ -22,8 +22,9 @@ import {
   Subject,
   of,
 } from 'rxjs';
-import { TaskFormComponent } from '../task-form/task-form.component';
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { EmployeeService } from '../../../../core/services/employee';
 
 export interface PeriodicElement {
   name: string;
@@ -33,9 +34,6 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, subject: 'dsdsds' },
-  { position: 2, name: 'Helium', weight: 4.0026, subject: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, subject: 'Li' },
   { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
   { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
   { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
@@ -64,10 +62,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
     ConfirmDialogModule,
     ToastModule,
   ],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss',
+  templateUrl: './employee-list.component.html',
+  styleUrl: './employee-list.component.scss',
 })
-export class TaskListComponent {
+export class EmployeeListComponent {
   filters = {
     searchValue: '',
     pageIndex: 0,
@@ -79,7 +77,7 @@ export class TaskListComponent {
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(TaskFormComponent, {
+    const dialogRef = this.dialog.open(EmployeeFormComponent, {
       width: '35vw',
       data: {
         record: this.record,
@@ -93,7 +91,8 @@ export class TaskListComponent {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private employeeService: EmployeeService
   ) {
     this.searchSubject
       .pipe(
@@ -181,5 +180,17 @@ export class TaskListComponent {
       'en-US'
     );
     console.log(this.filters);
+  }
+
+  getList() {
+    this.employeeService.getList().subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getList();
   }
 }
