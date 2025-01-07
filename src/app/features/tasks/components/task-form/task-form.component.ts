@@ -19,7 +19,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 
 @Component({
-  selector: 'app-employee-form',
+  selector: 'app-task-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,

@@ -892,7 +892,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   border-bottom-right-radius: 6px;
   position: absolute;
   top: 37%;
-  right: 0rem;
+  inset-inline-end: 0rem;
   width: 3rem;
 }
 .p-dropdown .p-dropdown-clear-icon {

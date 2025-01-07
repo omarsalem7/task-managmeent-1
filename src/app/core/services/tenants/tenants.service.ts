@@ -6,7 +6,7 @@ import { TaskDto } from './models';
 @Injectable({
   providedIn: 'root',
 })
-export class EmployeeService {
+export class TenantsService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
@@ -21,23 +21,22 @@ export class EmployeeService {
         }
       });
     }
-
-    return this.http.get(`${this.baseUrl}/Employees`, { params });
+    return this.http.get(`${this.baseUrl}/Tenants`);
   }
 
   getById(id: string) {
-    return this.http.get(`${this.baseUrl}/Employees/${id}`);
+    return this.http.get(`${this.baseUrl}/Tenants/${id}`);
   }
 
   create(task: TaskDto) {
-    return this.http.post(`${this.baseUrl}/Employees`, task);
+    return this.http.post(`${this.baseUrl}/Tenants/add`, task);
   }
 
   update(id: string, task: TaskDto) {
-    return this.http.put(`${this.baseUrl}/Employees/${id}`, task);
+    return this.http.put(`${this.baseUrl}/Tenants/${id}`, task);
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.baseUrl}/Employees/${id}`);
+    return this.http.delete(`${this.baseUrl}/Tenants/${id}`);
   }
 }
