@@ -26,7 +26,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             errorMessage = handleValidationError(error.error);
             break;
           case 401:
-            authService.logout();
+            // authService.logout();
             router.navigate(['/auth/login']);
             errorMessage = 'Please log in to continue';
             break;
