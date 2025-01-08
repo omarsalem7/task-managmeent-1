@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FilterListComponent {
   @Input() header: string = '';
+  @Input() isFilter: boolean = true;
   @Output() searchChange = new EventEmitter<string>();
 
   isOpenFilter: boolean = false;

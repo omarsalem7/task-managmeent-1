@@ -8,6 +8,7 @@
         (input)="onSearchChange($event)"
       />
     </div>
+    @if (isFilter) {
     <div class="cursor-pointer">
       <i
         (click)="isOpenFilter = !isOpenFilter"
@@ -19,8 +20,10 @@
         style="font-size: 25px"
       ></i>
     </div>
+    }
   </div>
 </div>
+@if (isFilter) {
 <div
   [ngClass]="
     !isOpenFilter
@@ -30,3 +33,4 @@
 >
   <ng-content></ng-content>
 </div>
+}

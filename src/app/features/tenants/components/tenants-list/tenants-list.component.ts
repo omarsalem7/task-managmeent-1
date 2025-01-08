@@ -15,15 +15,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  Subject,
-  of,
-} from 'rxjs';
-import { TaskFormComponent } from '../task-form/task-form.component';
+import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
+import { TenantsFormComponent } from '../tenants-form/tenants-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { TenantsService } from '../../../../core/services/tenants';
 
 export interface PeriodicElement {
   name: string;
@@ -32,21 +27,8 @@ export interface PeriodicElement {
   subject: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, subject: 'dsdsds' },
-  { position: 2, name: 'Helium', weight: 4.0026, subject: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, subject: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
-];
-
 @Component({
-  selector: 'app-task-list',
+  selector: 'app-tenants-list',
   standalone: true,
   providers: [provideNativeDateAdapter(), ConfirmationService, MessageService],
   imports: [
@@ -64,22 +46,22 @@ const ELEMENT_DATA: PeriodicElement[] = [
     ConfirmDialogModule,
     ToastModule,
   ],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss',
+  templateUrl: './tenants-list.component.html',
+  styleUrl: './tenants-list.component.scss',
 })
-export class TaskListComponent {
+export class TenantsListComponent {
   filters = {
-    searchValue: '',
-    pageIndex: 0,
-    pageSize: 10,
-    startDate: '',
+    searchTerm: '',
+    PageNumber: 1,
+    PageSize: 5,
     endDate: '',
+    startDate: '',
   };
 
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(TaskFormComponent, {
+    const dialogRef = this.dialog.open(TenantsFormComponent, {
       width: '35vw',
       data: {
         record: this.record,
@@ -87,38 +69,37 @@ export class TaskListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      if (result == 'refresh') {
+        this.getList();
+      }
     });
   }
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private tenantsService: TenantsService
   ) {
     this.searchSubject
       .pipe(
-        debounceTime(300),
+        debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.fetchResults())
+        switchMap(() => this.tenantsService.getList(this.filters))
       )
-      .subscribe((results) => {
-        this.dataSource = results;
+      .subscribe((results: any) => {
+        console.log(results);
+        this.dataSource = results.data;
+        this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = [
-    'position',
-    'name',
-    'weight',
-    'subject',
-    'edit',
-  ];
+  displayedColumns: string[] = ['tenantName', 'email', 'password', 'edit'];
 
-  dataSource = ELEMENT_DATA;
+  dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
   updateSearch(value: string) {
     this.searchSubject.next(value);
-    this.filters.searchValue = value;
+    this.filters.searchTerm = value;
   }
   newRecord() {
     this.record = null;
@@ -133,7 +114,7 @@ export class TaskListComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           target: event.target as EventTarget,
-          message: 'هل انت متاكد من حذف المهمه ؟',
+          message: 'هل انت متاكد من الحذف ؟',
           header: '',
           icon: 'pi pi-info-circle',
           acceptButtonStyleClass: 'p-button-danger p-button-text',
@@ -144,10 +125,13 @@ export class TaskListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'حذف',
-              detail: 'تم الحذف بنجاح',
+            this.tenantsService.delete(this.record.id).subscribe(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'تم الحذف',
+                detail: 'تم حذف بنجاح',
+              });
+              this.getList();
             });
           },
         });
@@ -157,11 +141,10 @@ export class TaskListComponent {
 
   onPageChange(event: any) {
     console.log(event);
+    this.filters.PageSize = event.pageSize;
+    this.filters.PageNumber = event.pageIndex + 1;
+    this.getList();
     // pageIndex , pageSize
-  }
-
-  fetchResults() {
-    return of();
   }
 
   record: any;
@@ -169,7 +152,7 @@ export class TaskListComponent {
     this.record = record;
   }
 
-  filterHandler() {
+  filterHandler(isRemoved?: boolean) {
     this.filters.startDate = formatDate(
       this.filters.startDate,
       'yyyy-MM-dd',
@@ -180,6 +163,22 @@ export class TaskListComponent {
       'yyyy-MM-dd',
       'en-US'
     );
-    console.log(this.filters);
+    if (isRemoved) {
+      this.filters.startDate = '';
+      this.filters.endDate = '';
+    }
+    this.getList();
+  }
+
+  totalCount: number = 0;
+  getList() {
+    this.tenantsService.getList(this.filters).subscribe((res: any) => {
+      this.dataSource = res.data;
+      this.totalCount = res.totalCount;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getList();
   }
 }

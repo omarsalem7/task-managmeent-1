@@ -20,7 +20,7 @@ export class TenantsService {
         }
       });
     }
-    return this.http.get(`${this.baseUrl}/Tenants`);
+    return this.http.get(`${this.baseUrl}/Tenants`, { params });
   }
 
   getById(id: string) {

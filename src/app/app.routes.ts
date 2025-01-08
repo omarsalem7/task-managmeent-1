@@ -32,6 +32,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'tenants',
+    loadChildren: () =>
+      import('./features/tenants/tenants.routes').then((m) => m.TENANTS_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
