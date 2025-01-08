@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TaskDto } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +27,12 @@ export class TenantsService {
     return this.http.get(`${this.baseUrl}/Tenants/${id}`);
   }
 
-  create(task: TaskDto) {
-    return this.http.post(`${this.baseUrl}/Tenants/add`, task);
+  create(tenant: any) {
+    return this.http.post(`${this.baseUrl}/Tenants`, tenant);
   }
 
-  update(id: string, task: TaskDto) {
-    return this.http.put(`${this.baseUrl}/Tenants/${id}`, task);
+  update(id: string, tenant: any) {
+    return this.http.put(`${this.baseUrl}/Tenants/${id}`, tenant);
   }
 
   delete(id: string) {
