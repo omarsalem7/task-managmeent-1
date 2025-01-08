@@ -38,6 +38,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'train',
+    loadChildren: () =>
+      import('./features/train/train.routes').then((m) => m.TRAIN_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

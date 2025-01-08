@@ -21,7 +21,7 @@ export class SidebarComponent {
     { label: 'إدارة المهام', icon: 'fas fa-tasks', route: '/tasks' },
     { label: 'إدارة الموظفين', icon: 'fas fa-users', route: '/employee' },
     { label: 'tenants', icon: 'fas fa-chart-line', route: '/tenants' },
-    { label: 'فتح العقد', icon: 'fas fa-file-contract', route: '/contract' },
+    { label: 'التدريب', icon: 'fas fa-file-contract', route: '/train' },
     { label: 'الفواتير', icon: 'fas fa-file-invoice', route: '/invoices' },
     { label: 'التقرير', icon: 'fas fa-chart-bar', route: '/reports' },
   ];
