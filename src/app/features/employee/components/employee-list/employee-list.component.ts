@@ -151,10 +151,13 @@ export class EmployeeListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'حذف',
-              detail: 'تم الحذف بنجاح',
+            this.employeeService.delete(this.record.id).subscribe(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'تم الحذف',
+                detail: 'تم حذف المهمه بنجاح',
+              });
+              this.getList();
             });
           },
         });
@@ -168,10 +171,6 @@ export class EmployeeListComponent {
     this.filters.PageNumber = event.pageIndex + 1;
     this.getList();
     // pageIndex , pageSize
-  }
-
-  fetchResults() {
-    return of();
   }
 
   record: any;
@@ -206,8 +205,6 @@ export class EmployeeListComponent {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getList();
   }
 }
