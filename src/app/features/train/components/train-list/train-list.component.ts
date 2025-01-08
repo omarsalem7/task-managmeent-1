@@ -18,7 +18,8 @@ import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-head
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { TrainFormComponent } from '../train-form/train-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { TenantsService } from '../../../../core/services/tenants';
+import { TrainService } from '../../../../core/services/train';
+import { environment } from '../../../../../environments/environment';
 
 export interface PeriodicElement {
   name: string;
@@ -50,6 +51,7 @@ export interface PeriodicElement {
   styleUrl: './train-list.component.scss',
 })
 export class TrainListComponent {
+  domain = environment.apiUrl;
   filters = {
     searchTerm: '',
     PageNumber: 1,
@@ -78,13 +80,13 @@ export class TrainListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private tenantsService: TenantsService
+    private trainService: TrainService
   ) {
     this.searchSubject
       .pipe(
         debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.tenantsService.getList(this.filters))
+        switchMap(() => this.trainService.getList(this.filters))
       )
       .subscribe((results: any) => {
         console.log(results);
@@ -125,7 +127,7 @@ export class TrainListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.tenantsService.delete(this.record.id).subscribe(() => {
+            this.trainService.delete(this.record.id).subscribe(() => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'تم الحذف',
@@ -172,7 +174,7 @@ export class TrainListComponent {
 
   totalCount: number = 0;
   getList() {
-    this.tenantsService.getList(this.filters).subscribe((res: any) => {
+    this.trainService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
     });

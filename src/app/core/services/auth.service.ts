@@ -46,9 +46,9 @@ export class AuthService {
   }
 
   logout(): void {
-    // Remove user details and token
     // this.http.post<any>(`${this.baseUrl}/auth/logout`, {});
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('role');
     this.currentUserSubject.next(null);
     this.router.navigate(['/auth/login']);
   }

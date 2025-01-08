@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5295',
+  apiUrl: 'https://taskmanagment-001-site1.ptempurl.com',
 };

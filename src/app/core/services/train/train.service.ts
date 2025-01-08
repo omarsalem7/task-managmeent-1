@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { createFormDataMultiFiles } from '../../../shared/utils/formdata';
 
 @Injectable({
   providedIn: 'root',
@@ -21,22 +22,25 @@ export class TrainService {
       });
     }
 
-    return this.http.get(`${this.baseUrl}/Employees`, { params });
+    return this.http.get(`${this.baseUrl}/exercises`, { params });
   }
 
   getById(id: string) {
-    return this.http.get(`${this.baseUrl}/Employees/${id}`);
+    return this.http.get(`${this.baseUrl}/exercises/${id}`);
   }
 
   create(task: any) {
-    return this.http.post(`${this.baseUrl}/Employees`, task);
+    return this.http.post(
+      `${this.baseUrl}/exercises`,
+      createFormDataMultiFiles(task)
+    );
   }
 
   update(id: string, task: any) {
-    return this.http.put(`${this.baseUrl}/Employees/${id}`, task);
+    return this.http.put(`${this.baseUrl}/exercises/${id}`, task);
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.baseUrl}/Employees/${id}`);
+    return this.http.delete(`${this.baseUrl}/exercises/${id}`);
   }
 }

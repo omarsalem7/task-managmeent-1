@@ -17,13 +17,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
-import { TenantsService } from '../../../../core/services/tenants';
-import { EmployeeService } from '../../../../core/services/employee';
 import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
+import { TrainService } from '../../../../core/services/train';
 
 @Component({
   selector: 'app-train-form',
@@ -41,6 +41,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,
+    FileUploadHandlerComponent,
   ],
   providers: [],
   templateUrl: './train-form.component.html',
@@ -54,15 +55,48 @@ export class TrainFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private tenantsService: TenantsService,
+    private trainService: TrainService,
     private snackBar: MatSnackBar
   ) {
-    const { tenantName, email, password } = this.data || {};
+    const { title, link, description, imageUrl } = this.data || {};
     this.taskForm = this.fb.group({
-      name: [tenantName ?? '', [Validators.required]],
-      email: [email ?? '', Validators.required],
-      password: [password ?? ''],
+      title: [title ?? '', [Validators.required]],
+      Link: [link ?? '', Validators.required],
+      description: [description ?? ''],
+      file: [imageUrl ?? ''],
     });
+  }
+
+  isFileRequired: boolean = false;
+  uploadedLogo: any = null;
+  imagePreview: any = null;
+  handleFileSelected(file: File) {
+    this.taskForm.patchValue({ file: file.name });
+    this.uploadedLogo = file;
+    this.handleFile(file);
+  }
+
+  handleCancelClicked() {
+    this.removeImage();
+  }
+
+  private removeImage() {
+    this.imagePreview = null;
+    this.taskForm.patchValue({ img: '' });
+    this.taskForm.get('file')?.updateValueAndValidity();
+    this.uploadedLogo = null;
+  }
+
+  private handleFile(file: File) {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      console.error('File is not an image');
+    }
   }
 
   onSubmit() {
@@ -73,10 +107,13 @@ export class TrainFormComponent {
 
     this.loading = true;
     const request: any = this.data
-      ? this.tenantsService.update(this.data.id, {
+      ? this.trainService.update(this.data.id, {
           ...this.taskForm.value,
         })
-      : this.tenantsService.create(this.taskForm.value);
+      : this.trainService.create({
+          ...this.taskForm.value,
+          file: this.uploadedLogo,
+        });
 
     request
       .pipe(
@@ -103,7 +140,7 @@ export class TrainFormComponent {
   }
   tenants: any[] = [];
   getLookup() {
-    this.tenantsService.getList().subscribe((res: any) => {
+    this.trainService.getList().subscribe((res: any) => {
       this.tenants = res.data;
     });
   }

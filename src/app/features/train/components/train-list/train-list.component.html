@@ -48,7 +48,7 @@
     <!-- Header -->
     <div class="bg-gradient-to-r bg-primary p-6">
       <h1 class="text-3xl font-bold text-white">
-        دورة تدريبية خاصة بتنشيط العمال
+        {{ item.title }}
       </h1>
     </div>
 
@@ -59,7 +59,7 @@
         <!-- Image Section -->
         <div class="rounded-lg overflow-hidden shadow-md h-64">
           <img
-            src="https://png.pngtree.com/background/20231030/original/pngtree-illustration-of-3d-rendered-laptop-computer-showcasing-the-concept-of-e-picture-image_5792554.jpg"
+            [src]="domain + '/' + item.imageUrl"
             alt="Training Session"
             class="w-full h-auto object-cover"
           />
@@ -68,15 +68,14 @@
         <!-- Text Content -->
         <div class="space-y-4">
           <p class="text-gray-700 text-lg leading-relaxed">
-            هذا النص يمكن تغييره في أي وقت على حسب الطلب. هذا النص يمكن تغييره
-            في أي وقت على حسب الطلب
+            {{ item.description }}
           </p>
 
           <!-- Course Details -->
           <div class="bg-gray-50 p-4 rounded-lg">
             <div class="mt-8 text-start">
               <a
-                href="https://youtu.be/V75R3Gc8Prc?si=CbhGFSel8562QrV7"
+                [href]="item.link"
                 class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300"
                 target="_blank"
                 rel="noopener noreferrer"

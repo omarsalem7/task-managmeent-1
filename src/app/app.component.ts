@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/layout/navbar/navbar.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
 import { AuthService } from './core/services/auth.service';
+import { TokenService } from './core/services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +20,12 @@ export class AppComponent {
     this.authService.isAuthenticated().subscribe((res) => {
       this.isAuth = res;
     });
+  }
+
+  constructor(private tokenService: TokenService) {
+    const currentUser = localStorage.getItem('currentUser');
+    const token = currentUser ? JSON.parse(currentUser).token : ''; // Replace with your storage method
+    const roleInfo = this.tokenService.getUserInfo(token).role;
+    localStorage.setItem('role', roleInfo);
   }
 }
