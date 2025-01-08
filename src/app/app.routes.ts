@@ -44,6 +44,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'files',
+    loadChildren: () =>
+      import('./features/files/files.routes').then((m) => m.FILES_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

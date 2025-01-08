@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
 
 @Component({
   selector: 'app-file-form',
@@ -41,15 +42,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,
+    FileUploadHandlerComponent,
   ],
   providers: [],
-  templateUrl: './tenants-form.component.html',
-  styleUrl: './tenants-form.component.scss',
+  templateUrl: './file-form.component.html',
+  styleUrl: './file-form.component.scss',
 })
-export class TenantsFormComponent {
+export class FileFormComponent {
   data = inject(MAT_DIALOG_DATA).record;
   taskForm: FormGroup;
-  dialogRef = inject(MatDialogRef<TenantsFormComponent>);
+  dialogRef = inject(MatDialogRef<FileFormComponent>);
   loading = false;
 
   constructor(
@@ -62,6 +64,7 @@ export class TenantsFormComponent {
       name: [tenantName ?? '', [Validators.required]],
       email: [email ?? '', Validators.required],
       password: [password ?? ''],
+      file: [password ?? ''],
     });
   }
 
@@ -107,6 +110,40 @@ export class TenantsFormComponent {
       this.tenants = res.data;
     });
   }
+
+  isFileRequired: boolean = false;
+  uploadedLogo: any = null;
+  imagePreview: any = null;
+  handleFileSelected(file: File) {
+    this.taskForm.patchValue({ file: file.name });
+    this.uploadedLogo = file;
+    this.handleFile(file);
+  }
+
+  handleCancelClicked() {
+    this.removeImage();
+  }
+
+  private removeImage() {
+    this.imagePreview = null;
+    this.taskForm.patchValue({ file: '' });
+    this.taskForm.get('file')?.updateValueAndValidity();
+    this.uploadedLogo = null;
+  }
+
+  private handleFile(file: File) {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.imagePreview =
+        'https://cdn-icons-png.flaticon.com/512/2457/2457802.png';
+    }
+  }
+
   ngOnInit(): void {
     this.getLookup();
   }

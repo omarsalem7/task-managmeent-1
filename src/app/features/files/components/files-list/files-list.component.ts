@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
-import { TenantsFormComponent } from '../tenants-form/tenants-form.component';
+import { FileFormComponent } from '../file-form/file-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TenantsService } from '../../../../core/services/tenants';
 
@@ -46,10 +46,10 @@ export interface PeriodicElement {
     ConfirmDialogModule,
     ToastModule,
   ],
-  templateUrl: './tenants-list.component.html',
-  styleUrl: './tenants-list.component.scss',
+  templateUrl: './files-list.component.html',
+  styleUrl: './files-list.component.scss',
 })
-export class TenantsListComponent {
+export class FilesListComponent {
   filters = {
     searchTerm: '',
     PageNumber: 1,
@@ -61,7 +61,7 @@ export class TenantsListComponent {
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(TenantsFormComponent, {
+    const dialogRef = this.dialog.open(FileFormComponent, {
       width: '35vw',
       data: {
         record: this.record,
