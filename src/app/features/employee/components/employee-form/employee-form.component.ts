@@ -19,10 +19,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
 import { EmployeeService } from '../../../../core/services/employee';
-import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { tap, finalize } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-form',
@@ -41,7 +42,7 @@ import { CommonModule } from '@angular/common';
     ToastModule,
     MatProgressSpinnerModule,
   ],
-  providers: [MessageService],
+  providers: [],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss',
 })
@@ -55,7 +56,7 @@ export class EmployeeFormComponent {
   constructor(
     private fb: FormBuilder,
     private tenantsService: TenantsService,
-    private messageService: MessageService
+    private snackBar: MatSnackBar
   ) {
     const {
       fullName,
@@ -82,20 +83,40 @@ export class EmployeeFormComponent {
   }
 
   onSubmit() {
-    this.loading = true;
-    if (this.taskForm.valid) {
-      this.employeeService.create(this.taskForm.value).subscribe((res) => {
-        //  this.loading = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'نجح',
-          detail: 'تم اضافه الموظف بنجاح',
-        });
-        this.dialogRef.close('refresh');
-      });
-    } else {
+    if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
+      return;
     }
+
+    this.loading = true;
+    const request: any = this.data
+      ? this.employeeService.update(this.data.id, {
+          ...this.taskForm.value,
+        })
+      : this.employeeService.create(this.taskForm.value);
+
+    request
+      .pipe(
+        tap(() => this.dialogRef.close('refresh')),
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.snackBar.open(
+            this.data
+              ? 'تم تعديل الموظف بنجاح ✅✅'
+              : 'تم اضافه الموظف بنجاح ✅✅',
+            'Close',
+            {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            }
+          );
+        },
+      });
   }
   tenants: any[] = [];
   getLookup() {

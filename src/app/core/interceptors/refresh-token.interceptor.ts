@@ -16,8 +16,8 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (
 
   return next(req).pipe(
     catchError((error) => {
-      alert('refreshToken interceptor');
       if (error.status === 401 && !req.url.includes('refresh')) {
+        alert('refreshToken interceptor');
         let currentUser = localStorage.getItem('currentUser');
         const current = currentUser ? JSON.parse(currentUser) : null;
 

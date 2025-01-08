@@ -54,8 +54,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 function handleValidationError(error: any): string {
-  if (error.details) {
-    const errors = Object.entries(error.details)
+  console.log(error);
+  if (error.errors) {
+    const errors = Object.entries(error.errors)
       .map(
         ([field, messages]: [string, any]) =>
           `${field}: ${

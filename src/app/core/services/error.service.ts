@@ -14,7 +14,7 @@ export class ErrorService {
   showError(message: string) {
     this.errorSubject.next(message);
     this.snackBar.open(message, 'Close', {
-      duration: 4000,
+      duration: 5000,
       panelClass: ['error-snackbar'],
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
