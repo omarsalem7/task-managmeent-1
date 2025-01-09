@@ -80,6 +80,27 @@
       >
         <i class="pi pi-ellipsis-v"></i>
       </button>
+      <ng-container *appHasRole="['Employee']">
+        @switch (element.status) { @case ('0') {
+        <button
+          (click)="startTask(element.id)"
+          class="p-2 border border-yellow-400 rounded-md flex gap-2"
+        >
+          <span>ابد الان</span> <i class="fa-solid fa-play"></i>
+        </button>
+        } @case ('InProgress') {
+        <button
+          (click)="completeTask(element.id)"
+          class="p-2 border border-blue-400 rounded-md flex gap-2"
+        >
+          <span>اكتملت</span> <i class="fa-regular fa-thumbs-up"></i>
+        </button>
+        } @case ('Overdue') {
+        <button class="p-2 border border-green-400 rounded-md flex gap-2">
+          <span>اكتملت</span> <i class="fa-solid fa-check"></i>
+        </button>
+        } }
+      </ng-container>
     </td>
   </ng-container>
 

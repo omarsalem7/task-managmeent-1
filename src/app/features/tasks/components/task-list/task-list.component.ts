@@ -172,6 +172,18 @@ export class TaskListComponent {
     this.record = record;
   }
 
+  startTask(id: any) {
+    this.taskService.startTask(id).subscribe(() => {
+      this.getList();
+    });
+  }
+
+  completeTask(id: any) {
+    this.taskService.completeTask(id).subscribe(() => {
+      this.getList();
+    });
+  }
+
   filterHandler(isRemoved?: boolean) {
     this.filters.startDate = formatDate(
       this.filters.startDate,

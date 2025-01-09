@@ -33,6 +33,12 @@ export class TaskService {
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/api/TaskItems/${id}`);
   }
+  startTask(id: string) {
+    return this.http.put(`${this.baseUrl}/api/TaskItems/start/${id}`, null);
+  }
+  completeTask(id: string) {
+    return this.http.put(`${this.baseUrl}/api/TaskItems/complete/${id}`, null);
+  }
 
   create(task: TaskDto) {
     return this.http.post(`${this.baseUrl}/api/TaskItems`, task);
