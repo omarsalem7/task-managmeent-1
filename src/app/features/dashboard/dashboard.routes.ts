@@ -7,7 +7,7 @@ export const DASHBOARD_ROUTES: Routes = [
     path: '',
     component: DashboardComponent,
     // canActivate: [authGuard],
-    title: 'Dashboard - Task Management',
+    data: { title: 'الرئيسية' },
     children: [
       {
         path: 'stats',

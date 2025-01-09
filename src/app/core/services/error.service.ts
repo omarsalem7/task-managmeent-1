@@ -16,8 +16,8 @@ export class ErrorService {
     this.snackBar.open(message, 'Close', {
       duration: 5000,
       panelClass: ['error-snackbar'],
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
     });
   }
 }

@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-// import { authGuard } from '../../core/guards/auth.guard';
+import { authGuard } from '../../core/guards/auth.guard';
 
 export const TASKS_ROUTES: Routes = [
   {
     path: '',
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
+    data: { title: 'إداره المهام' },
     children: [
       {
         path: '',
@@ -12,7 +13,6 @@ export const TASKS_ROUTES: Routes = [
           import('./components/task-list/task-list.component').then(
             (m) => m.TaskListComponent
           ),
-        title: 'Tasks - Task Management',
       },
       {
         path: 'new',
@@ -20,7 +20,6 @@ export const TASKS_ROUTES: Routes = [
           import('./components/task-form/task-form.component').then(
             (m) => m.TaskFormComponent
           ),
-        title: 'New Task - Task Management',
       },
       {
         path: 'edit/:id',
@@ -28,7 +27,6 @@ export const TASKS_ROUTES: Routes = [
           import('./components/task-form/task-form.component').then(
             (m) => m.TaskFormComponent
           ),
-        title: 'Edit Task - Task Management',
       },
     ],
   },

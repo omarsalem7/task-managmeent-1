@@ -24,6 +24,40 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'employee',
+    loadChildren: () =>
+      import('./features/employee/employee.routes').then(
+        (m) => m.EMPLOYEE_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'tenants',
+    loadChildren: () =>
+      import('./features/tenants/tenants.routes').then((m) => m.TENANTS_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'notification',
+    loadChildren: () =>
+      import('./features/notification/notification.routes').then(
+        (m) => m.NOTIFICATION_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'train',
+    loadChildren: () =>
+      import('./features/train/train.routes').then((m) => m.TRAIN_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'files',
+    loadChildren: () =>
+      import('./features/files/files.routes').then((m) => m.FILES_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
