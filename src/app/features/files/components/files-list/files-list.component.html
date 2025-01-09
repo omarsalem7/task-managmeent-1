@@ -1,5 +1,11 @@
 <app-list-header header="عدد الملفات" [count]="totalCount">
-  <button class="custom-button" (click)="newRecord()">اضافة ملف</button>
+  <button
+    class="custom-button"
+    (click)="newRecord()"
+    *appHasRole="['Employee']"
+  >
+    اضافة ملف
+  </button>
   <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>
@@ -43,24 +49,51 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-table">
   <!-- Position Column -->
-  <ng-container matColumnDef="tenantName">
-    <th mat-header-cell *matHeaderCellDef>الاسم</th>
-    <td mat-cell *matCellDef="let element">{{ element.tenantName }}</td>
+  <ng-container matColumnDef="createdById">
+    <th mat-header-cell *matHeaderCellDef>اسم الموظف</th>
+    <td mat-cell *matCellDef="let element">{{ element.createdById }}</td>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>البريد الالكتروني</th>
-    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  <ng-container matColumnDef="fileName">
+    <th mat-header-cell *matHeaderCellDef>عنوان الملف</th>
+    <td mat-cell *matCellDef="let element">{{ element.fileName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="taskItem">
+    <th mat-header-cell *matHeaderCellDef>المهمه المتعلقه بالملف</th>
+    <td mat-cell *matCellDef="let element">{{ element.taskItem }}</td>
+  </ng-container>
+  <ng-container matColumnDef="fileUrl">
+    <th mat-header-cell *matHeaderCellDef>مرفقات</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.fileUrl }} -->
+
+      <a
+        download="file"
+        class="download-link"
+        (click)="handleFile(element.fileUrl)"
+      >
+        <i class="fas fa-download"></i>
+
+        <span class="link-text">تحميل</span>
+      </a>
+    </td>
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="password">
-    <th mat-header-cell *matHeaderCellDef>الرقم السري</th>
-    <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+  <ng-container matColumnDef="createdOn">
+    <th mat-header-cell *matHeaderCellDef>تاريخ الانشاء</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.createdOn | date : "dd-MM-yyyy - hh:mm a" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tenantId" *appHasRole="['SuperAdmin']">
+    <th mat-header-cell *matHeaderCellDef>اسم الشركة</th>
+    <td mat-cell *matCellDef="let element">{{ element.tenantId }}</td>
   </ng-container>
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit">
+  <!-- <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button
@@ -71,7 +104,7 @@
         <i class="pi pi-ellipsis-v"></i>
       </button>
     </td>
-  </ng-container>
+  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

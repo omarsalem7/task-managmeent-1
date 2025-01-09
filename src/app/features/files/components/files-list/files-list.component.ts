@@ -19,6 +19,9 @@ import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { FileFormComponent } from '../file-form/file-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FilesService } from '../../../../core/services/files';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
 
 export interface PeriodicElement {
   name: string;
@@ -45,11 +48,13 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    HasRoleDirective,
   ],
   templateUrl: './files-list.component.html',
   styleUrl: './files-list.component.scss',
 })
 export class FilesListComponent {
+  domain = environment.apiUrl;
   filters = {
     searchTerm: '',
     PageNumber: 1,
@@ -78,7 +83,8 @@ export class FilesListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private filesService: FilesService
+    private filesService: FilesService,
+    private http: HttpClient
   ) {
     this.searchSubject
       .pipe(
@@ -92,7 +98,14 @@ export class FilesListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = ['tenantName', 'email', 'password', 'edit'];
+  displayedColumns: string[] = [
+    'createdById',
+    'fileName',
+    'taskItem',
+    'fileUrl',
+    'createdOn',
+    // 'edit',
+  ];
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
@@ -146,6 +159,24 @@ export class FilesListComponent {
     // pageIndex , pageSize
   }
 
+  handleFile(fileUrl: string) {
+    fileUrl = this.domain + '/' + fileUrl;
+    // fileUrl = 'https://www.orimi.com/pdf-test.xls';
+
+    const fileExtension = fileUrl.split('.').pop()?.toLowerCase();
+
+    if (fileExtension === 'pdf') {
+      // Open PDF in a new tab
+      window.open(fileUrl, '_blank');
+    } else {
+      // Trigger file download
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = fileUrl.split('/').pop() || 'downloaded_file';
+      link.click();
+    }
+  }
+
   record: any;
   editTask(record: any) {
     this.record = record;
@@ -172,12 +203,21 @@ export class FilesListComponent {
   totalCount: number = 0;
   getList() {
     this.filesService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res.data;
-      this.totalCount = res.totalCount;
+      this.dataSource = res;
+      this.totalCount = res.length;
     });
   }
-
+  currentRole = localStorage.getItem('role');
   ngOnInit(): void {
     this.getList();
+    if (this.currentRole === 'SuperAdmin') {
+      this.displayedColumns.splice(
+        this.displayedColumns.length - 1,
+        0,
+        'tenantId'
+      );
+
+      // this.displayedColumns.push('edit');
+    }
   }
 }

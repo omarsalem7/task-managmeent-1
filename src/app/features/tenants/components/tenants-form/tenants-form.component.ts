@@ -88,8 +88,8 @@ export class TenantsFormComponent {
         next: () => {
           this.snackBar.open(
             this.data
-              ? 'تم تعديل الموظف بنجاح ✅✅'
-              : 'تم اضافه الموظف بنجاح ✅✅',
+              ? 'تم تعديل الشركه بنجاح ✅✅'
+              : 'تم اضافه الشركه بنجاح ✅✅',
             'Close',
             {
               duration: 5000,

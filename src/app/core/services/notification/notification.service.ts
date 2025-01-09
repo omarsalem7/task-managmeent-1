@@ -26,9 +26,21 @@ export class NotificationService {
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/Tenants/${id}`);
   }
+  // /api/Notifications/react/{notificationId}
+
+  react(id: any) {
+    return this.http.post(`${this.baseUrl}/api/Notifications/react/${id}`, id);
+  }
 
   create(tenant: any) {
     return this.http.post(`${this.baseUrl}/api/Notifications`, tenant);
+  }
+
+  // /api/Notifications/latestNotification
+  getLatest() {
+    return this.http.get(
+      `${this.baseUrl}/api/Notifications/latestNotification`
+    );
   }
 
   update(id: string, tenant: any) {

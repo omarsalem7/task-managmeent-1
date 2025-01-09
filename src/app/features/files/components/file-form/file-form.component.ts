@@ -95,8 +95,8 @@ export class FileFormComponent {
         next: () => {
           this.snackBar.open(
             this.data
-              ? 'تم تعديل الموظف بنجاح ✅✅'
-              : 'تم اضافه الموظف بنجاح ✅✅',
+              ? 'تم تعديل الملف بنجاح ✅✅'
+              : 'تم اضافه الملف بنجاح ✅✅',
             'Close',
             {
               duration: 5000,
