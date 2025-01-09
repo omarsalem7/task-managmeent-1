@@ -35,7 +35,7 @@ export class TaskService {
   }
 
   create(task: TaskDto) {
-    return this.http.post(`${this.baseUrl}/api/TaskItems/add`, task);
+    return this.http.post(`${this.baseUrl}/api/TaskItems`, task);
   }
 
   update(id: string, task: TaskDto) {

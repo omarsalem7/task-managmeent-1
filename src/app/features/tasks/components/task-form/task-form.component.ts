@@ -20,7 +20,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
 import { EmployeeService } from '../../../../core/services/employee';
-
+import { TaskService } from '../../../../core/services/task';
+import { tap, finalize } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-task-form',
   standalone: true,
@@ -47,17 +50,19 @@ export class TaskFormComponent {
   constructor(
     private fb: FormBuilder,
     private tenantsService: TenantsService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private taskService: TaskService,
+    private snackBar: MatSnackBar
   ) {
-    const { tenantId, description, employeeIds, startDate, endDate } =
+    const { tenantId, description, employeeIds, startDate, endDate, notes } =
       this.data || {};
     this.taskForm = this.fb.group({
       description: [description ?? '', [Validators.required]],
       tenantId: [tenantId ?? '', Validators.required],
       employeeIds: [employeeIds ?? '', Validators.required],
-      notes: [''],
-      startDate: [startDate ?? null, Validators.required],
-      endDate: [endDate ?? null, Validators.required],
+      notes: [notes ?? ''],
+      startDate: [startDate ? new Date(startDate) : null, Validators.required],
+      endDate: [endDate ? new Date(endDate) : null, Validators.required],
     });
   }
 
@@ -74,16 +79,56 @@ export class TaskFormComponent {
     this.employeeService
       .getEmployeesbyTanentId(event.value)
       .subscribe((res: any) => {
-        this.employees = res.data;
+        this.employees = res;
       });
   }
-
+  loading = false;
   onSubmit() {
-    if (this.taskForm.valid) {
-      this.dialogRef.close(this.taskForm.value);
-    } else {
+    if (this.taskForm.invalid) {
       this.taskForm.markAllAsTouched();
+      return;
     }
+    const formValue = {
+      ...this.taskForm.value,
+      employeeIds: [this.taskForm.value.employeeIds],
+      startDate: formatDate(
+        this.taskForm.value.startDate,
+        'yyyy-MM-dd',
+        'en-US'
+      ),
+      endDate: formatDate(this.taskForm.value.endDate, 'yyyy-MM-dd', 'en-US'),
+    };
+    this.loading = true;
+    const request: any = this.data
+      ? this.taskService.update(this.data.id, {
+          ...formValue,
+        })
+      : this.taskService.create({
+          ...formValue,
+        });
+
+    request
+      .pipe(
+        tap(() => this.dialogRef.close('refresh')),
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.snackBar.open(
+            this.data
+              ? 'تم تعديل المهمه بنجاح ✅✅'
+              : 'تم اضافه المهمه بنجاح ✅✅',
+            'Close',
+            {
+              duration: 5000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            }
+          );
+        },
+      });
   }
   ngOnInit(): void {
     this.getLookups();

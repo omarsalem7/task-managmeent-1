@@ -140,6 +140,7 @@ export class TaskListComponent {
           rejectIcon: 'none',
 
           accept: () => {
+            console.log('rec', this.record);
             this.taskService.delete(this.record.id).subscribe(() => {
               this.messageService.add({
                 severity: 'success',
