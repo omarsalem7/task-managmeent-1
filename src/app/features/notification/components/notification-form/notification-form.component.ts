@@ -18,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
+import { NotificationService } from '../../../../core/services/notification';
 import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
@@ -42,25 +43,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
   ],
   providers: [],
-  templateUrl: './tenants-form.component.html',
-  styleUrl: './tenants-form.component.scss',
+  templateUrl: './notification-form.component.html',
+  styleUrl: './notification-form.component.scss',
 })
-export class TenantsFormComponent {
+export class NotificationFormComponent {
   data = inject(MAT_DIALOG_DATA).record;
   taskForm: FormGroup;
-  dialogRef = inject(MatDialogRef<TenantsFormComponent>);
+  dialogRef = inject(MatDialogRef<NotificationFormComponent>);
   loading = false;
 
   constructor(
     private fb: FormBuilder,
     private tenantsService: TenantsService,
+    private notificationService: NotificationService,
     private snackBar: MatSnackBar
   ) {
-    const { tenantName, email, password } = this.data || {};
+    const { title, message, tenantId } = this.data || {};
     this.taskForm = this.fb.group({
-      tenantName: [tenantName ?? '', [Validators.required]],
-      email: [email ?? '', Validators.required],
-      password: [password ?? ''],
+      title: [title ?? '', [Validators.required]],
+      message: [message ?? '', Validators.required],
+      tenantId: [tenantId ?? ''],
     });
   }
 
@@ -72,10 +74,10 @@ export class TenantsFormComponent {
 
     this.loading = true;
     const request: any = this.data
-      ? this.tenantsService.update(this.data.id, {
+      ? this.notificationService.update(this.data.id, {
           ...this.taskForm.value,
         })
-      : this.tenantsService.create(this.taskForm.value);
+      : this.notificationService.create(this.taskForm.value);
 
     request
       .pipe(
@@ -84,20 +86,18 @@ export class TenantsFormComponent {
           this.loading = false;
         })
       )
-      .subscribe({
-        next: () => {
-          this.snackBar.open(
-            this.data
-              ? 'تم تعديل الموظف بنجاح ✅✅'
-              : 'تم اضافه الموظف بنجاح ✅✅',
-            'Close',
-            {
-              duration: 5000,
-              horizontalPosition: 'center',
-              verticalPosition: 'bottom',
-            }
-          );
-        },
+      .subscribe(() => {
+        this.snackBar.open(
+          this.data
+            ? 'تم تعديل التعميم بنجاح ✅✅'
+            : 'تم اضافه التعميم بنجاح ✅✅',
+          'Close',
+          {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+          }
+        );
       });
   }
   tenants: any[] = [];

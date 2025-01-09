@@ -16,9 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
-import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import { NotificationFormComponent } from '../notification-form/notification-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { EmployeeService } from '../../../../core/services/employee';
+import { NotificationService } from '../../../../core/services/notification';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 export interface PeriodicElement {
@@ -29,7 +29,7 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-employee-list',
+  selector: 'app-files-list',
   standalone: true,
   providers: [provideNativeDateAdapter(), ConfirmationService, MessageService],
   imports: [
@@ -48,22 +48,22 @@ export interface PeriodicElement {
     ToastModule,
     HasRoleDirective,
   ],
-  templateUrl: './employee-list.component.html',
-  styleUrl: './employee-list.component.scss',
+  templateUrl: './notification-list.component.html',
+  styleUrl: './notification-list.component.scss',
 })
-export class EmployeeListComponent {
+export class NotificationListComponent {
   filters = {
-    SearchTerm: '',
+    searchTerm: '',
     PageNumber: 1,
     PageSize: 5,
-    StartDate: '',
-    EndDate: '',
+    endDate: '',
+    startDate: '',
   };
 
   readonly dialog = inject(MatDialog);
 
   openDialog() {
-    const dialogRef = this.dialog.open(EmployeeFormComponent, {
+    const dialogRef = this.dialog.open(NotificationFormComponent, {
       width: '35vw',
       data: {
         record: this.record,
@@ -80,13 +80,13 @@ export class EmployeeListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private employeeService: EmployeeService
+    private notificationService: NotificationService
   ) {
     this.searchSubject
       .pipe(
         debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.employeeService.getList(this.filters))
+        switchMap(() => this.notificationService.getList(this.filters))
       )
       .subscribe((results: any) => {
         console.log(results);
@@ -94,24 +94,14 @@ export class EmployeeListComponent {
         this.totalCount = results.totalCount;
       });
   }
-
-  displayedColumns: string[] = [
-    'fullName',
-    'jobNumber',
-    'company',
-    'email',
-    'phoneNumber',
-    'jobTitle',
-    'startDate',
-    'endDate',
-  ];
+  displayedColumns: string[] = ['title', 'message', 'tenantId'];
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
   updateSearch(value: string) {
     this.searchSubject.next(value);
-    this.filters.SearchTerm = value;
+    this.filters.searchTerm = value;
   }
   newRecord() {
     this.record = null;
@@ -126,7 +116,7 @@ export class EmployeeListComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           target: event.target as EventTarget,
-          message: 'هل انت متاكد من حذف المهمه ؟',
+          message: 'هل انت متاكد من الحذف ؟',
           header: '',
           icon: 'pi pi-info-circle',
           acceptButtonStyleClass: 'p-button-danger p-button-text',
@@ -137,11 +127,11 @@ export class EmployeeListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.employeeService.delete(this.record.id).subscribe(() => {
+            this.notificationService.delete(this.record.id).subscribe(() => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'تم الحذف',
-                detail: 'تم حذف المهمه بنجاح',
+                detail: 'تم حذف بنجاح',
               });
               this.getList();
             });
@@ -165,35 +155,36 @@ export class EmployeeListComponent {
   }
 
   filterHandler(isRemoved?: boolean) {
-    this.filters.StartDate = formatDate(
-      this.filters.StartDate,
+    this.filters.startDate = formatDate(
+      this.filters.startDate,
       'yyyy-MM-dd',
       'en-US'
     );
-    this.filters.EndDate = formatDate(
-      this.filters.EndDate,
+    this.filters.endDate = formatDate(
+      this.filters.endDate,
       'yyyy-MM-dd',
       'en-US'
     );
     if (isRemoved) {
-      this.filters.StartDate = '';
-      this.filters.EndDate = '';
+      this.filters.startDate = '';
+      this.filters.endDate = '';
     }
     this.getList();
   }
 
   totalCount: number = 0;
   getList() {
-    this.employeeService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res.data;
-      this.totalCount = res.totalCount;
+    this.notificationService.getList(this.filters).subscribe((res: any) => {
+      this.dataSource = res;
+      this.totalCount = res.length;
     });
   }
+
   currentRole = localStorage.getItem('role');
   ngOnInit(): void {
     this.getList();
-    if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('edit');
-    }
+    // if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
+    //   this.displayedColumns.push('edit');
+    // }
   }
 }

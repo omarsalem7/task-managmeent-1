@@ -24,6 +24,12 @@ export class TaskService {
     return this.http.get(`${this.baseUrl}/api/TaskItems`, { params });
   }
 
+  getTasksForCurrentEmployee() {
+    return this.http.get(
+      `${this.baseUrl}/api/TaskItems/GetTasksForCurrentEmployee`
+    );
+  }
+
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/api/TaskItems/${id}`);
   }

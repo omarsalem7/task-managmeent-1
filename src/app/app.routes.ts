@@ -38,6 +38,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'notification',
+    loadChildren: () =>
+      import('./features/notification/notification.routes').then(
+        (m) => m.NOTIFICATION_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: 'train',
     loadChildren: () =>
       import('./features/train/train.routes').then((m) => m.TRAIN_ROUTES),

@@ -7,20 +7,27 @@
     class="font-arabic"
   >
     <div class="mb-3">
-      <label for="name">الاسم</label>
-      <input type="text" id="name" pInputText formControlName="name" />
-      <app-form-error [control]="taskForm.get('name')"></app-form-error>
+      <label for="tenantId">المهمه</label>
+      <p-dropdown
+        id="taskId"
+        formControlName="taskId"
+        [options]="empTasks"
+        optionLabel="name"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('taskId')"></app-form-error>
     </div>
     <div class="mb-3">
-      <label for="email">البريد الالكتروني</label>
-      <input type="text" id="email" pInputText formControlName="email" />
-      <app-form-error [control]="taskForm.get('email')"></app-form-error>
+      <label for="name">العنوان</label>
+      <input
+        type="text"
+        id="fileTitle"
+        pInputText
+        formControlName="fileTitle"
+      />
+      <app-form-error [control]="taskForm.get('fileTitle')"></app-form-error>
     </div>
-    <div class="mb-3">
-      <label for="password">كلمه المرور</label>
-      <input type="text" id="password" pInputText formControlName="password" />
-      <app-form-error [control]="taskForm.get('password')"></app-form-error>
-    </div>
+
     <div class="mb-3">
       <label for="file"> الملف</label>
       <app-file-upload-handler

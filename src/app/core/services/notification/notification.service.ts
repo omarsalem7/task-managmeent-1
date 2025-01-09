@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class TenantsService {
+export class NotificationService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class TenantsService {
         }
       });
     }
-    return this.http.get(`${this.baseUrl}/Tenants`, { params });
+    return this.http.get(`${this.baseUrl}/api/Notifications`, { params });
   }
 
   getById(id: string) {
@@ -28,7 +28,7 @@ export class TenantsService {
   }
 
   create(tenant: any) {
-    return this.http.post(`${this.baseUrl}/Auth/register-company`, tenant);
+    return this.http.post(`${this.baseUrl}/api/Notifications`, tenant);
   }
 
   update(id: string, tenant: any) {

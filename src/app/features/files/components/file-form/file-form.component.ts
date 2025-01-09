@@ -17,14 +17,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
-import { TenantsService } from '../../../../core/services/tenants';
-import { EmployeeService } from '../../../../core/services/employee';
 import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
+import { FilesService } from '../../../../core/services/files';
+import { TaskService } from '../../../../core/services/task';
 
 @Component({
   selector: 'app-file-form',
@@ -56,15 +56,15 @@ export class FileFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private tenantsService: TenantsService,
+    private filesService: FilesService,
+    private taskService: TaskService,
     private snackBar: MatSnackBar
   ) {
-    const { tenantName, email, password } = this.data || {};
+    const { fileTitle, file, taskId } = this.data || {};
     this.taskForm = this.fb.group({
-      name: [tenantName ?? '', [Validators.required]],
-      email: [email ?? '', Validators.required],
-      password: [password ?? ''],
-      file: [password ?? ''],
+      taskId: [taskId ?? ''],
+      file: [file ?? ''],
+      fileTitle: [fileTitle ?? ''],
     });
   }
 
@@ -76,10 +76,13 @@ export class FileFormComponent {
 
     this.loading = true;
     const request: any = this.data
-      ? this.tenantsService.update(this.data.id, {
+      ? this.filesService.update(this.data.id, {
           ...this.taskForm.value,
         })
-      : this.tenantsService.create(this.taskForm.value);
+      : this.filesService.create({
+          ...this.taskForm.value,
+          file: this.uploadedLogo,
+        });
 
     request
       .pipe(
@@ -104,10 +107,10 @@ export class FileFormComponent {
         },
       });
   }
-  tenants: any[] = [];
+  empTasks: any[] = [];
   getLookup() {
-    this.tenantsService.getList().subscribe((res: any) => {
-      this.tenants = res.data;
+    this.taskService.getList().subscribe((res: any) => {
+      this.empTasks = res.data;
     });
   }
 

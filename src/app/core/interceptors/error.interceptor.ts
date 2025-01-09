@@ -5,11 +5,10 @@ import { ErrorService } from '../services/error.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const errorService = inject(ErrorService);
-  const authService = inject(AuthService);
+
   const router = inject(Router);
 
   return next(req).pipe(
@@ -23,6 +22,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         // Server-side error
         switch (error.status) {
           case 400:
+            console.log(error.status);
             errorMessage = handleValidationError(error.error);
             break;
           case 401:
@@ -42,7 +42,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           case 500:
             errorMessage = 'Server error. Please try again later';
             break;
+          case 200:
+            errorMessage = 'Server error. Please try again later';
+            break;
           default:
+            alert(error.status);
             errorMessage = `Error: ${error.message}`;
         }
       }
