@@ -74,6 +74,7 @@ export class TenantsFormComponent {
     const request: any = this.data
       ? this.tenantsService.update(this.data.id, {
           ...this.taskForm.value,
+          name: this.taskForm.value.tenantName,
         })
       : this.tenantsService.create(this.taskForm.value);
 
