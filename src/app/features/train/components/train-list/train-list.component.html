@@ -1,5 +1,11 @@
-<app-list-header header="عدد الدورات" [count]="5">
-  <button class="custom-button" (click)="newRecord()">اضافة دوره</button>
+<app-list-header header="عدد الدورات" [count]="totalCount">
+  <button
+    class="custom-button"
+    (click)="newRecord()"
+    *appHasRole="['SuperAdmin']"
+  >
+    اضافة دوره
+  </button>
   <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>

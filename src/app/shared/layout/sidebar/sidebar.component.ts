@@ -20,7 +20,7 @@ export class SidebarComponent {
     { label: 'الرئيسية', icon: 'fas fa-home', route: '/dashboard' },
     { label: 'إدارة المهام', icon: 'fas fa-tasks', route: '/tasks' },
     { label: 'إدارة الموظفين', icon: 'fas fa-users', route: '/employee' },
-    { label: 'tenants', icon: 'fas fa-chart-line', route: '/tenants' },
+    { label: 'إدارة الشركات', icon: 'fas fa-chart-line', route: '/tenants' },
     { label: 'التدريب', icon: 'fas fa-file-contract', route: '/train' },
     { label: 'الملفات', icon: 'fas fa-file-invoice', route: '/files' },
     { label: 'التقرير', icon: 'fas fa-chart-bar', route: '/reports' },

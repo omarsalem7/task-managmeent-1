@@ -18,7 +18,7 @@ import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-head
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { FileFormComponent } from '../file-form/file-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { TenantsService } from '../../../../core/services/tenants';
+import { FilesService } from '../../../../core/services/files';
 
 export interface PeriodicElement {
   name: string;
@@ -78,13 +78,13 @@ export class FilesListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private tenantsService: TenantsService
+    private filesService: FilesService
   ) {
     this.searchSubject
       .pipe(
         debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.tenantsService.getList(this.filters))
+        switchMap(() => this.filesService.getList(this.filters))
       )
       .subscribe((results: any) => {
         console.log(results);
@@ -125,7 +125,7 @@ export class FilesListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.tenantsService.delete(this.record.id).subscribe(() => {
+            this.filesService.delete(this.record.id).subscribe(() => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'تم الحذف',
@@ -172,7 +172,7 @@ export class FilesListComponent {
 
   totalCount: number = 0;
   getList() {
-    this.tenantsService.getList(this.filters).subscribe((res: any) => {
+    this.filesService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
     });

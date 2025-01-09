@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { createFormDataMultiFiles } from '../../../shared/utils/formdata';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TrainService {
+export class FilesService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
@@ -21,7 +22,7 @@ export class TrainService {
       });
     }
 
-    return this.http.get(`${this.baseUrl}/Employees`, { params });
+    return this.http.get(`${this.baseUrl}/api/TasksFiles/files`, { params });
   }
 
   getById(id: string) {
@@ -29,14 +30,20 @@ export class TrainService {
   }
 
   create(task: any) {
-    return this.http.post(`${this.baseUrl}/Employees`, task);
+    return this.http.post(
+      `${this.baseUrl}/api/TasksFiles/upload`,
+      createFormDataMultiFiles(task)
+    );
   }
 
   update(id: string, task: any) {
-    return this.http.put(`${this.baseUrl}/Employees/${id}`, task);
+    return this.http.put(
+      `${this.baseUrl}/api/TasksFiles/update/${id}`,
+      createFormDataMultiFiles(task)
+    );
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.baseUrl}/Employees/${id}`);
+    return this.http.delete(`${this.baseUrl}/api/TasksFiles/${id}`);
   }
 }

@@ -20,6 +20,7 @@ import { TrainFormComponent } from '../train-form/train-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TrainService } from '../../../../core/services/train';
 import { environment } from '../../../../../environments/environment';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 export interface PeriodicElement {
   name: string;
@@ -46,6 +47,7 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    HasRoleDirective,
   ],
   templateUrl: './train-list.component.html',
   styleUrl: './train-list.component.scss',
@@ -53,7 +55,7 @@ export interface PeriodicElement {
 export class TrainListComponent {
   domain = environment.apiUrl;
   filters = {
-    searchTerm: '',
+    SearchTerm: '',
     PageNumber: 1,
     PageSize: 5,
     endDate: '',
@@ -94,14 +96,12 @@ export class TrainListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = ['tenantName', 'email', 'password', 'edit'];
-
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
   updateSearch(value: string) {
     this.searchSubject.next(value);
-    this.filters.searchTerm = value;
+    this.filters.SearchTerm = value;
   }
   newRecord() {
     this.record = null;

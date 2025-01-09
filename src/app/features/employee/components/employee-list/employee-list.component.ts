@@ -15,16 +15,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  Subject,
-  of,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../../../../core/services/employee';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 export interface PeriodicElement {
   name: string;
@@ -32,16 +27,6 @@ export interface PeriodicElement {
   weight: number;
   subject: string;
 }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
-//   { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
-//   { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
-//   { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
-//   { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
-//   { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
-//   { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
-// ];
 
 @Component({
   selector: 'app-employee-list',
@@ -61,6 +46,7 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    HasRoleDirective,
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss',
@@ -108,6 +94,7 @@ export class EmployeeListComponent {
         this.totalCount = results.totalCount;
       });
   }
+  currentRole = localStorage.getItem('role');
   displayedColumns: string[] = [
     'fullName',
     'jobNumber',
@@ -117,7 +104,6 @@ export class EmployeeListComponent {
     'jobTitle',
     'startDate',
     'endDate',
-    'edit',
   ];
 
   dataSource: any[] = [];
@@ -206,5 +192,8 @@ export class EmployeeListComponent {
 
   ngOnInit(): void {
     this.getList();
+    if (this.currentRole === 'SuperAdmin') {
+      this.displayedColumns.push('edit');
+    }
   }
 }

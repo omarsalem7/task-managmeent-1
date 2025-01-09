@@ -28,6 +28,11 @@ export class EmployeeService {
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/Employees/${id}`);
   }
+  getEmployeesbyTanentId(id: string) {
+    return this.http.get(
+      `${this.baseUrl}/Employees/GetEmployeesBasedOnTenantIdAsync/${id}`
+    );
+  }
 
   create(task: TaskDto) {
     return this.http.post(`${this.baseUrl}/Employees`, task);

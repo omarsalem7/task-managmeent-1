@@ -20,4 +20,11 @@ export class TokenService {
     console.log(decoded);
     return decoded ? decoded : null;
   }
+
+  setRole() {
+    const currentUser = localStorage.getItem('currentUser');
+    const token = currentUser ? JSON.parse(currentUser).token : ''; // Replace with your storage method
+    const roleInfo = this.getUserInfo(token).role;
+    localStorage.setItem('role', roleInfo);
+  }
 }

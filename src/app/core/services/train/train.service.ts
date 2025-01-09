@@ -37,7 +37,10 @@ export class TrainService {
   }
 
   update(id: string, task: any) {
-    return this.http.put(`${this.baseUrl}/exercises/${id}`, task);
+    return this.http.put(
+      `${this.baseUrl}/exercises/${id}`,
+      createFormDataMultiFiles(task)
+    );
   }
 
   delete(id: string) {

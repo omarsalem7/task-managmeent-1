@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { TaskDto } from './models';
 
 @Injectable({
@@ -10,8 +10,18 @@ export class TaskService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getList() {
-    return this.http.get(`${this.baseUrl}/api/TaskItems`);
+  getList(inputFilter?: any) {
+    let params = new HttpParams();
+
+    if (inputFilter) {
+      Object.keys(inputFilter).forEach((key) => {
+        if (inputFilter[key] !== '' && inputFilter[key] !== null) {
+          params = params.set(key, inputFilter[key]);
+        }
+      });
+    }
+
+    return this.http.get(`${this.baseUrl}/api/TaskItems`, { params });
   }
 
   getById(id: string) {

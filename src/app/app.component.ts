@@ -22,10 +22,5 @@ export class AppComponent {
     });
   }
 
-  constructor(private tokenService: TokenService) {
-    const currentUser = localStorage.getItem('currentUser');
-    const token = currentUser ? JSON.parse(currentUser).token : ''; // Replace with your storage method
-    const roleInfo = this.tokenService.getUserInfo(token).role;
-    localStorage.setItem('role', roleInfo);
-  }
+  constructor() {}
 }

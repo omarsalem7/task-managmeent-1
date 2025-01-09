@@ -24,6 +24,8 @@ import {
 } from 'rxjs';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { TaskService } from '../../../../core/services/task';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 export interface PeriodicElement {
   name: string;
@@ -31,19 +33,6 @@ export interface PeriodicElement {
   weight: number;
   subject: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, subject: 'dsdsds' },
-  { position: 2, name: 'Helium', weight: 4.0026, subject: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, subject: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, subject: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, subject: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, subject: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, subject: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, subject: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, subject: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, subject: 'Ne' },
-];
 
 @Component({
   selector: 'app-task-list',
@@ -63,14 +52,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    HasRoleDirective,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
   filters = {
-    searchValue: '',
-    pageIndex: 0,
+    searchTerm: '',
+    pageNumber: 1,
     pageSize: 10,
     startDate: '',
     endDate: '',
@@ -87,44 +77,50 @@ export class TaskListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      if (result == 'refresh') {
+        this.getList();
+      }
     });
   }
+  totalCount: number = 0;
 
   constructor(
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private taskService: TaskService
   ) {
     this.searchSubject
       .pipe(
-        debounceTime(300),
+        debounceTime(600),
         distinctUntilChanged(),
-        switchMap(() => this.fetchResults())
+        switchMap(() => this.taskService.getList(this.filters))
       )
-      .subscribe((results) => {
-        this.dataSource = results;
+      .subscribe((results: any) => {
+        console.log(results);
+        this.dataSource = results.data;
+        this.totalCount = results.totalCount;
       });
   }
   displayedColumns: string[] = [
-    'position',
-    'name',
-    'weight',
-    'subject',
+    'description',
+    'tenantId',
+    'notes',
+    'startDate',
+    'endDate',
     'edit',
   ];
 
-  dataSource = ELEMENT_DATA;
+  dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
   updateSearch(value: string) {
     this.searchSubject.next(value);
-    this.filters.searchValue = value;
+    this.filters.searchTerm = value;
   }
   newRecord() {
     this.record = null;
     this.openDialog();
   }
-
   items = [
     { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
     {
@@ -144,10 +140,13 @@ export class TaskListComponent {
           rejectIcon: 'none',
 
           accept: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'حذف',
-              detail: 'تم الحذف بنجاح',
+            this.taskService.delete(this.record.id).subscribe(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'تم الحذف',
+                detail: 'تم حذف المهمه بنجاح',
+              });
+              this.getList();
             });
           },
         });
@@ -157,6 +156,9 @@ export class TaskListComponent {
 
   onPageChange(event: any) {
     console.log(event);
+    this.filters.pageSize = event.pageSize;
+    this.filters.pageNumber = event.pageIndex + 1;
+    this.getList();
     // pageIndex , pageSize
   }
 
@@ -169,7 +171,7 @@ export class TaskListComponent {
     this.record = record;
   }
 
-  filterHandler() {
+  filterHandler(isRemoved?: boolean) {
     this.filters.startDate = formatDate(
       this.filters.startDate,
       'yyyy-MM-dd',
@@ -180,6 +182,21 @@ export class TaskListComponent {
       'yyyy-MM-dd',
       'en-US'
     );
-    console.log(this.filters);
+    if (isRemoved) {
+      this.filters.startDate = '';
+      this.filters.endDate = '';
+    }
+    this.getList();
+  }
+
+  getList() {
+    this.taskService.getList(this.filters).subscribe((res: any) => {
+      this.dataSource = res.data;
+      this.totalCount = res.totalCount;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getList();
   }
 }

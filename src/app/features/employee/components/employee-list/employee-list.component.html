@@ -1,5 +1,11 @@
 <app-list-header header="عدد الموظفين" [count]="totalCount">
-  <button class="custom-button" (click)="newRecord()">اضافة مهمه</button>
+  <button
+    class="custom-button"
+    *appHasRole="['SuperAdmin']"
+    (click)="newRecord()"
+  >
+    اضافة موظف
+  </button>
   <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button>
 </app-list-header>
@@ -82,7 +88,7 @@
   </ng-container>
 
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit">
+  <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin']">
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button

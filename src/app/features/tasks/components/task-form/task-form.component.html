@@ -7,34 +7,54 @@
     class="font-arabic"
   >
     <div class="mb-3">
-      <label for="subject">موضوع المهمة</label>
-      <input type="text" id="subject" pInputText formControlName="subject" />
-      <app-form-error [control]="taskForm.get('subject')"></app-form-error>
-    </div>
-    <div class="mb-3">
-      <label for="company">اسم الشركة</label>
-      <input type="text" id="company" pInputText formControlName="company" />
-      <app-form-error [control]="taskForm.get('company')"></app-form-error>
-    </div>
-    <div class="mb-3">
-      <label for="employee">اسم الموظف</label>
-      <input type="text" id="employee" pInputText formControlName="employee" />
-      <app-form-error [control]="taskForm.get('employee')"></app-form-error>
-    </div>
-    <div class="mb-3">
-      <label for="description">وصف المهمه</label>
-      <textarea
-        formControlName="description"
-        rows="3"
+      <label for="description">موضوع المهمة</label>
+      <input
+        type="text"
         id="description"
+        pInputText
+        formControlName="description"
+      />
+      <app-form-error [control]="taskForm.get('description')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="tenantId">اسم الشركة</label>
+      <!-- <input type="text" id="company" pInputText formControlName="company" /> -->
+      <p-dropdown
+        (onChange)="getListEmployees($event)"
+        id="tenantId"
+        formControlName="tenantId"
+        [options]="tenants"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('tenantId')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="employeeIds">اسم الموظف</label>
+      <!-- <input type="text" id="company" pInputText formControlName="company" /> -->
+      <p-dropdown
+        id="employeeIds"
+        formControlName="employeeIds"
+        [options]="employees"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('employeeIds')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="notes">ملاحظات</label>
+      <textarea
+        formControlName="notes"
+        rows="3"
+        id="notes"
         [autoResize]="true"
         pInputTextarea
       ></textarea>
-      <app-form-error [control]="taskForm.get('description')"></app-form-error>
+      <app-form-error [control]="taskForm.get('notes')"></app-form-error>
     </div>
     <div class="flex gap-5">
       <div class="flex flex-col gap-1 w-full">
-        <label for="startDate">تاريخ الانشاء</label>
+        <label for="startDate">تاريخ البدايه</label>
         <p-calendar
           id="startDate"
           formControlName="startDate"

@@ -126,8 +126,8 @@ export class TrainFormComponent {
         next: () => {
           this.snackBar.open(
             this.data
-              ? 'تم تعديل الموظف بنجاح ✅✅'
-              : 'تم اضافه الموظف بنجاح ✅✅',
+              ? 'تم تعديل الدوره بنجاح ✅✅'
+              : 'تم اضافه الدوره بنجاح ✅✅',
             'Close',
             {
               duration: 5000,

@@ -6,6 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TokenService } from '../../../../core/services/token.service';
 import {
   FormGroup,
   FormBuilder,
@@ -31,7 +32,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -50,6 +52,7 @@ export class LoginComponent {
       try {
         const { email, password } = this.loginForm.value;
         this.authService.login(email, password).subscribe(() => {
+          this.tokenService.setRole();
           this.router.navigateByUrl('/dashboard');
           this.isLoading = false;
         });
