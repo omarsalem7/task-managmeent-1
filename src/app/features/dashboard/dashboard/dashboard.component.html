@@ -4,8 +4,27 @@
     <div
       class="bg-white rounded-lg shadow mb-4 p-4 flex justify-between items-center"
     >
-      <h1 class="text-lg font-bold text-gray-800">سجل الضرائب</h1>
-      <div class="text-gray-600">10:09:14 - 28-12-2024 :تاريخ اليوم</div>
+      @if (currentAttendance?.checkIn) {
+      <div class="text-gray-600" dir="ltr">
+        {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - hh:mm a" }} :تاريخ
+        اليوم
+      </div>
+      } @if (!currentAttendance?.checkIn) {
+      <button
+        (click)="checkIn()"
+        class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+      >
+        تسجيل الحضور
+      </button>
+
+      }@else {
+      <button
+        (click)="checkOut(currentAttendance?.id)"
+        class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded"
+      >
+        تسجيل الانصراف
+      </button>
+      }
     </div>
 
     <!-- Stats Grid -->

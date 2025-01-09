@@ -4,6 +4,8 @@ import { AllTasksComponent } from '../components/all-tasks/all-tasks.component';
 import { HasRoleDirective } from '../../../core/directives/has-role.directive';
 import { NotificationService } from '../../../core/services/notification';
 import { DatePipe } from '@angular/common';
+import { AttendanceService } from '../../../core/services/attendance';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +21,8 @@ import { DatePipe } from '@angular/common';
 })
 export class DashboardComponent {
   notiService = inject(NotificationService);
+  attendanceService = inject(AttendanceService);
+  snackBar = inject(MatSnackBar);
   currentRole = localStorage.getItem('role') ?? '';
 
   isLiked = false;
@@ -28,12 +32,36 @@ export class DashboardComponent {
     });
   }
 
+  checkIn() {
+    this.attendanceService.checkIn().subscribe(() => {
+      this.showMessage('تم تسجيل الحضور بنجاح ✅✅');
+    });
+  }
+  checkOut(id: number) {
+    this.attendanceService.checkOut(id).subscribe(() => {
+      this.showMessage('تم تسجيل الانصراف بنجاح ✅✅');
+    });
+  }
+
+  private showMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+  }
+
+  currentAttendance: any;
   currentNoti: any;
   ngOnInit(): void {
     if (this.currentRole == 'Employee') {
       this.notiService.getLatest().subscribe((res) => {
         this.currentNoti = res;
       });
+
+      this.attendanceService
+        .getCurrentAttendance()
+        .subscribe((res) => (this.currentAttendance = res));
     }
   }
 }
