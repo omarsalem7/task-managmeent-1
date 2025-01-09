@@ -8,11 +8,12 @@ import {
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { HasRoleDirective } from '../../../core/directives/has-role.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, HasRoleDirective],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -49,6 +50,8 @@ export class NavbarComponent {
         this.titleService.setTitle(this.currentTitle);
       });
   }
+
+  currentRole = localStorage.getItem('role');
 
   logout() {
     this.authService.logout();

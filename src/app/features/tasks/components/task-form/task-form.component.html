@@ -16,7 +16,7 @@
       />
       <app-form-error [control]="taskForm.get('description')"></app-form-error>
     </div>
-    <div class="mb-3">
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
       <label for="tenantId">اسم الشركة</label>
       <!-- <input type="text" id="company" pInputText formControlName="company" /> -->
       <p-dropdown

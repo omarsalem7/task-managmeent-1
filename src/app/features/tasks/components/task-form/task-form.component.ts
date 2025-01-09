@@ -24,6 +24,7 @@ import { TaskService } from '../../../../core/services/task';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { formatDate } from '@angular/common';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 @Component({
   selector: 'app-task-form',
   standalone: true,
@@ -38,6 +39,7 @@ import { formatDate } from '@angular/common';
     InputTextareaModule,
     CalendarModule,
     DropdownModule,
+    HasRoleDirective,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
@@ -58,7 +60,7 @@ export class TaskFormComponent {
       this.data || {};
     this.taskForm = this.fb.group({
       description: [description ?? '', [Validators.required]],
-      tenantId: [tenantId ?? '', Validators.required],
+      tenantId: [tenantId ?? ''],
       employeeIds: [employeeIds ?? '', Validators.required],
       notes: [notes ?? ''],
       startDate: [startDate ? new Date(startDate) : null, Validators.required],
@@ -73,7 +75,7 @@ export class TaskFormComponent {
     });
   }
 
-  employees = [];
+  employees: any[] = [];
   getListEmployees(event: any) {
     // todo getListEmployees based on tenantId= event.value
     this.employeeService
@@ -130,7 +132,14 @@ export class TaskFormComponent {
         },
       });
   }
+
+  currentRole = localStorage.getItem('role');
   ngOnInit(): void {
+    if (this.currentRole === 'Admin') {
+      this.employeeService.getList().subscribe((res: any) => {
+        this.employees = res.data;
+      });
+    }
     this.getLookups();
   }
 }

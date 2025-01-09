@@ -94,7 +94,7 @@ export class NotificationListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = ['title', 'message', 'tenantId'];
+  displayedColumns: string[] = ['title', 'message', 'createdOn'];
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
@@ -183,8 +183,8 @@ export class NotificationListComponent {
   currentRole = localStorage.getItem('role');
   ngOnInit(): void {
     this.getList();
-    // if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
-    //   this.displayedColumns.push('edit');
-    // }
+    if (this.currentRole === 'SuperAdmin') {
+      this.displayedColumns.push('tenantId');
+    }
   }
 }

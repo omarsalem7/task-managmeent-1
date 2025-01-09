@@ -192,7 +192,7 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('company');
+      this.displayedColumns.push('tenantName');
       this.displayedColumns.push('edit');
     }
   }

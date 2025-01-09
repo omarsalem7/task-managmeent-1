@@ -64,18 +64,18 @@ export class SidebarComponent {
     },
   ];
 
-  settingsItems: MenuItem[] = [
-    { label: 'الاعدادات', icon: 'fas fa-cog', route: '/settings' },
-    {
-      label: 'ادارة مستخدمين النظام',
-      icon: 'fas fa-users-cog',
-      route: '/user-management',
-    },
-    {
-      label: 'اعدادات النظام',
-      icon: 'fas fa-tools',
-      route: '/system-settings',
-    },
-    { label: 'الدعم الفني', icon: 'fas fa-headset', route: '/support' },
-  ];
+  // settingsItems: MenuItem[] = [
+  //   { label: 'الاعدادات', icon: 'fas fa-cog', route: '/settings' },
+  //   {
+  //     label: 'ادارة مستخدمين النظام',
+  //     icon: 'fas fa-users-cog',
+  //     route: '/user-management',
+  //   },
+  //   {
+  //     label: 'اعدادات النظام',
+  //     icon: 'fas fa-tools',
+  //     route: '/system-settings',
+  //   },
+  //   { label: 'الدعم الفني', icon: 'fas fa-headset', route: '/support' },
+  // ];
 }
