@@ -140,7 +140,6 @@ export class FilesListComponent {
   ];
 
   onPageChange(event: any) {
-    console.log(event);
     this.filters.PageSize = event.pageSize;
     this.filters.PageNumber = event.pageIndex + 1;
     this.getList();
