@@ -105,6 +105,7 @@ export class TaskListComponent {
     'description',
     'tenantId',
     'notes',
+    'status',
     'startDate',
     'endDate',
     'edit',
@@ -208,8 +209,13 @@ export class TaskListComponent {
       this.totalCount = res.totalCount;
     });
   }
-
+  currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
+    if (this.currentRole === 'Employee') {
+      this.displayedColumns = this.displayedColumns.filter(
+        (x) => x !== 'status'
+      );
+    }
     this.getList();
   }
 }
