@@ -103,8 +103,9 @@ export class TaskListComponent {
   }
   displayedColumns: string[] = [
     'description',
-    'tenantId',
     'notes',
+    'employeeNames',
+    'tenantName',
     'status',
     'startDate',
     'endDate',
@@ -157,11 +158,9 @@ export class TaskListComponent {
   ];
 
   onPageChange(event: any) {
-    console.log(event);
     this.filters.pageSize = event.pageSize;
     this.filters.pageNumber = event.pageIndex + 1;
     this.getList();
-    // pageIndex , pageSize
   }
 
   fetchResults() {
@@ -211,11 +210,11 @@ export class TaskListComponent {
   }
   currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
-    // if (this.currentRole === 'Employee') {
-    //   this.displayedColumns = this.displayedColumns.filter(
-    //     (x) => x !== 'status'
-    //   );
-    // }
+    if (this.currentRole !== 'SuperAdmin') {
+      this.displayedColumns = this.displayedColumns.filter(
+        (x) => x !== 'tenantName'
+      );
+    }
     this.getList();
   }
 }

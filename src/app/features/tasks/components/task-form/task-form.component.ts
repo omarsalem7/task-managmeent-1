@@ -63,6 +63,7 @@ export class TaskFormComponent {
   ) {
     const { tenantId, description, employeeIds, startDate, endDate, notes } =
       this.data || {};
+    console.log(this.data);
     this.taskForm = this.fb.group({
       description: [description ?? '', [Validators.required]],
       tenantId: [tenantId ?? ''],
