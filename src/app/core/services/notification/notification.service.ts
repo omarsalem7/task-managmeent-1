@@ -44,10 +44,10 @@ export class NotificationService {
   }
 
   update(id: string, tenant: any) {
-    return this.http.put(`${this.baseUrl}/Tenants/${id}`, tenant);
+    return this.http.put(`${this.baseUrl}/api/Notifications/${id}`, tenant);
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.baseUrl}/Tenants/${id}`);
+    return this.http.delete(`${this.baseUrl}/api/Notifications/${id}`);
   }
 }

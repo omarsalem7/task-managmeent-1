@@ -16,7 +16,7 @@
       <input type="text" id="message" pInputText formControlName="message" />
       <app-form-error [control]="taskForm.get('message')"></app-form-error>
     </div>
-    <div class="mb-3">
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
       <label for="tenantId">اسم الشركه</label>
       <p-dropdown
         id="tenantId"

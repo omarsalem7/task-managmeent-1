@@ -186,5 +186,8 @@ export class NotificationListComponent {
     if (this.currentRole === 'SuperAdmin') {
       this.displayedColumns.push('tenantId');
     }
+    if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
+      this.displayedColumns.push('edit');
+    }
   }
 }
