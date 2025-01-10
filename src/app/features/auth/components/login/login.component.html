@@ -7,7 +7,7 @@
       <div class="absolute inset-0 opacity-10"></div>
       <div class="relative z-10">
         <img
-          src="images/bg-login.png"
+          src="images/dark-bg-login.png"
           alt="Login illustration"
           class="rounded-lg shadow-md"
         />
@@ -30,11 +30,12 @@
             </div>
             <label
               [for]="type.value"
-              class="block text-center py-2 px-4 cursor-pointer text-sm transition-all duration-200 rounded-full"
-              [class.bg-sky-200]="
+              class="block text-center text-white py-2 px-4 cursor-pointer text-sm transition-all duration-200 rounded-full"
+              [class.bg-primary]="
                 loginForm.get('userType')?.value === type.value
               "
-              [class.text-gray-600]="
+              [class.bg-gray]="loginForm.get('userType')?.value !== type.value"
+              [class.text-black]="
                 loginForm.get('userType')?.value !== type.value
               "
             >
