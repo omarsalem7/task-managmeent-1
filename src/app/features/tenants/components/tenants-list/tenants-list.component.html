@@ -69,11 +69,15 @@
   </ng-container>
   <ng-container matColumnDef="startDate">
     <th mat-header-cell *matHeaderCellDef>تاريخ الانشاء</th>
-    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate | date : "dd-MM-yyyy" }}
+    </td>
   </ng-container>
   <ng-container matColumnDef="endDate">
     <th mat-header-cell *matHeaderCellDef>تاريخ الانتهاء</th>
-    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.endDate | date : "dd-MM-yyyy" }}
+    </td>
   </ng-container>
   <ng-container matColumnDef="notes">
     <th mat-header-cell *matHeaderCellDef>ملاحظات</th>
