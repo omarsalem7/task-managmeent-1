@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
@@ -25,6 +25,9 @@ import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { formatDate } from '@angular/common';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { DatePicker } from 'primeng/datepicker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-task-form',
   standalone: true,
@@ -36,10 +39,12 @@ import { HasRoleDirective } from '../../../../core/directives/has-role.directive
     MatInputModule,
     MatFormFieldModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     CalendarModule,
     DropdownModule,
     HasRoleDirective,
+    DatePicker,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',

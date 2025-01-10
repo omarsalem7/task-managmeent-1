@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -37,7 +37,7 @@ import { TrainService } from '../../../../core/services/train';
     MatInputModule,
     MatFormFieldModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,

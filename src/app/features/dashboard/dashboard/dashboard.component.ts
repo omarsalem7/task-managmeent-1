@@ -35,11 +35,13 @@ export class DashboardComponent {
   checkIn() {
     this.attendanceService.checkIn().subscribe(() => {
       this.showMessage('تم تسجيل الحضور بنجاح ✅✅');
+      this.getCurrentAttendance();
     });
   }
   checkOut(id: number) {
     this.attendanceService.checkOut(id).subscribe(() => {
       this.showMessage('تم تسجيل الانصراف بنجاح ✅✅');
+      this.getCurrentAttendance();
     });
   }
 
@@ -51,6 +53,12 @@ export class DashboardComponent {
     });
   }
 
+  getCurrentAttendance() {
+    this.attendanceService
+      .getCurrentAttendance()
+      .subscribe((res) => (this.currentAttendance = res));
+  }
+  // currentUtcDate = new Date().toISOString();
   currentAttendance: any;
   currentNoti: any;
   ngOnInit(): void {
@@ -59,9 +67,7 @@ export class DashboardComponent {
         this.currentNoti = res;
       });
 
-      this.attendanceService
-        .getCurrentAttendance()
-        .subscribe((res) => (this.currentAttendance = res));
+      this.getCurrentAttendance();
     }
   }
 }

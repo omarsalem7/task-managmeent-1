@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
 import { NotificationService } from '../../../../core/services/notification';
@@ -37,7 +37,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule,
     MatFormFieldModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,

@@ -44,10 +44,10 @@
     <div class="mb-3">
       <label for="notes">ملاحظات</label>
       <textarea
+        class="p-textarea p-inputtext"
         formControlName="notes"
         rows="3"
         id="notes"
-        [autoResize]="true"
         pInputTextarea
       ></textarea>
       <app-form-error [control]="taskForm.get('notes')"></app-form-error>
@@ -55,26 +55,25 @@
     <div class="flex gap-5">
       <div class="flex flex-col gap-1 w-full">
         <label for="startDate">تاريخ البدايه</label>
-        <p-calendar
-          id="startDate"
+        <p-datepicker
           formControlName="startDate"
-          [style]="{ minWidth: '100%' }"
-          [showButtonBar]="true"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
           appendTo="body"
-          class="w-full"
+          inputId="icondisplay"
         />
         <app-form-error [control]="taskForm.get('startDate')"></app-form-error>
       </div>
       <div class="flex flex-col gap-1 w-full">
         <label for="endDate">تاريخ الانتهاء</label>
-        <p-calendar
-          id="endDate"
+        <p-datepicker
           formControlName="endDate"
-          [style]="{ minWidth: '100%' }"
-          [showButtonBar]="true"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
           appendTo="body"
-          class="w-full"
+          inputId="icondisplay"
         />
+
         <app-form-error [control]="taskForm.get('endDate')"></app-form-error>
       </div>
     </div>
@@ -82,6 +81,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="font-arabic">إلغاء</button>
+
   <button
     mat-button
     cdkFocusInitial
@@ -89,6 +89,11 @@
     form="myForm"
     class="font-arabic"
   >
-    {{ data ? "تعديل" : "اضافه" }}
+    @if(loading){
+    <mat-spinner diameter="20"></mat-spinner>
+    }@else{
+
+    <span>{{ data ? "تعديل" : "اضافه" }}</span>
+    }
   </button>
 </mat-dialog-actions>

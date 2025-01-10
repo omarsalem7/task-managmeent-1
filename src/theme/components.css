@@ -357,7 +357,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 .p-datepicker:not(.p-datepicker-inline) {
   background: #ffffff;
   border: 0 none;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
 }
 .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
   background: #ffffff;
