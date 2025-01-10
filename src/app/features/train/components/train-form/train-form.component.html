@@ -16,14 +16,16 @@
       <input type="text" id="Link" pInputText formControlName="Link" />
       <app-form-error [control]="taskForm.get('Link')"></app-form-error>
     </div>
+
     <div class="mb-3">
-      <label for="description">الوصف</label>
-      <input
-        type="text"
-        id="description"
-        pInputText
+      <label for="description">تفاصيل الدوره</label>
+      <textarea
+        class="p-textarea p-inputtext"
         formControlName="description"
-      />
+        rows="3"
+        id="description"
+        pInputTextarea
+      ></textarea>
       <app-form-error [control]="taskForm.get('description')"></app-form-error>
     </div>
     <div class="mb-3">
