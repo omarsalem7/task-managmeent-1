@@ -49,18 +49,13 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      try {
-        const { email, password } = this.loginForm.value;
-        this.authService.login(email, password).subscribe(() => {
-          this.tokenService.setRole();
-          this.router.navigateByUrl('/dashboard');
-          this.isLoading = false;
-        });
-      } catch (error) {
-        console.error('Login failed:', error);
-      } finally {
+
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe(() => {
+        this.tokenService.setRole();
         this.isLoading = false;
-      }
+        this.router.navigateByUrl('/dashboard');
+      });
     }
   }
 
