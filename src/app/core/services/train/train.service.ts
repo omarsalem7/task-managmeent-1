@@ -35,6 +35,12 @@ export class TrainService {
       createFormDataMultiFiles(task)
     );
   }
+  reactTrain(id: any) {
+    return this.http.post(`${this.baseUrl}/Reactions`, {
+      exerciseId: id,
+      reactId: 1,
+    });
+  }
 
   update(id: string, task: any) {
     return this.http.put(
