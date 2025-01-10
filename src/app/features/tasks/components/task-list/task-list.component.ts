@@ -211,11 +211,11 @@ export class TaskListComponent {
   }
   currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
-    if (this.currentRole === 'Employee') {
-      this.displayedColumns = this.displayedColumns.filter(
-        (x) => x !== 'status'
-      );
-    }
+    // if (this.currentRole === 'Employee') {
+    //   this.displayedColumns = this.displayedColumns.filter(
+    //     (x) => x !== 'status'
+    //   );
+    // }
     this.getList();
   }
 }

@@ -96,7 +96,11 @@ export class TenantsListComponent {
     'tenantName',
     'email',
     'password',
-    // 'edit'
+    'subscriptionFee',
+    'phoneNumber',
+    'startDate',
+    'endDate',
+    'notes',
   ];
 
   dataSource: any[] = [];
