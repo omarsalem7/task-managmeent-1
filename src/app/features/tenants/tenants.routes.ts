@@ -5,7 +5,7 @@ export const TENANTS_ROUTES: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: { title: 'tenants' },
+    data: { title: 'اداره الشركات' },
     children: [
       {
         path: '',

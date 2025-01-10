@@ -5,7 +5,7 @@ export const NOTIFICATION_ROUTES: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: { title: 'tenants' },
+    data: { title: 'التعميم' },
     children: [
       {
         path: '',

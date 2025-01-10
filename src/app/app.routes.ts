@@ -24,6 +24,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'attendance',
+    loadChildren: () =>
+      import('./features/attendance/attendance.routes').then(
+        (m) => m.ATTEND_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: 'employee',
     loadChildren: () =>
       import('./features/employee/employee.routes').then(

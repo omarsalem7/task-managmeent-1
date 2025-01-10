@@ -5,7 +5,7 @@ export const FILES_ROUTES: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: { title: 'tenants' },
+    data: { title: 'الملفات' },
     children: [
       {
         path: '',

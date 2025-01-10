@@ -62,6 +62,12 @@ export class SidebarComponent {
       route: '/notification',
       visible: ['Admin', 'SuperAdmin'].includes(this.currentRole),
     },
+    {
+      label: 'الحضور والانصراف',
+      icon: 'fas fa-chart-bar',
+      route: '/attendance',
+      visible: true,
+    },
   ];
 
   // settingsItems: MenuItem[] = [

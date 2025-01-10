@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '../../core/guards/auth.guard';
 
-export const TRAIN_ROUTES: Routes = [
+export const ATTEND_ROUTES: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: { title: 'التدريب' },
+    data: { title: 'الحضور والانصراف' },
     children: [
       {
         path: '',
         loadComponent: () =>
-          import('./components/train-list/train-list.component').then(
-            (m) => m.TrainListComponent
+          import('./components/attendance-list/attendance-list.component').then(
+            (m) => m.AttendanceListComponent
           ),
       },
     ],
