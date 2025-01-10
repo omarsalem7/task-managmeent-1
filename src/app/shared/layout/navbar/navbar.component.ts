@@ -46,7 +46,7 @@ export class NavbarComponent {
         mergeMap((route) => route.data)
       )
       .subscribe((data) => {
-        this.currentTitle = data['title'] || 'Default Title';
+        this.currentTitle = data['title'] || 'Task Managment';
         this.titleService.setTitle(this.currentTitle);
       });
   }
