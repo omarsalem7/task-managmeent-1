@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { formatDate } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -61,7 +62,7 @@ export class TenantsFormComponent {
       tenantName,
       email,
       password,
-      startDate,
+      // startDate,
       phoneNumber,
       subscriptionFee,
       notes,
@@ -70,8 +71,8 @@ export class TenantsFormComponent {
       tenantName: [tenantName ?? '', [Validators.required]],
       email: [email ?? '', Validators.required],
       password: [password ?? ''],
-      startDate: [startDate ?? null],
-      endDate: [startDate ?? null],
+      startDate: [null],
+      endDate: [null],
       phoneNumber: [phoneNumber ?? ''],
       subscriptionFee: [subscriptionFee ?? null],
       notes: [notes ?? ''],
@@ -84,13 +85,23 @@ export class TenantsFormComponent {
       return;
     }
 
+    const formValue = {
+      ...this.taskForm.value,
+      startDate: formatDate(
+        this.taskForm.value.startDate,
+        'yyyy-MM-dd',
+        'en-US'
+      ),
+      endDate: formatDate(this.taskForm.value.endDate, 'yyyy-MM-dd', 'en-US'),
+    };
+
     this.loading = true;
     const request: any = this.data
       ? this.tenantsService.update(this.data.id, {
-          ...this.taskForm.value,
+          ...formValue,
           name: this.taskForm.value.tenantName,
         })
-      : this.tenantsService.create(this.taskForm.value);
+      : this.tenantsService.create(formValue);
 
     request
       .pipe(

@@ -100,9 +100,11 @@ export class EmployeeListComponent {
     'jobNumber',
     'email',
     'phoneNumber',
+    'nationality',
+    'identityNumber',
     'jobTitle',
+    'password',
     'startDate',
-    'endDate',
   ];
 
   dataSource: any[] = [];
@@ -192,7 +194,7 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('tenantName');
+      this.displayedColumns.splice(2, 0, 'tenantName');
       this.displayedColumns.push('edit');
     }
   }

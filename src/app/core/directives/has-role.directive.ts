@@ -28,7 +28,6 @@ export class HasRoleDirective {
 
   private checkRolePermission(requiredRoles: string[]): boolean {
     const res = requiredRoles.some((role) => this.currentRole === role);
-    console.log(requiredRoles, res);
     return res;
   }
 }

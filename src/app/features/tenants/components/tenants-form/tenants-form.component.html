@@ -73,8 +73,14 @@
     </div>
 
     <div class="mb-3">
-      <label for="notes"> الملاحظات</label>
-      <input type="text" id="notes" pInputText formControlName="notes" />
+      <label for="notes">ملاحظات</label>
+      <textarea
+        class="p-textarea p-inputtext"
+        formControlName="notes"
+        rows="3"
+        id="notes"
+        pInputTextarea
+      ></textarea>
       <app-form-error [control]="taskForm.get('notes')"></app-form-error>
     </div>
 

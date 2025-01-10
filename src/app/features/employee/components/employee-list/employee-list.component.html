@@ -72,19 +72,29 @@
     <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="nationality">
+    <th mat-header-cell *matHeaderCellDef>الجنسية</th>
+    <td mat-cell *matCellDef="let element">{{ element.nationality }}</td>
+  </ng-container>
+  <ng-container matColumnDef="identityNumber">
+    <th mat-header-cell *matHeaderCellDef>رقم الهوية</th>
+    <td mat-cell *matCellDef="let element">{{ element.identityNumber }}</td>
+  </ng-container>
   <ng-container matColumnDef="jobTitle">
     <th mat-header-cell *matHeaderCellDef>المسمي الوظيفي</th>
     <td mat-cell *matCellDef="let element">{{ element.jobTitle }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="startDate">
-    <th mat-header-cell *matHeaderCellDef>تاريخ البدايه</th>
-    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef>كلمه السر</th>
+    <td mat-cell *matCellDef="let element">{{ element.password }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="endDate">
+  <ng-container matColumnDef="startDate">
     <th mat-header-cell *matHeaderCellDef>تاريخ الانشاء</th>
-    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate | date : "dd-mm-yyyy" }}
+    </td>
   </ng-container>
 
   <!-- Edit Action Column -->

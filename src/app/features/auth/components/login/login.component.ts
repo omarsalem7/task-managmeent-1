@@ -51,10 +51,15 @@ export class LoginComponent {
       this.isLoading = true;
 
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe(() => {
-        this.tokenService.setRole();
-        this.isLoading = false;
-        this.router.navigateByUrl('/dashboard');
+      this.authService.login(email, password).subscribe({
+        next: () => {
+          this.tokenService.setRole();
+          this.isLoading = false;
+          this.router.navigateByUrl('/dashboard');
+        },
+        error: () => {
+          this.isLoading = false;
+        },
       });
     }
   }

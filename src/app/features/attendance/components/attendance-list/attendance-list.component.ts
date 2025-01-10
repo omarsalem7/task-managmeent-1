@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
 import { CommonModule } from '@angular/common';
@@ -16,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { AttendanceService } from '../../../../core/services/attendance';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 

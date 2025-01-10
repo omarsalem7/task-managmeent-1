@@ -53,7 +53,7 @@
         [control]="taskForm.get('identityNumber')"
       ></app-form-error>
     </div>
-    <div class="mb-3">
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
       <label for="tenantId">اسم الشركه</label>
       <p-dropdown
         id="tenantId"
