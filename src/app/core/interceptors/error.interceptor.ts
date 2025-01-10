@@ -46,7 +46,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             errorMessage = 'Server error. Please try again later';
             break;
           default:
-            alert(error.status);
             errorMessage = `Error: ${error.message}`;
         }
       }
