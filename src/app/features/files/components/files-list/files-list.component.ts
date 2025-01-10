@@ -201,9 +201,11 @@ export class FilesListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.filesService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res;
+      this.loading = false;
       this.totalCount = res.length;
     });
   }

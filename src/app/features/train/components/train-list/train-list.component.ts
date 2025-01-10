@@ -173,9 +173,11 @@ export class TrainListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.trainService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
+      this.loading = false;
       this.totalCount = res.totalCount;
     });
   }

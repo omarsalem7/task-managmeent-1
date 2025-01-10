@@ -164,11 +164,13 @@ export class AttendanceListComponent {
     this.getList();
   }
 
+  loading = true;
   totalCount: number = 0;
   getList() {
     this.attendanceService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res;
       this.totalCount = res.length;
+      this.loading = false;
     });
   }
 

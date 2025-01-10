@@ -179,10 +179,12 @@ export class TenantsListComponent {
     this.getList();
   }
 
+  loading = true;
   totalCount: number = 0;
   getList() {
     this.tenantsService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
+      this.loading = false;
       this.totalCount = res.totalCount;
     });
   }

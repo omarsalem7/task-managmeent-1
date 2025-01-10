@@ -184,8 +184,10 @@ export class EmployeeListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.employeeService.getList(this.filters).subscribe((res: any) => {
+      this.loading = false;
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
     });

@@ -113,6 +113,13 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      <div class="flex justify-center items-center py-10 text-l font-semibold">
+        {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+      </div>
+    </td>
+  </tr>
 </table>
 
 <mat-paginator

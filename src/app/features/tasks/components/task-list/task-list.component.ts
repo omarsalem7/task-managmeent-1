@@ -202,10 +202,12 @@ export class TaskListComponent {
     this.getList();
   }
 
+  loading = true;
   getList() {
     this.taskService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
+      this.loading = false;
     });
   }
   currentRole = localStorage.getItem('role') ?? '';
