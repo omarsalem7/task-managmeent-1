@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { AttendanceService } from '../../../core/services/attendance';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StatisticsService } from '../../../core/services/statistics.service';
+import { TasksDaysComponent } from '../components/tasks-days/tasks-days.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { StatisticsService } from '../../../core/services/statistics.service';
     AllTasksComponent,
     HasRoleDirective,
     DatePipe,
+    TasksDaysComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',

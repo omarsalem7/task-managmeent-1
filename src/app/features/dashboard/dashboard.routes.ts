@@ -8,21 +8,5 @@ export const DASHBOARD_ROUTES: Routes = [
     component: DashboardComponent,
     // canActivate: [authGuard],
     data: { title: 'الرئيسية' },
-    children: [
-      {
-        path: 'stats',
-        loadComponent: () =>
-          import('./components/task-stats/task-stats.component').then(
-            (m) => m.TaskStatsComponent
-          ),
-      },
-      {
-        path: 'activity',
-        loadComponent: () =>
-          import('./components/recent-activity/recent-activity.component').then(
-            (m) => m.RecentActivityComponent
-          ),
-      },
-    ],
   },
 ];
