@@ -23,7 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { DatePicker } from 'primeng/datepicker';
 @Component({
   selector: 'app-file-form',
   standalone: true,
@@ -40,6 +40,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,
+    DatePicker,
   ],
   providers: [],
   templateUrl: './tenants-form.component.html',
@@ -56,11 +57,24 @@ export class TenantsFormComponent {
     private tenantsService: TenantsService,
     private snackBar: MatSnackBar
   ) {
-    const { tenantName, email, password } = this.data || {};
+    const {
+      tenantName,
+      email,
+      password,
+      startDate,
+      phoneNumber,
+      subscriptionFee,
+      notes,
+    } = this.data || {};
     this.taskForm = this.fb.group({
       tenantName: [tenantName ?? '', [Validators.required]],
       email: [email ?? '', Validators.required],
       password: [password ?? ''],
+      startDate: [startDate ?? null],
+      endDate: [startDate ?? null],
+      phoneNumber: [phoneNumber ?? ''],
+      subscriptionFee: [subscriptionFee ?? null],
+      notes: [notes ?? ''],
     });
   }
 
