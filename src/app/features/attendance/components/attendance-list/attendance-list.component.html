@@ -3,11 +3,7 @@
   <!-- <button class="custom-button">تصدير pdf</button>
   <button class="custom-button">تصدير Excel</button> -->
 </app-list-header>
-<app-filter-list
-  [isFilter]="false"
-  header="الشركات"
-  (searchChange)="updateSearch($event)"
->
+<app-filter-list header="الشركات" (searchChange)="updateSearch($event)">
   <div class="flex gap-6 mb-4 flex-wrap items-center">
     <mat-form-field>
       <mat-label class="font-arabic">تاريخ البدء</mat-label>
