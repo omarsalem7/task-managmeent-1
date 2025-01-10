@@ -92,7 +92,12 @@ export class TenantsListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = ['tenantName', 'email', 'password', 'edit'];
+  displayedColumns: string[] = [
+    'tenantName',
+    'email',
+    'password',
+    // 'edit'
+  ];
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
