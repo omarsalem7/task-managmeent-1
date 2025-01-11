@@ -127,6 +127,7 @@ export class EmployeeFormComponent {
     });
   }
   ngOnInit(): void {
+    console.log(this.data);
     this.getLookup();
   }
 }

@@ -101,7 +101,7 @@ export class EmployeeListComponent {
     'email',
     'phoneNumber',
     'nationality',
-    'identityNumber',
+    'nationalId',
     'jobTitle',
     'password',
     'createdOn',
