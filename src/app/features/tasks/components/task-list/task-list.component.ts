@@ -72,6 +72,13 @@ export class TaskListComponent {
 
   readonly dialog = inject(MatDialog);
 
+  taskStatusesAr: any = {
+    Completed: 'مكتمله',
+    InProgress: 'مستمرة',
+    Overdue: 'منتهية',
+    '1': 'جديده',
+    New: 'جديده',
+  };
   openDialog() {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '35vw',

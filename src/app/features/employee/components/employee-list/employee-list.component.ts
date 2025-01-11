@@ -127,7 +127,7 @@ export class EmployeeListComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           target: event.target as EventTarget,
-          message: 'هل انت متاكد من حذف المهمه ؟',
+          message: 'هل انت متاكد من حذف الموظف ؟',
           header: '',
           icon: 'pi pi-info-circle',
           acceptButtonStyleClass: 'p-button-danger p-button-text',
@@ -142,7 +142,7 @@ export class EmployeeListComponent {
               this.messageService.add({
                 severity: 'success',
                 summary: 'تم الحذف',
-                detail: 'تم حذف المهمه بنجاح',
+                detail: 'تم حذف الموظف بنجاح',
               });
               this.getList();
             });

@@ -186,7 +186,7 @@ export class NotificationListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('tenantId');
+      this.displayedColumns.push('tenantName');
     }
     if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
       this.displayedColumns.push('edit');
