@@ -99,9 +99,9 @@ export class FilesListComponent {
       });
   }
   displayedColumns: string[] = [
-    'createdById',
+    'employeeName',
     'fileName',
-    'taskItem',
+    'taskItemName',
     'fileUrl',
     'createdOn',
     // 'edit',
@@ -216,7 +216,7 @@ export class FilesListComponent {
       this.displayedColumns.splice(
         this.displayedColumns.length - 1,
         0,
-        'tenantId'
+        'tenantName'
       );
 
       // this.displayedColumns.push('edit');

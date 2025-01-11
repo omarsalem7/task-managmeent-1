@@ -74,7 +74,7 @@ export class DashboardComponent {
 
   completionPercent: any = 0;
   getStatsComp() {
-    this.statService.getStats().subscribe((res: any) => {
+    this.statService.getStatsTent().subscribe((res: any) => {
       this.currentStat = res;
       const total = res?.continuedTasks + res?.newTasks + res?.overdue;
       this.completionPercent = total > 0 ? total / res.completedTasks : 0;

@@ -9,13 +9,18 @@ export class StatisticsService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getStats() {
+  getStatsTent() {
     return this.http.get(`${this.baseUrl}/api/TenantStatistics/statistics`);
   }
   getStatsEmp() {
     return this.http.get(
       `${this.baseUrl}/api/Statistics/tasks-status-current-month`
     );
+  }
+
+  // /api/TenantStatistics/statistics
+  getTasksDaysChartTents() {
+    return this.http.get(`${this.baseUrl}/api/TenantStatistics/current-month`);
   }
 
   // /api/Statistics/tasks-status-by-day

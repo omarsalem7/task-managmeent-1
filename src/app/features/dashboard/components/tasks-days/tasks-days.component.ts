@@ -11,38 +11,68 @@ import { StatisticsService } from '../../../../core/services/statistics.service'
 })
 export class TasksDaysComponent {
   statisticsService = inject(StatisticsService);
+
   title = 'days-tasks';
   chart: any = null;
 
   ngOnInit() {
     this.loadChartData();
   }
-
+  currentRole = localStorage.getItem('role') ?? '';
   private loadChartData() {
-    this.statisticsService.getTasksDaysChart().subscribe(
-      (response: any) => {
-        const daysLabels = response.days.map((day: any) => day.day.toString());
-        const finishedTasksData = response.days.map(
-          (day: any) => day.finishedTasks
-        );
-        const completedTasksData = response.days.map(
-          (day: any) => day.completedTasks
-        );
-        const inProgressTasksData = response.days.map(
-          (day: any) => day.inProgressTasks
-        );
+    if (this.currentRole == 'Employee') {
+      this.statisticsService.getTasksDaysChart().subscribe(
+        (response: any) => {
+          const daysLabels = response.days.map((day: any) =>
+            day.day.toString()
+          );
+          const finishedTasksData = response.days.map(
+            (day: any) => day.finishedTasks
+          );
+          const completedTasksData = response.days.map(
+            (day: any) => day.completedTasks
+          );
+          const inProgressTasksData = response.days.map(
+            (day: any) => day.inProgressTasks
+          );
 
-        this.renderChart(
-          daysLabels,
-          finishedTasksData,
-          completedTasksData,
-          inProgressTasksData
-        );
-      },
-      (error) => {
-        console.error('Failed to load chart data:', error);
-      }
-    );
+          this.renderChart(
+            daysLabels,
+            finishedTasksData,
+            completedTasksData,
+            inProgressTasksData
+          );
+        },
+        (error) => {
+          console.error('Failed to load chart data:', error);
+        }
+      );
+    } else {
+      this.statisticsService.getTasksDaysChartTents().subscribe(
+        (response: any) => {
+          const daysLabels = response.map((day: any) => day.day.toString());
+          const finishedTasksData = response.map(
+            (day: any) => day.finishedTasks
+          );
+          const completedTasksData = response.map(
+            (day: any) => day.completedTasks
+          );
+          const inProgressTasksData = response.map(
+            (day: any) => day.inProgressTasks
+          );
+
+          this.renderChart(
+            daysLabels,
+            finishedTasksData,
+            completedTasksData,
+            inProgressTasksData
+          );
+        },
+        (error) => {
+          console.error('Failed to load chart data:', error);
+        }
+      );
+    }
   }
 
   private renderChart(

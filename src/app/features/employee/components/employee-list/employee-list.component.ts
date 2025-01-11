@@ -104,7 +104,7 @@ export class EmployeeListComponent {
     'identityNumber',
     'jobTitle',
     'password',
-    'startDate',
+    'createdOn',
   ];
 
   dataSource: any[] = [];
