@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ListHeaderComponent {
   @Input({ required: true }) header!: string;
-  @Input({ required: true }) count!: number;
+  @Input() count?: number;
 }

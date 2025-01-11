@@ -28,7 +28,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           case 401:
             // authService.logout();
             router.navigate(['/auth/login']);
-            errorMessage = 'Please log in to continue';
+            errorMessage = handleValidationError(error.error);
             break;
           case 403:
             errorMessage = "You don't have permission to perform this action";
@@ -40,9 +40,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             errorMessage = handleValidationError(error.error);
             break;
           case 500:
-            errorMessage = 'Server error. Please try again later';
-            break;
-          case 200:
             errorMessage = 'Server error. Please try again later';
             break;
           default:

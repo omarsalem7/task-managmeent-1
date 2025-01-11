@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,11 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {
     // Check localStorage on service initialization
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -31,6 +36,27 @@ export class AuthService {
         tap((user: any) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+        })
+      );
+  }
+  newPassword(newPassDto: any): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/Auth/change-password`, {
+        ...newPassDto,
+      })
+      .pipe(
+        tap(() => {
+          this.snackBar.open(
+            'تم تغير الرقم السري بنجاح اعد التسجيل ✅✅',
+            'Close',
+            {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            }
+          );
+          setTimeout(() => {}, 2000);
+          this.logout();
         })
       );
   }

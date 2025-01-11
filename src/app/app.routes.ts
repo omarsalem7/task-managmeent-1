@@ -66,6 +66,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'new-password',
+    loadChildren: () =>
+      import('./features/new-password/newPassword.routes').then(
+        (m) => m.NEWPASSWORD_ROUTES
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
