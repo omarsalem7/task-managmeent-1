@@ -17,7 +17,8 @@ import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-head
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { AttendanceService } from '../../../../core/services/attendance';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { TenantsService } from '../../../../core/services/tenants';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -41,7 +42,7 @@ export interface PeriodicElement {
     FormsModule,
     MatDialogModule,
     MenuModule,
-
+    DropdownModule,
     ToastModule,
     HasRoleDirective,
   ],
@@ -50,6 +51,7 @@ export interface PeriodicElement {
 })
 export class AttendanceListComponent {
   filters = {
+    tenantId: null,
     searchTerm: '',
     PageNumber: 1,
     PageSize: 5,
@@ -74,7 +76,10 @@ export class AttendanceListComponent {
   //   });
   // }
 
-  constructor(private attendanceService: AttendanceService) {
+  constructor(
+    private attendanceService: AttendanceService,
+    private tenantsService: TenantsService
+  ) {
     this.searchSubject
       .pipe(
         debounceTime(600),
@@ -98,6 +103,12 @@ export class AttendanceListComponent {
   newRecord() {
     this.record = null;
     // this.openDialog();
+  }
+  tenants = [];
+  getLookup() {
+    this.tenantsService.getList({ pageSize: 500 }).subscribe((res: any) => {
+      this.tenants = res.data;
+    });
   }
 
   // items = [
@@ -147,19 +158,17 @@ export class AttendanceListComponent {
   }
 
   filterHandler(isRemoved?: boolean) {
-    this.filters.startDate = formatDate(
-      this.filters.startDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
-    this.filters.endDate = formatDate(
-      this.filters.endDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
     if (isRemoved) {
       this.filters.startDate = '';
       this.filters.endDate = '';
+      this.filters.tenantId = null;
+    } else {
+      this.filters.startDate = this.filters?.startDate
+        ? formatDate(this.filters?.startDate, 'yyyy-MM-dd', 'en-US')
+        : '';
+      this.filters.endDate = this.filters?.endDate
+        ? formatDate(this.filters?.endDate, 'yyyy-MM-dd', 'en-US')
+        : '';
     }
     this.getList();
   }
@@ -168,8 +177,8 @@ export class AttendanceListComponent {
   totalCount: number = 0;
   getList() {
     this.attendanceService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res;
-      this.totalCount = res.length;
+      this.dataSource = res.data;
+      this.totalCount = res.totalCount;
       this.loading = false;
     });
   }
@@ -182,6 +191,7 @@ export class AttendanceListComponent {
     if (this.currentRole === 'SuperAdmin') {
       this.displayedColumns.unshift('tenantName');
       this.displayedColumns.unshift('employeeName');
+      this.getLookup();
     }
     this.getList();
   }

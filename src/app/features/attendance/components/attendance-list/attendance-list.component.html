@@ -33,6 +33,17 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <!-- <label for="tenantId">اسم الشركه</label> -->
+      <p-dropdown
+        id="tenantId"
+        [(ngModel)]="filters.tenantId"
+        [options]="tenants"
+        placeholder="اسم الشركه"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+    </div>
     <div class="flex gap-3">
       <button class="btn-outline" (click)="filterHandler()">بحث</button>
       <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
