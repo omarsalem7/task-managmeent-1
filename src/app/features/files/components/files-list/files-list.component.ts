@@ -20,7 +20,6 @@ import { FileFormComponent } from '../file-form/file-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FilesService } from '../../../../core/services/files';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
 export interface PeriodicElement {
@@ -83,8 +82,7 @@ export class FilesListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private filesService: FilesService,
-    private http: HttpClient
+    private filesService: FilesService
   ) {
     this.searchSubject
       .pipe(
@@ -204,9 +202,9 @@ export class FilesListComponent {
   loading = true;
   getList() {
     this.filesService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res;
+      this.dataSource = res.data;
       this.loading = false;
-      this.totalCount = res.length;
+      this.totalCount = res.totalCount;
     });
   }
   currentRole = localStorage.getItem('role');
