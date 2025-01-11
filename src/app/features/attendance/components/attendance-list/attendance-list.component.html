@@ -34,7 +34,6 @@
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
     <div class="mb-3" *appHasRole="['SuperAdmin']">
-      <!-- <label for="tenantId">اسم الشركه</label> -->
       <p-dropdown
         id="tenantId"
         [(ngModel)]="filters.tenantId"

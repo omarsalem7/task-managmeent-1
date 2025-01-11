@@ -36,8 +36,20 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
-    <div>
+
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <p-dropdown
+        id="tenantId"
+        [(ngModel)]="filters.tenantId"
+        [options]="tenants"
+        placeholder="اسم الشركه"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+    </div>
+    <div class="flex gap-3">
       <button class="btn-outline" (click)="filterHandler()">بحث</button>
+      <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
     </div>
   </div>
 </app-filter-list>
@@ -149,7 +161,7 @@
 </table>
 
 <mat-paginator
-  [length]="200"
+  [length]="totalCount"
   [pageSizeOptions]="[5, 10, 100]"
   aria-label="Select page"
   (page)="onPageChange($event)"

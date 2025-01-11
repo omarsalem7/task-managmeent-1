@@ -26,6 +26,8 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TaskService } from '../../../../core/services/task';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { DropdownModule } from 'primeng/dropdown';
+import { TenantsService } from '../../../../core/services/tenants';
 
 export interface PeriodicElement {
   name: string;
@@ -52,6 +54,7 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    DropdownModule,
     HasRoleDirective,
   ],
   templateUrl: './task-list.component.html',
@@ -59,9 +62,10 @@ export interface PeriodicElement {
 })
 export class TaskListComponent {
   filters = {
+    tenantId: null,
     searchTerm: '',
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 5,
     startDate: '',
     endDate: '',
   };
@@ -87,7 +91,8 @@ export class TaskListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private tenantsService: TenantsService
   ) {
     this.searchSubject
       .pipe(
@@ -185,19 +190,17 @@ export class TaskListComponent {
   }
 
   filterHandler(isRemoved?: boolean) {
-    this.filters.startDate = formatDate(
-      this.filters.startDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
-    this.filters.endDate = formatDate(
-      this.filters.endDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
     if (isRemoved) {
       this.filters.startDate = '';
       this.filters.endDate = '';
+      this.filters.tenantId = null;
+    } else {
+      this.filters.startDate = this.filters?.startDate
+        ? formatDate(this.filters?.startDate, 'yyyy-MM-dd', 'en-US')
+        : '';
+      this.filters.endDate = this.filters?.endDate
+        ? formatDate(this.filters?.endDate, 'yyyy-MM-dd', 'en-US')
+        : '';
     }
     this.getList();
   }
@@ -211,11 +214,19 @@ export class TaskListComponent {
     });
   }
   currentRole = localStorage.getItem('role') ?? '';
+  tenants = [];
+  getLookup() {
+    this.tenantsService.getList({ pageSize: 500 }).subscribe((res: any) => {
+      this.tenants = res.data;
+    });
+  }
   ngOnInit(): void {
     if (this.currentRole !== 'SuperAdmin') {
       this.displayedColumns = this.displayedColumns.filter(
         (x) => x !== 'tenantName'
       );
+    } else {
+      this.getLookup();
     }
     this.getList();
   }
