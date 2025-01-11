@@ -101,8 +101,21 @@ export class TenantsListComponent {
     'startDate',
     'endDate',
     'notes',
+    'status',
   ];
 
+  getStatus(expirationDate: string): string {
+    if (!expirationDate) return 'منتهي';
+
+    const expDate = new Date(expirationDate);
+    const today = new Date();
+
+    // Remove time portion for accurate date comparison
+    expDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return expDate > today ? 'قيد العمل' : 'منتهي';
+  }
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
