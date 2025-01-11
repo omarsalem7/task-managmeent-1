@@ -106,6 +106,13 @@ export class DashboardComponent {
   // currentUtcDate = new Date().toISOString();
   currentAttendance: any;
   currentNoti: any;
+
+  superCount: any;
+  getCountSuper() {
+    this.statService.getTasksCountSuper().subscribe((res) => {
+      this.superCount = res;
+    });
+  }
   ngOnInit(): void {
     if (this.currentRole === 'Employee') {
       this.getCurrentAttendance();
@@ -117,6 +124,9 @@ export class DashboardComponent {
 
     if (this.currentRole === 'Admin') {
       this.getStatsComp();
+    }
+    if (this.currentRole === 'SuperAdmin') {
+      this.getCountSuper();
     }
   }
 }

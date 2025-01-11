@@ -111,6 +111,71 @@
     </div>
   </div>
 
+  <div class="grid grid-cols-5 gap-4 mb-4" *appHasRole="['SuperAdmin']">
+    <!-- Total Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class="text-white">
+        <div class="text-2xl font-bold">
+          {{ superCount?.Overdue }}
+        </div>
+        <div class="text-sm">مجموع المتأخره</div>
+      </div>
+      <i class="fas fa-dollar-sign text-white text-3xl"></i>
+    </div>
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class="text-white">
+        <div class="text-2xl font-bold">
+          {{ superCount?.Completed }}
+        </div>
+        <div class="text-sm">مجموع المكتمة</div>
+      </div>
+      <i class="fas fa-dollar-sign text-white text-3xl"></i>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class="text-white">
+        <div class="text-2xl font-bold">
+          {{ superCount?.InProgress }}
+        </div>
+        <div class="text-sm">مجموع جاري العمل</div>
+      </div>
+      <i class="fas fa-bell text-white text-3xl"></i>
+    </div>
+
+    <!-- Active Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class="text-white">
+        <div class="text-2xl font-bold">
+          {{ superCount?.New }}
+        </div>
+        <div class="text-sm">مجموع المهام الجديدة</div>
+      </div>
+      <i class="fas fa-th-large text-white text-3xl"></i>
+    </div>
+
+    <!-- New Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class="text-white">
+        <div class="text-2xl font-bold">
+          {{ superCount?.All }}
+        </div>
+        <div class="text-sm">كافة المهام</div>
+      </div>
+      <i class="fas fa-comments text-white text-3xl"></i>
+    </div>
+  </div>
+
   <!-- Last Design Section -->
   @if (currentNoti) {
   <div

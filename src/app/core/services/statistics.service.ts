@@ -23,9 +23,11 @@ export class StatisticsService {
     return this.http.get(`${this.baseUrl}/api/TenantStatistics/current-month`);
   }
 
-  // /api/Statistics/tasks-status-by-day
   getTasksDaysChart() {
     return this.http.get(`${this.baseUrl}/api/Statistics/tasks-status-by-day`);
+  }
+  getTasksCountSuper() {
+    return this.http.get(`${this.baseUrl}/api/Statistics/tasks-status-count`);
   }
 
   getEmpPerformance(inputFilter?: any) {
