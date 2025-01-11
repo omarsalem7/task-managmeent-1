@@ -21,8 +21,8 @@
       <input type="text" id="password" pInputText formControlName="password" />
       <app-form-error [control]="taskForm.get('password')"></app-form-error>
     </div>
-    <div class="flex gap-5 mb-3">
-      <div class="flex flex-col gap-1 w-full">
+    <div class="mb-3">
+      <!-- <div class="flex flex-col gap-1 w-full">
         <label for="startDate">تاريخ البدايه</label>
         <p-datepicker
           formControlName="startDate"
@@ -33,21 +33,21 @@
           inputId="icondisplay"
         />
         <app-form-error [control]="taskForm.get('startDate')"></app-form-error>
-      </div>
-      <div class="flex flex-col gap-1 w-full">
-        <label for="endDate">تاريخ الانتهاء</label>
-        <p-datepicker
-          [style]="{ width: '100%' }"
-          formControlName="endDate"
-          [iconDisplay]="'input'"
-          [showIcon]="true"
-          appendTo="body"
-          inputId="icondisplay"
-        />
+      </div> -->
 
-        <app-form-error [control]="taskForm.get('endDate')"></app-form-error>
-      </div>
+      <label for="endDate">تاريخ انتهاء الاشتراك</label>
+      <p-datepicker
+        [style]="{ width: '100%' }"
+        formControlName="endDate"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        appendTo="body"
+        inputId="icondisplay"
+      />
+
+      <app-form-error [control]="taskForm.get('endDate')"></app-form-error>
     </div>
+
     <div class="mb-3">
       <label for="phoneNumber"> رقم الهاتف</label>
       <input

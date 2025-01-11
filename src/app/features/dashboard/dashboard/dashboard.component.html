@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-5 mt-5">
   <!-- Header remains the same -->
 
-  <div class="flex flex-col gap-1 w-full">
+  <div class="flex flex-col gap-1 w-full" *appHasRole="['SuperAdmin']">
     <label for="startDate"> فلتر بالتاريخ</label>
     <p-datepicker
       [style]="{ width: '25%' }"

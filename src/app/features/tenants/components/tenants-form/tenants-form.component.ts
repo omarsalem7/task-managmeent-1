@@ -87,8 +87,9 @@ export class TenantsFormComponent {
 
     const formValue = {
       ...this.taskForm.value,
-      startDate: formatDate(
-        this.taskForm.value.startDate,
+      startDate: formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+      expirationDate: formatDate(
+        this.taskForm.value.endDate,
         'yyyy-MM-dd',
         'en-US'
       ),
