@@ -30,6 +30,12 @@ export class StatisticsService {
     return this.http.get(`${this.baseUrl}/api/Statistics/tasks-status-count`);
   }
 
+  // /api/Statistics/statusesOverYear
+
+  getStatsOverYear() {
+    return this.http.get(`${this.baseUrl}/api/Statistics/statusesOverYear`);
+  }
+
   getEmpPerformance(inputFilter?: any) {
     let params = new HttpParams();
 

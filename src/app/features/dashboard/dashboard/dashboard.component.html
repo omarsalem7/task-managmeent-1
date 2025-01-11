@@ -1,19 +1,20 @@
 <div class="flex flex-col gap-5 mt-5">
   <!-- Header remains the same -->
-
-  <div class="flex flex-col gap-1 w-full" *appHasRole="['SuperAdmin']">
-    <label for="startDate"> فلتر بالتاريخ</label>
-    <p-datepicker
-      [style]="{ width: '25%' }"
-      [selectionMode]="'range'"
-      [(ngModel)]="date"
-      [iconDisplay]="'input'"
-      [showIcon]="true"
-      [maxDate]="today"
-      appendTo="body"
-      placeholder="ادخل تاريخ البدايه والنهايه ..."
-      inputId="icondisplay"
-    />
+  <div class="flex flex-row-reverse">
+    <div class="flex flex-col gap-1" *appHasRole="['SuperAdmin']">
+      <!-- <label for="startDate"> فلتر بالتاريخ</label> -->
+      <p-datepicker
+        [style]="{ width: '100%' }"
+        [selectionMode]="'range'"
+        [(ngModel)]="date"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        [maxDate]="today"
+        appendTo="body"
+        placeholder="ادخل تاريخ البدايه والنهايه ..."
+        inputId="icondisplay"
+      />
+    </div>
   </div>
   @if(!currentAttendance?.isCheckedOut){
   <div
