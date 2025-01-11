@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { StatisticsService } from '../../../../core/services/statistics.service';
 
 @Component({
   selector: 'app-tasks-days',
@@ -9,46 +10,69 @@ import Chart from 'chart.js/auto';
   styleUrl: './tasks-days.component.scss',
 })
 export class TasksDaysComponent {
+  statisticsService = inject(StatisticsService);
   title = 'days-tasks';
-  chart: any = [];
-
-  getDaysInMonth(
-    month: number,
-    year: number = new Date().getFullYear()
-  ): string[] {
-    const daysInMonth = new Date(year, month, 0).getDate();
-    return Array.from({ length: daysInMonth }, (_, i) => `${i + 1}`);
-  }
+  chart: any = null;
 
   ngOnInit() {
-    const currentMonth = new Date().getMonth() + 1; // Adding 1 because getMonth() returns 0-11
-    const daysLabels = this.getDaysInMonth(currentMonth);
+    this.loadChartData();
+  }
 
-    const generateMonthData = () => {
-      return daysLabels.map(() => Math.floor(Math.random() * 20) + 1);
-    };
+  private loadChartData() {
+    this.statisticsService.getTasksDaysChart().subscribe(
+      (response: any) => {
+        const daysLabels = response.days.map((day: any) => day.day.toString());
+        const finishedTasksData = response.days.map(
+          (day: any) => day.finishedTasks
+        );
+        const completedTasksData = response.days.map(
+          (day: any) => day.completedTasks
+        );
+        const inProgressTasksData = response.days.map(
+          (day: any) => day.inProgressTasks
+        );
+
+        this.renderChart(
+          daysLabels,
+          finishedTasksData,
+          completedTasksData,
+          inProgressTasksData
+        );
+      },
+      (error) => {
+        console.error('Failed to load chart data:', error);
+      }
+    );
+  }
+
+  private renderChart(
+    labels: string[],
+    finishedTasks: number[],
+    completedTasks: number[],
+    inProgressTasks: number[]
+  ) {
+    if (this.chart) {
+      this.chart.destroy(); // Destroy existing chart instance to prevent duplication
+    }
 
     this.chart = new Chart('canvas3', {
       type: 'bar',
       data: {
-        labels: daysLabels,
+        labels: labels,
         datasets: [
           {
             label: 'المهام المكتمله',
-            data: generateMonthData(),
-            // borderWidth: 1,
+            data: completedTasks,
             backgroundColor: '#9BD0F5',
           },
           {
             label: 'المهام المنتهي',
-            data: generateMonthData(),
-            // borderWidth: 1,
+            data: finishedTasks,
             backgroundColor: '#de6868',
           },
           {
             label: 'المهام الفعاله',
-            data: generateMonthData(),
-            // borderWidth: 1,
+            data: inProgressTasks,
             backgroundColor: '#9fd69f',
           },
         ],
