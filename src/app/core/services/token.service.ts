@@ -17,7 +17,8 @@ export class TokenService {
 
   getUserInfo(token: string): any {
     const decoded = this.decodeToken(token);
-    console.log(decoded);
+    localStorage.setItem('tenantName', decoded?.given_name);
+    // console.log(decoded);
     return decoded ? decoded : null;
   }
 

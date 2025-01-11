@@ -33,8 +33,6 @@ export class TasksClassificationComponent implements OnInit {
       const overdueTasks = Object.values(response).map(
         (month) => (month as any).Overdue
       );
-      console.log('newTasks', newTasks);
-      console.log('inProgressTasks', inProgressTasks);
 
       this.chart = new Chart('canvas01', {
         type: 'bar',

@@ -32,6 +32,18 @@ export class NavbarComponent {
       });
   }
 
+  headerName: string = '';
+  getHeaderName() {
+    if (this.currentRole === 'Admin') {
+      this.headerName = localStorage.getItem('tenantName') ?? '';
+    } else {
+      const currentUser = localStorage.getItem('currentUser');
+      this.headerName = currentUser
+        ? JSON.parse(currentUser).fullName ?? JSON.parse(currentUser).email
+        : '';
+    }
+  }
+
   ngOnInit(): void {
     this.router.events
       .pipe(
@@ -49,6 +61,8 @@ export class NavbarComponent {
         this.currentTitle = data['title'] || 'Task Managment';
         this.titleService.setTitle(this.currentTitle);
       });
+
+    this.getHeaderName();
   }
 
   currentRole = localStorage.getItem('role');
