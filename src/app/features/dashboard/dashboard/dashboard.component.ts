@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TasksClassificationComponent } from '../components/tasks-classification/tasks-classification.component';
 import { AllTasksComponent } from '../components/all-tasks/all-tasks.component';
 import { HasRoleDirective } from '../../../core/directives/has-role.directive';
@@ -8,6 +8,10 @@ import { AttendanceService } from '../../../core/services/attendance';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StatisticsService } from '../../../core/services/statistics.service';
 import { TasksDaysComponent } from '../components/tasks-days/tasks-days.component';
+import { DatePicker } from 'primeng/datepicker';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Knob } from 'primeng/knob';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +22,10 @@ import { TasksDaysComponent } from '../components/tasks-days/tasks-days.componen
     HasRoleDirective,
     DatePipe,
     TasksDaysComponent,
+    DatePicker,
+    CommonModule,
+    FormsModule,
+    Knob,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -28,7 +36,8 @@ export class DashboardComponent {
   statService = inject(StatisticsService);
   snackBar = inject(MatSnackBar);
   currentRole = localStorage.getItem('role') ?? '';
-
+  protected date = signal([]);
+  today = new Date();
   isLiked = false;
   react() {
     this.notiService.react(this.currentNoti.id).subscribe(() => {
@@ -57,13 +66,29 @@ export class DashboardComponent {
     });
   }
 
+  compStat = {
+    currentStat: {},
+    completionPercent: 0,
+  };
   currentStat: any;
-  totalTask: number = 0;
-  getStats() {
+
+  completionPercent: any = 0;
+  getStatsComp() {
     this.statService.getStats().subscribe((res: any) => {
       this.currentStat = res;
-      this.totalTask =
-        res.newTasks + res.completedTasks + res.continuedTasks + res.overdue;
+      const total = res?.continuedTasks + res?.newTasks + res?.overdue;
+      this.completionPercent = total > 0 ? total / res.completedTasks : 0;
+    });
+  }
+  getStatsEmp() {
+    this.statService.getStatsEmp().subscribe((res: any) => {
+      this.currentStat = {
+        totalTasks: res.TotalTasks,
+        completedTasks: res.Completed,
+        continuedTasks: res.InProgress,
+        newTasks: res.New,
+      };
+      this.completionPercent = res.CompletionPercentage;
     });
   }
 
@@ -73,7 +98,7 @@ export class DashboardComponent {
       .subscribe((res) => (this.currentAttendance = res));
   }
 
-  getLatestAttendance() {
+  getLatestNoti() {
     this.notiService.getLatest().subscribe((res) => {
       this.currentNoti = res;
     });
@@ -84,10 +109,14 @@ export class DashboardComponent {
   ngOnInit(): void {
     if (this.currentRole === 'Employee') {
       this.getCurrentAttendance();
+      this.getStatsEmp();
     }
     if (['Admin', 'Employee'].some((role) => this.currentRole === role)) {
-      this.getLatestAttendance();
-      this.getStats();
+      this.getLatestNoti();
+    }
+
+    if (this.currentRole === 'Admin') {
+      this.getStatsComp();
     }
   }
 }

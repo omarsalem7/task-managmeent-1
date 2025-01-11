@@ -12,7 +12,7 @@ export class TasksClassificationComponent {
   title = 'ng-chart';
   chart: any = [];
   ngOnInit() {
-    this.chart = new Chart('canvas', {
+    this.chart = new Chart('canvas01', {
       type: 'bar',
       data: {
         labels: [
