@@ -28,6 +28,7 @@ import { TaskService } from '../../../../core/services/task';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 
 export interface PeriodicElement {
   name: string;
@@ -225,6 +226,12 @@ export class TaskListComponent {
   getLookup() {
     this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
+    });
+  }
+
+  exportExcel() {
+    this.taskService.exportExcel().subscribe((file) => {
+      ExportExcel(file, 'attendance');
     });
   }
   ngOnInit(): void {

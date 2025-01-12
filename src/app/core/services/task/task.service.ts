@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TaskDto } from './models';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,21 @@ export class TaskService {
     return this.http.get(
       `${this.baseUrl}/api/TaskItems/GetTasksForCurrentEmployee`
     );
+  }
+
+  exportExcel(): Observable<Blob> {
+    return this.http
+      .get(`${this.baseUrl}/api/Downloads/download-excel-TaskItems`, {
+        responseType: 'blob',
+      })
+      .pipe(
+        map((response) => {
+          if (!response) {
+            throw new Error('No data received');
+          }
+          return response as Blob;
+        })
+      );
   }
 
   getById(id: string) {

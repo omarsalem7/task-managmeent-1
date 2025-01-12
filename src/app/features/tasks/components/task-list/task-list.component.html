@@ -6,8 +6,14 @@
   >
     اضافة مهمه
   </button>
-  <button class="custom-button">تصدير pdf</button>
-  <button class="custom-button">تصدير Excel</button>
+  <!-- <button class="custom-button">تصدير pdf</button> -->
+  <button
+    class="custom-button"
+    (click)="exportExcel()"
+    *appHasRole="['SuperAdmin', 'Admin']"
+  >
+    تصدير Excel
+  </button>
 </app-list-header>
 <app-filter-list header="المهام" (searchChange)="updateSearch($event)">
   <div class="flex gap-6 mb-4 flex-wrap items-center">
