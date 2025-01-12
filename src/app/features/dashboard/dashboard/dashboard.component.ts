@@ -97,9 +97,10 @@ export class DashboardComponent {
   }
 
   getCurrentAttendance() {
-    this.attendanceService
-      .getCurrentAttendance()
-      .subscribe((res) => (this.currentAttendance = res));
+    this.attendanceService.getCurrentAttendance().subscribe((res) => {
+      this.currentAttendance = res;
+      console.log(this.currentAttendance);
+    });
   }
 
   getLatestNoti() {

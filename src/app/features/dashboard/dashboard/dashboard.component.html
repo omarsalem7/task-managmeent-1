@@ -17,7 +17,7 @@
       />
     </div>
   </div>
-  @if(!currentAttendance?.isCheckedOut){
+  @if(currentAttendance?.checkIn &&currentAttendance?.checkOut){ }@else {
   <div
     *appHasRole="['Employee']"
     class="bg-white rounded-lg shadow mb-4 p-4 flex justify-between items-center"
@@ -45,6 +45,7 @@
     }
   </div>
   }
+
   <!-- Stats Grid -->
   <div class="grid grid-cols-4 gap-4 mb-4" *appHasRole="['Employee', 'Admin']">
     <!-- Total Tasks -->
