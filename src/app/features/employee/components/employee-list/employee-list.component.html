@@ -6,7 +6,13 @@
   >
     اضافة موظف
   </button>
-  <button (click)="exportExcel()" class="custom-button">تصدير Excel</button>
+  <button
+    (click)="exportExcel()"
+    class="custom-button"
+    *appHasRole="['SuperAdmin']"
+  >
+    تصدير Excel
+  </button>
   <!-- <button class="custom-button">تصدير Excel</button> -->
 </app-list-header>
 <app-filter-list header="الموظفين" (searchChange)="updateSearch($event)">

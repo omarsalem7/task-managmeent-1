@@ -1,5 +1,5 @@
 <app-list-header header="الحضور والانصراف" [count]="totalCount">
-  <ng-container *appHasRole="['SuperAdmin']">
+  <ng-container *appHasRole="['SuperAdmin', 'Admin']">
     <button class="custom-button" (click)="downloadPDF()">تصدير pdf</button>
     <button class="custom-button" (click)="exportExcel()">تصدير Excel</button>
   </ng-container>
