@@ -122,7 +122,7 @@ export class EmployeeFormComponent {
   }
   tenants: any[] = [];
   getLookup() {
-    this.tenantsService.getList().subscribe((res: any) => {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
     });
   }
