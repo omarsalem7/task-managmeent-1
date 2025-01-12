@@ -66,14 +66,24 @@ export class TenantsFormComponent {
       phoneNumber,
       subscriptionFee,
       notes,
+      expirationDate,
     } = this.data || {};
     this.taskForm = this.fb.group({
-      tenantName: [tenantName ?? '', [Validators.required]],
-      email: [email ?? '', Validators.required],
-      password: [password ?? ''],
+      tenantName: [
+        { value: tenantName ?? '', disabled: this.data },
+        [Validators.required],
+      ],
+      email: [{ value: email ?? '', disabled: this.data }, Validators.required],
+      password: [
+        { value: password ?? '', disabled: this.data },
+        Validators.required,
+      ],
       startDate: [null],
-      endDate: [null],
-      phoneNumber: [phoneNumber ?? ''],
+      endDate: [
+        expirationDate ? new Date(expirationDate) : null,
+        Validators.required,
+      ],
+      phoneNumber: [{ value: phoneNumber ?? '', disabled: this.data }],
       subscriptionFee: [subscriptionFee ?? null],
       notes: [notes ?? ''],
     });
@@ -86,7 +96,7 @@ export class TenantsFormComponent {
     }
 
     const formValue = {
-      ...this.taskForm.value,
+      ...this.taskForm.getRawValue(),
       startDate: formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       expirationDate: formatDate(
         this.taskForm.value.endDate,
@@ -100,7 +110,7 @@ export class TenantsFormComponent {
     const request: any = this.data
       ? this.tenantsService.update(this.data.id, {
           ...formValue,
-          name: this.taskForm.value.tenantName,
+          // name: this.taskForm.value.tenantName,
         })
       : this.tenantsService.create(formValue);
 
@@ -115,7 +125,7 @@ export class TenantsFormComponent {
         next: () => {
           this.snackBar.open(
             this.data
-              ? 'تم تعديل الشركه بنجاح ✅✅'
+              ? 'تم تحديث الاشتراك بنجاح ✅✅'
               : 'تم اضافه الشركه بنجاح ✅✅',
             'Close',
             {
