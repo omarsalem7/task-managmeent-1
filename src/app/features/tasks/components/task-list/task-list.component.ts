@@ -223,7 +223,7 @@ export class TaskListComponent {
   currentRole = localStorage.getItem('role') ?? '';
   tenants = [];
   getLookup() {
-    this.tenantsService.getList({ pageSize: 500 }).subscribe((res: any) => {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
     });
   }
