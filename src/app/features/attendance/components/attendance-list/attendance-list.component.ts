@@ -19,6 +19,7 @@ import { AttendanceService } from '../../../../core/services/attendance';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -155,6 +156,30 @@ export class AttendanceListComponent {
   record: any;
   editTask(record: any) {
     this.record = record;
+  }
+
+  exportExcel() {
+    this.attendanceService.exportExcel().subscribe((file) => {
+      ExportExcel(file, 'attendance');
+    });
+  }
+
+  downloadPDF() {
+    this.attendanceService.downloadPdf().subscribe({
+      next: (blob: any) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'downloaded-file.pdf'; // Name of the downloaded file
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error downloading file:', err);
+      },
+    });
   }
 
   filterHandler(isRemoved?: boolean) {

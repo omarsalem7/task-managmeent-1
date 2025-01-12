@@ -1,7 +1,8 @@
 <app-list-header header="الحضور والانصراف" [count]="totalCount">
-  <!-- <button class="custom-button" (click)="newRecord()">اضافة شركه</button> -->
-  <!-- <button class="custom-button">تصدير pdf</button>
-  <button class="custom-button">تصدير Excel</button> -->
+  <ng-container *appHasRole="['SuperAdmin']">
+    <button class="custom-button" (click)="downloadPDF()">تصدير pdf</button>
+    <button class="custom-button" (click)="exportExcel()">تصدير Excel</button>
+  </ng-container>
 </app-list-header>
 <app-filter-list
   header="الحضور والانصراف"
