@@ -77,7 +77,11 @@ export class DashboardComponent {
     this.statService.getStatsTent().subscribe((res: any) => {
       this.currentStat = res;
       const total = res?.continuedTasks + res?.newTasks + res?.overdue;
+      // console.log('total:', total, 'res.completedTasks:', res.completedTasks);
       this.completionPercent = total > 0 ? total / res.completedTasks : 0;
+      if (res.completedTasks == 0) {
+        this.completionPercent = 0;
+      }
     });
   }
   getStatsEmp() {
