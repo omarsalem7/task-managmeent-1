@@ -15,11 +15,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  Subject,
+  firstValueFrom,
+} from 'rxjs';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../../../../core/services/employee';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 
 export interface PeriodicElement {
   name: string;
@@ -117,6 +124,12 @@ export class EmployeeListComponent {
   newRecord() {
     this.record = null;
     this.openDialog();
+  }
+
+  exportExcel() {
+    this.employeeService.exportExcel().subscribe((file) => {
+      ExportExcel(file, 'employee');
+    });
   }
 
   items = [
