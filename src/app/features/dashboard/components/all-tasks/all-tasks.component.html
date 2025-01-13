@@ -1,5 +1,7 @@
-<div class="shadow-lg p-4 rounded-lg">
-  @if (isDataEmpty) {
+<div
+  class="shadow-lg p-4 rounded-lg h-full flex justify-center items-center flex-col gap-5"
+>
+  <!-- @if (isDataEmpty) {
   <p
     class="text-center text-gray-500 h-[500px] flex justify-center items-center"
   >
@@ -7,5 +9,13 @@
   </p>
   }@else {
   <canvas id="canvasAllTasks">{{ chart }}</canvas>
-  }
+  } -->
+
+  <h3 class="font-semibold">نسبة التفاعل</h3>
+  <p-knob
+    size="200"
+    [disabled]="true"
+    [(ngModel)]="completionPercent"
+    [valueTemplate]="(completionPercent | number : '1.2-2') + '%'"
+  />
 </div>

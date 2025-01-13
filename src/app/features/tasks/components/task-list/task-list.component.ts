@@ -128,7 +128,7 @@ export class TaskListComponent {
     'endDate',
     'edit',
   ];
-  completionPercentage: number = 0;
+
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
@@ -246,7 +246,6 @@ export class TaskListComponent {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
       this.loading = false;
-      this.completionPercentage = res.completionPercentage;
     });
   }
   currentRole = localStorage.getItem('role') ?? '';
