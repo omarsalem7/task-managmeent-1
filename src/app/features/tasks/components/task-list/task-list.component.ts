@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
+import { InputNumber } from 'primeng/inputnumber';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -57,6 +59,7 @@ export interface PeriodicElement {
     ToastModule,
     DropdownModule,
     HasRoleDirective,
+    InputNumber,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -70,7 +73,7 @@ export class TaskListComponent {
     startDate: '',
     endDate: '',
   };
-
+  snackBar = inject(MatSnackBar);
   readonly dialog = inject(MatDialog);
 
   taskStatusesAr: any = {
@@ -118,13 +121,14 @@ export class TaskListComponent {
     'description',
     'notes',
     'employeeNames',
+    'completionPercentage',
     'tenantName',
     'status',
     'startDate',
     'endDate',
     'edit',
   ];
-
+  completionPercentage: number = 0;
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
@@ -169,6 +173,29 @@ export class TaskListComponent {
       },
     },
   ];
+
+  updatePercent(id: any, event: any): void {
+    if (+event.value > 100 || +event.value < 0) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'احذر',
+        detail: 'تم ادخال رقم غير صحيح',
+      });
+      return;
+    }
+    this.taskService
+      .updateCompletionPercentage({
+        taskId: id,
+        percentage: event.value,
+      })
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'تم بنجاح',
+          detail: 'تم تحديث نسبه الاكتمال بنجاح',
+        });
+      });
+  }
 
   onPageChange(event: any) {
     this.filters.pageSize = event.pageSize;
@@ -219,6 +246,7 @@ export class TaskListComponent {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
       this.loading = false;
+      this.completionPercentage = res.completionPercentage;
     });
   }
   currentRole = localStorage.getItem('role') ?? '';

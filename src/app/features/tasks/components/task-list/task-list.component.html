@@ -78,6 +78,26 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="completionPercentage">
+    <th mat-header-cell *matHeaderCellDef>نسبه الاكتمال</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.completionPercentage }} -->
+      <input
+        (keyup.enter)="updatePercent(element.id, ele)"
+        type="number"
+        [disabled]="
+          element.status !== 'InProgress' || currentRole !== 'Employee'
+        "
+        [value]="
+          element.status === 'Completed' ? 100 : element?.completionPercentage
+        "
+        #ele
+        min="0"
+        max="100"
+        class="custom-input py-2 w-[80px]"
+      />
+    </td>
+  </ng-container>
   <ng-container matColumnDef="tenantName">
     <th mat-header-cell *matHeaderCellDef>الشركه</th>
     <td mat-cell *matCellDef="let element">{{ element.tenantName }}</td>

@@ -46,6 +46,13 @@ export class TaskService {
       );
   }
 
+  updateCompletionPercentage(task: any) {
+    return this.http.put(
+      `${this.baseUrl}/api/TaskItems/updateCompletionPercentage`,
+      task
+    );
+  }
+
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/api/TaskItems/${id}`);
   }
