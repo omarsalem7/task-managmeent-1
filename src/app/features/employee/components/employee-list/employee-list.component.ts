@@ -15,11 +15,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  Subject,
+  firstValueFrom,
+} from 'rxjs';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../../../../core/services/employee';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 
 export interface PeriodicElement {
   name: string;
@@ -100,9 +107,11 @@ export class EmployeeListComponent {
     'jobNumber',
     'email',
     'phoneNumber',
+    'nationality',
+    'identityNumber',
     'jobTitle',
-    'startDate',
-    'endDate',
+    'password',
+    'createdOn',
   ];
 
   dataSource: any[] = [];
@@ -117,6 +126,12 @@ export class EmployeeListComponent {
     this.openDialog();
   }
 
+  exportExcel() {
+    this.employeeService.exportExcel().subscribe((file) => {
+      ExportExcel(file, 'employee');
+    });
+  }
+
   items = [
     { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
     {
@@ -125,7 +140,7 @@ export class EmployeeListComponent {
       command: (event: any) => {
         this.confirmationService.confirm({
           target: event.target as EventTarget,
-          message: 'هل انت متاكد من حذف المهمه ؟',
+          message: 'هل انت متاكد من حذف الموظف ؟',
           header: '',
           icon: 'pi pi-info-circle',
           acceptButtonStyleClass: 'p-button-danger p-button-text',
@@ -140,7 +155,7 @@ export class EmployeeListComponent {
               this.messageService.add({
                 severity: 'success',
                 summary: 'تم الحذف',
-                detail: 'تم حذف المهمه بنجاح',
+                detail: 'تم حذف الموظف بنجاح',
               });
               this.getList();
             });
@@ -182,8 +197,10 @@ export class EmployeeListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.employeeService.getList(this.filters).subscribe((res: any) => {
+      this.loading = false;
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
     });
@@ -192,7 +209,7 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('tenantName');
+      this.displayedColumns.splice(2, 0, 'tenantName');
       this.displayedColumns.push('edit');
     }
   }

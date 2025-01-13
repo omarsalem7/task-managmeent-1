@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { formatDate } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -61,18 +62,28 @@ export class TenantsFormComponent {
       tenantName,
       email,
       password,
-      startDate,
+      // startDate,
       phoneNumber,
       subscriptionFee,
       notes,
+      expirationDate,
     } = this.data || {};
     this.taskForm = this.fb.group({
-      tenantName: [tenantName ?? '', [Validators.required]],
-      email: [email ?? '', Validators.required],
-      password: [password ?? ''],
-      startDate: [startDate ?? null],
-      endDate: [startDate ?? null],
-      phoneNumber: [phoneNumber ?? ''],
+      tenantName: [
+        { value: tenantName ?? '', disabled: this.data },
+        [Validators.required],
+      ],
+      email: [{ value: email ?? '', disabled: this.data }, Validators.required],
+      password: [
+        { value: password ?? '', disabled: this.data },
+        Validators.required,
+      ],
+      startDate: [null],
+      endDate: [
+        expirationDate ? new Date(expirationDate) : null,
+        Validators.required,
+      ],
+      phoneNumber: [{ value: phoneNumber ?? '', disabled: this.data }],
       subscriptionFee: [subscriptionFee ?? null],
       notes: [notes ?? ''],
     });
@@ -84,13 +95,24 @@ export class TenantsFormComponent {
       return;
     }
 
+    const formValue = {
+      ...this.taskForm.getRawValue(),
+      startDate: formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+      expirationDate: formatDate(
+        this.taskForm.value.endDate,
+        'yyyy-MM-dd',
+        'en-US'
+      ),
+      endDate: formatDate(this.taskForm.value.endDate, 'yyyy-MM-dd', 'en-US'),
+    };
+
     this.loading = true;
     const request: any = this.data
       ? this.tenantsService.update(this.data.id, {
-          ...this.taskForm.value,
-          name: this.taskForm.value.tenantName,
+          ...formValue,
+          // name: this.taskForm.value.tenantName,
         })
-      : this.tenantsService.create(this.taskForm.value);
+      : this.tenantsService.create(formValue);
 
     request
       .pipe(
@@ -103,7 +125,7 @@ export class TenantsFormComponent {
         next: () => {
           this.snackBar.open(
             this.data
-              ? 'تم تعديل الشركه بنجاح ✅✅'
+              ? 'تم تحديث الاشتراك بنجاح ✅✅'
               : 'تم اضافه الشركه بنجاح ✅✅',
             'Close',
             {

@@ -16,7 +16,8 @@
       <input type="text" id="message" pInputText formControlName="message" />
       <app-form-error [control]="taskForm.get('message')"></app-form-error>
     </div>
-    <div class="mb-3">
+    @if (!data?.id) {
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
       <label for="tenantId">اسم الشركه</label>
       <p-dropdown
         id="tenantId"
@@ -28,6 +29,7 @@
       ></p-dropdown>
       <app-form-error [control]="taskForm.get('tenantId')"></app-form-error>
     </div>
+    }
 
     <button type="submit" pButton label="إرسال" class="mt-3"></button>
   </form>

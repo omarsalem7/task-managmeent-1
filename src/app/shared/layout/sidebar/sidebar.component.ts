@@ -68,6 +68,12 @@ export class SidebarComponent {
       route: '/attendance',
       visible: true,
     },
+    {
+      label: 'اعداد كلمة السر',
+      icon: 'fas fa-chart-bar',
+      route: '/new-password',
+      visible: this.currentRole === 'Employee',
+    },
   ];
 
   // settingsItems: MenuItem[] = [

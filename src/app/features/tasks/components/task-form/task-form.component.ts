@@ -63,6 +63,7 @@ export class TaskFormComponent {
   ) {
     const { tenantId, description, employeeIds, startDate, endDate, notes } =
       this.data || {};
+    console.log(this.data);
     this.taskForm = this.fb.group({
       description: [description ?? '', [Validators.required]],
       tenantId: [tenantId ?? ''],
@@ -75,7 +76,8 @@ export class TaskFormComponent {
 
   tenants: any[] = [];
   getLookups() {
-    this.tenantsService.getList().subscribe((res: any) => {
+    if (this.currentRole == 'Admin') return;
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
     });
   }

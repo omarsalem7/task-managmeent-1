@@ -21,6 +21,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { TrainService } from '../../../../core/services/train';
 import { environment } from '../../../../../environments/environment';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface PeriodicElement {
   name: string;
@@ -61,7 +62,7 @@ export class TrainListComponent {
     endDate: '',
     startDate: '',
   };
-
+  snackBar = inject(MatSnackBar);
   readonly dialog = inject(MatDialog);
 
   openDialog() {
@@ -173,10 +174,22 @@ export class TrainListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.trainService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
+      this.loading = false;
       this.totalCount = res.totalCount;
+    });
+  }
+
+  react(id: number) {
+    this.trainService.reactTrain(id).subscribe(() => {
+      this.snackBar.open('تم تسجيل اعجابك بالدوره بنجاح ✅✅', 'Close', {
+        duration: 2800,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
     });
   }
 

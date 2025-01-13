@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 @Component({
   selector: 'app-file-form',
@@ -41,6 +42,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,
+    HasRoleDirective,
   ],
   providers: [],
   templateUrl: './notification-form.component.html',
@@ -102,7 +104,7 @@ export class NotificationFormComponent {
   }
   tenants: any[] = [];
   getLookup() {
-    this.tenantsService.getList().subscribe((res: any) => {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
     });
   }

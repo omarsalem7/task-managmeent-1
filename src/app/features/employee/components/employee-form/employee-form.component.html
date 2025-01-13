@@ -46,6 +46,7 @@
       <input
         type="text"
         id="identityNumber"
+        type="number"
         pInputText
         formControlName="identityNumber"
       />
@@ -53,7 +54,8 @@
         [control]="taskForm.get('identityNumber')"
       ></app-form-error>
     </div>
-    <div class="mb-3">
+    @if (!data?.id) {
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
       <label for="tenantId">اسم الشركه</label>
       <p-dropdown
         id="tenantId"
@@ -64,6 +66,7 @@
       ></p-dropdown>
       <app-form-error [control]="taskForm.get('tenantId')"></app-form-error>
     </div>
+    }
     <div class="mb-3">
       <label for="jobTitle">المسمى الوظيفي</label>
       <input type="text" id="jobTitle" pInputText formControlName="jobTitle" />

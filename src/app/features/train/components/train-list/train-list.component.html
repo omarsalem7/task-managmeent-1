@@ -47,6 +47,11 @@
   </div>
 </app-filter-list>
 
+@if (loading) {
+<div class="flex items-center justify-center h-full">
+  جـــاري التــحـــمـــيل ......
+</div>
+}@else {
 <div class="container mx-auto px-4 py-5 flex flex-col gap-6">
   @for (item of dataSource; track item) {
   <!-- Main Card -->
@@ -79,7 +84,7 @@
               {{ item.description }}
             </p>
           </div>
-          <div class="mt-8 text-start">
+          <div class="mt-8 flex justify-between items-center">
             <a
               [href]="item.link"
               class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300"
@@ -88,6 +93,13 @@
             >
               رابط الدورة
             </a>
+
+            <div *appHasRole="['Employee']">
+              <i
+                class="fa-regular fa-thumbs-up text-3xl mx-2 cursor-pointer"
+                (click)="react(item.id)"
+              ></i>
+            </div>
           </div>
         </div>
       </div>
@@ -96,8 +108,13 @@
     </div>
   </div>
 
+  }@empty {
+  <p class="flex justify-center items-center py-10 text-l font-semibold">
+    لا توجد دورات حاليا
+  </p>
   }
 </div>
+}
 
 <mat-paginator
   [length]="totalCount"

@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
 import { CommonModule } from '@angular/common';
@@ -16,10 +15,11 @@ import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
 import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { AttendanceService } from '../../../../core/services/attendance';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { TenantsService } from '../../../../core/services/tenants';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -43,7 +43,7 @@ export interface PeriodicElement {
     FormsModule,
     MatDialogModule,
     MenuModule,
-
+    DropdownModule,
     ToastModule,
     HasRoleDirective,
   ],
@@ -52,6 +52,7 @@ export interface PeriodicElement {
 })
 export class AttendanceListComponent {
   filters = {
+    tenantId: null,
     searchTerm: '',
     PageNumber: 1,
     PageSize: 5,
@@ -76,7 +77,10 @@ export class AttendanceListComponent {
   //   });
   // }
 
-  constructor(private attendanceService: AttendanceService) {
+  constructor(
+    private attendanceService: AttendanceService,
+    private tenantsService: TenantsService
+  ) {
     this.searchSubject
       .pipe(
         debounceTime(600),
@@ -100,6 +104,12 @@ export class AttendanceListComponent {
   newRecord() {
     this.record = null;
     // this.openDialog();
+  }
+  tenants = [];
+  getLookup() {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
+      this.tenants = res.data;
+    });
   }
 
   // items = [
@@ -148,29 +158,53 @@ export class AttendanceListComponent {
     this.record = record;
   }
 
+  exportExcel() {
+    this.attendanceService.exportExcel(this.filters).subscribe((file) => {
+      ExportExcel(file, 'attendance');
+    });
+  }
+
+  downloadPDF() {
+    this.attendanceService.downloadPdf().subscribe({
+      next: (blob: any) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'downloaded-file.pdf'; // Name of the downloaded file
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error downloading file:', err);
+      },
+    });
+  }
+
   filterHandler(isRemoved?: boolean) {
-    this.filters.startDate = formatDate(
-      this.filters.startDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
-    this.filters.endDate = formatDate(
-      this.filters.endDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
     if (isRemoved) {
       this.filters.startDate = '';
       this.filters.endDate = '';
+      this.filters.tenantId = null;
+    } else {
+      this.filters.startDate = this.filters?.startDate
+        ? formatDate(this.filters?.startDate, 'yyyy-MM-dd', 'en-US')
+        : '';
+      this.filters.endDate = this.filters?.endDate
+        ? formatDate(this.filters?.endDate, 'yyyy-MM-dd', 'en-US')
+        : '';
     }
     this.getList();
   }
 
+  loading = true;
   totalCount: number = 0;
   getList() {
     this.attendanceService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res;
-      this.totalCount = res.length;
+      this.dataSource = res.data;
+      this.totalCount = res.totalCount;
+      this.loading = false;
     });
   }
 
@@ -182,6 +216,7 @@ export class AttendanceListComponent {
     if (this.currentRole === 'SuperAdmin') {
       this.displayedColumns.unshift('tenantName');
       this.displayedColumns.unshift('employeeName');
+      this.getLookup();
     }
     this.getList();
   }

@@ -173,10 +173,12 @@ export class NotificationListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.notificationService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res;
-      this.totalCount = res.length;
+      this.dataSource = res.data;
+      this.loading = false;
+      this.totalCount = res.totalCount;
     });
   }
 
@@ -184,7 +186,10 @@ export class NotificationListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.push('tenantId');
+      this.displayedColumns.push('tenantName');
+    }
+    if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
+      this.displayedColumns.push('edit');
     }
   }
 }

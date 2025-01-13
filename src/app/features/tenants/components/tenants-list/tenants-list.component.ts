@@ -96,9 +96,26 @@ export class TenantsListComponent {
     'tenantName',
     'email',
     'password',
-    // 'edit'
+    'subscriptionFee',
+    'phoneNumber',
+    'startDate',
+    'endDate',
+    'notes',
+    'status',
   ];
 
+  getStatus(expirationDate: string): string {
+    if (!expirationDate) return 'منتهي';
+
+    const expDate = new Date(expirationDate);
+    const today = new Date();
+
+    // Remove time portion for accurate date comparison
+    expDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return expDate > today ? 'قيد العمل' : 'منتهي';
+  }
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
 
@@ -112,40 +129,43 @@ export class TenantsListComponent {
   }
 
   items = [
-    { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
     {
-      label: 'حذف',
-      icon: 'pi pi-trash',
-      command: (event: any) => {
-        this.confirmationService.confirm({
-          target: event.target as EventTarget,
-          message: 'هل انت متاكد من الحذف ؟',
-          header: '',
-          icon: 'pi pi-info-circle',
-          acceptButtonStyleClass: 'p-button-danger p-button-text',
-          rejectButtonStyleClass: 'p-button-text p-button-text',
-          acceptLabel: 'نعم انا متاكد',
-          rejectLabel: 'لا اريد ان احذف',
-          acceptIcon: 'none',
-          rejectIcon: 'none',
-
-          accept: () => {
-            this.tenantsService.delete(this.record.id).subscribe(() => {
-              this.messageService.add({
-                severity: 'success',
-                summary: 'تم الحذف',
-                detail: 'تم حذف بنجاح',
-              });
-              this.getList();
-            });
-          },
-        });
-      },
+      label: 'تجديد الاشتراك',
+      icon: 'pi pi-pencil',
+      command: () => this.openDialog(),
     },
+    // {
+    //   label: 'حذف',
+    //   icon: 'pi pi-trash',
+    //   command: (event: any) => {
+    //     this.confirmationService.confirm({
+    //       target: event.target as EventTarget,
+    //       message: 'هل انت متاكد من الحذف ؟',
+    //       header: '',
+    //       icon: 'pi pi-info-circle',
+    //       acceptButtonStyleClass: 'p-button-danger p-button-text',
+    //       rejectButtonStyleClass: 'p-button-text p-button-text',
+    //       acceptLabel: 'نعم انا متاكد',
+    //       rejectLabel: 'لا اريد ان احذف',
+    //       acceptIcon: 'none',
+    //       rejectIcon: 'none',
+
+    //       accept: () => {
+    //         this.tenantsService.delete(this.record.id).subscribe(() => {
+    //           this.messageService.add({
+    //             severity: 'success',
+    //             summary: 'تم الحذف',
+    //             detail: 'تم حذف بنجاح',
+    //           });
+    //           this.getList();
+    //         });
+    //       },
+    //     });
+    //   },
+    // },
   ];
 
   onPageChange(event: any) {
-    console.log(event);
     this.filters.PageSize = event.pageSize;
     this.filters.PageNumber = event.pageIndex + 1;
     this.getList();
@@ -175,15 +195,20 @@ export class TenantsListComponent {
     this.getList();
   }
 
+  loading = true;
   totalCount: number = 0;
   getList() {
     this.tenantsService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
+      this.loading = false;
       this.totalCount = res.totalCount;
     });
   }
 
+  currentRole = localStorage.getItem('role') ?? '';
+
   ngOnInit(): void {
+    if (this.currentRole == 'SuperAdmin') this.displayedColumns.push('edit');
     this.getList();
   }
 }

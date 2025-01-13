@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { tap, finalize } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 @Component({
   selector: 'app-employee-form',
@@ -41,6 +42,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     DropdownModule,
     ToastModule,
     MatProgressSpinnerModule,
+    HasRoleDirective,
   ],
   providers: [],
   templateUrl: './employee-form.component.html',
@@ -78,7 +80,7 @@ export class EmployeeFormComponent {
       identityNumber: [identityNumber ?? ''],
       jobTitle: [jobTitle ?? null, Validators.required],
       nationality: [nationality ?? null],
-      tenantId: [tenantId ?? null, Validators.required],
+      tenantId: [tenantId ?? null],
     });
   }
 
@@ -120,11 +122,12 @@ export class EmployeeFormComponent {
   }
   tenants: any[] = [];
   getLookup() {
-    this.tenantsService.getList().subscribe((res: any) => {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
     });
   }
   ngOnInit(): void {
+    console.log(this.data);
     this.getLookup();
   }
 }

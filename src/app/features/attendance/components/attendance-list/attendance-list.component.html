@@ -1,9 +1,13 @@
 <app-list-header header="الحضور والانصراف" [count]="totalCount">
-  <!-- <button class="custom-button" (click)="newRecord()">اضافة شركه</button> -->
-  <!-- <button class="custom-button">تصدير pdf</button>
-  <button class="custom-button">تصدير Excel</button> -->
+  <ng-container *appHasRole="['SuperAdmin', 'Admin']">
+    <!-- <button class="custom-button" (click)="downloadPDF()">تصدير pdf</button> -->
+    <button class="custom-button" (click)="exportExcel()">تصدير Excel</button>
+  </ng-container>
 </app-list-header>
-<app-filter-list header="الشركات" (searchChange)="updateSearch($event)">
+<app-filter-list
+  header="الحضور والانصراف"
+  (searchChange)="updateSearch($event)"
+>
   <div class="flex gap-6 mb-4 flex-wrap items-center">
     <mat-form-field>
       <mat-label class="font-arabic">تاريخ البدء</mat-label>
@@ -30,6 +34,16 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <p-dropdown
+        id="tenantId"
+        [(ngModel)]="filters.tenantId"
+        [options]="tenants"
+        placeholder="اسم الشركه"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+    </div>
     <div class="flex gap-3">
       <button class="btn-outline" (click)="filterHandler()">بحث</button>
       <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
@@ -89,6 +103,13 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      <div class="flex justify-center items-center py-10 text-l font-semibold">
+        {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+      </div>
+    </td>
+  </tr>
 </table>
 
 <mat-paginator

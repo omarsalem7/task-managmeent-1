@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
+import { InputNumber } from 'primeng/inputnumber';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -26,6 +28,9 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TaskService } from '../../../../core/services/task';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
+import { DropdownModule } from 'primeng/dropdown';
+import { TenantsService } from '../../../../core/services/tenants';
+import { ExportExcel } from '../../../../shared/utils/exportExcel';
 
 export interface PeriodicElement {
   name: string;
@@ -52,6 +57,7 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    DropdownModule,
     HasRoleDirective,
   ],
   templateUrl: './task-list.component.html',
@@ -59,15 +65,23 @@ export interface PeriodicElement {
 })
 export class TaskListComponent {
   filters = {
+    tenantId: null,
     searchTerm: '',
     pageNumber: 1,
-    pageSize: 10,
+    pageSize: 5,
     startDate: '',
     endDate: '',
   };
-
+  snackBar = inject(MatSnackBar);
   readonly dialog = inject(MatDialog);
 
+  taskStatusesAr: any = {
+    Completed: 'مكتمله',
+    InProgress: 'مستمرة',
+    Overdue: 'منتهية',
+    '1': 'جديده',
+    New: 'جديده',
+  };
   openDialog() {
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '35vw',
@@ -87,7 +101,8 @@ export class TaskListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private tenantsService: TenantsService
   ) {
     this.searchSubject
       .pipe(
@@ -103,8 +118,11 @@ export class TaskListComponent {
   }
   displayedColumns: string[] = [
     'description',
-    'tenantId',
     'notes',
+    'employeeNames',
+    'completionPercentage',
+    'tenantName',
+    'status',
     'startDate',
     'endDate',
     'edit',
@@ -155,12 +173,33 @@ export class TaskListComponent {
     },
   ];
 
+  updatePercent(id: any, event: any): void {
+    if (+event.value > 100 || +event.value < 0) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'احذر',
+        detail: 'تم ادخال رقم غير صحيح',
+      });
+      return;
+    }
+    this.taskService
+      .updateCompletionPercentage({
+        taskId: id,
+        percentage: event.value,
+      })
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'تم بنجاح',
+          detail: 'تم تحديث نسبه الاكتمال بنجاح',
+        });
+      });
+  }
+
   onPageChange(event: any) {
-    console.log(event);
     this.filters.pageSize = event.pageSize;
     this.filters.pageNumber = event.pageIndex + 1;
     this.getList();
-    // pageIndex , pageSize
   }
 
   fetchResults() {
@@ -185,31 +224,50 @@ export class TaskListComponent {
   }
 
   filterHandler(isRemoved?: boolean) {
-    this.filters.startDate = formatDate(
-      this.filters.startDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
-    this.filters.endDate = formatDate(
-      this.filters.endDate,
-      'yyyy-MM-dd',
-      'en-US'
-    );
     if (isRemoved) {
       this.filters.startDate = '';
       this.filters.endDate = '';
+      this.filters.tenantId = null;
+    } else {
+      this.filters.startDate = this.filters?.startDate
+        ? formatDate(this.filters?.startDate, 'yyyy-MM-dd', 'en-US')
+        : '';
+      this.filters.endDate = this.filters?.endDate
+        ? formatDate(this.filters?.endDate, 'yyyy-MM-dd', 'en-US')
+        : '';
     }
     this.getList();
   }
 
+  loading = true;
   getList() {
     this.taskService.getList(this.filters).subscribe((res: any) => {
       this.dataSource = res.data;
       this.totalCount = res.totalCount;
+      this.loading = false;
+    });
+  }
+  currentRole = localStorage.getItem('role') ?? '';
+  tenants = [];
+  getLookup() {
+    this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
+      this.tenants = res.data;
     });
   }
 
+  exportExcel() {
+    this.taskService.exportExcel(this.filters).subscribe((file) => {
+      ExportExcel(file, 'attendance');
+    });
+  }
   ngOnInit(): void {
+    if (this.currentRole !== 'SuperAdmin') {
+      this.displayedColumns = this.displayedColumns.filter(
+        (x) => x !== 'tenantName'
+      );
+    } else {
+      this.getLookup();
+    }
     this.getList();
   }
 }

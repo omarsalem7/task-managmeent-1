@@ -20,7 +20,6 @@ import { FileFormComponent } from '../file-form/file-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { FilesService } from '../../../../core/services/files';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
 export interface PeriodicElement {
@@ -83,8 +82,7 @@ export class FilesListComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private filesService: FilesService,
-    private http: HttpClient
+    private filesService: FilesService
   ) {
     this.searchSubject
       .pipe(
@@ -99,9 +97,9 @@ export class FilesListComponent {
       });
   }
   displayedColumns: string[] = [
-    'createdById',
+    'employeeName',
     'fileName',
-    'taskItem',
+    'taskItemName',
     'fileUrl',
     'createdOn',
     // 'edit',
@@ -201,10 +199,12 @@ export class FilesListComponent {
   }
 
   totalCount: number = 0;
+  loading = true;
   getList() {
     this.filesService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res;
-      this.totalCount = res.length;
+      this.dataSource = res.data;
+      this.loading = false;
+      this.totalCount = res.totalCount;
     });
   }
   currentRole = localStorage.getItem('role');
@@ -214,7 +214,7 @@ export class FilesListComponent {
       this.displayedColumns.splice(
         this.displayedColumns.length - 1,
         0,
-        'tenantId'
+        'tenantName'
       );
 
       // this.displayedColumns.push('edit');
