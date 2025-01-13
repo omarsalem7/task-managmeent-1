@@ -20,12 +20,12 @@
   @if(currentAttendance?.checkIn &&currentAttendance?.checkOut){
   <div class="flex justify-between">
     <div class="text-gray-600">
-      <span>تاريخ الحضور</span>
-      {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - hh:mm a" }} :
+      <span>تاريخ الحضور</span>:
+      {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - hh:mm a" }}
     </div>
     <div class="text-gray-600">
-      <span>تاريخ الانصراف</span>
-      {{ currentAttendance?.checkOut | date : "dd-MM-yyyy - hh:mm a" }} :
+      <span>تاريخ الانصراف</span>:
+      {{ currentAttendance?.checkOut | date : "dd-MM-yyyy - hh:mm a" }}
     </div>
   </div>
 
