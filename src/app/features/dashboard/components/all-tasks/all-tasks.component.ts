@@ -23,9 +23,7 @@ export class AllTasksComponent {
   date = model([]);
   chart: any;
 
-  ngOnInit() {
-    // this.fetchTaskData();
-  }
+  ngOnInit() {}
   isDataEmpty = false;
   completionPercent: number = 0;
   fetchTaskData() {
