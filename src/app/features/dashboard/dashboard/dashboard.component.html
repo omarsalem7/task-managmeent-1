@@ -17,7 +17,19 @@
       />
     </div>
   </div>
-  @if(currentAttendance?.checkIn &&currentAttendance?.checkOut){ }@else {
+  @if(currentAttendance?.checkIn &&currentAttendance?.checkOut){
+  <div class="flex justify-between">
+    <div class="text-gray-600">
+      {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - hh:mm a" }} :
+      <span>تاريخ الحضور</span>
+    </div>
+    <div class="text-gray-600">
+      {{ currentAttendance?.checkOut | date : "dd-MM-yyyy - hh:mm a" }} :
+      <span>تاريخ الانصراف</span>
+    </div>
+  </div>
+
+  }@else {
   <div
     *appHasRole="['Employee']"
     class="bg-white rounded-lg shadow mb-4 p-4 flex justify-between items-center"
@@ -125,7 +137,7 @@
         </div>
         <div class="text-sm">مجموع المتأخره</div>
       </div>
-      <i class="fas fa-dollar-sign text-white text-3xl"></i>
+      <i class="fas fa-solid fa-clock text-white text-3xl"></i>
     </div>
     <div
       class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
@@ -136,7 +148,7 @@
         </div>
         <div class="text-sm">مجموع المكتمة</div>
       </div>
-      <i class="fas fa-dollar-sign text-white text-3xl"></i>
+      <i class="fas fa-solid fa-list-check text-white text-3xl"></i>
     </div>
 
     <!-- Completed Tasks -->
@@ -149,7 +161,7 @@
         </div>
         <div class="text-sm">مجموع جاري العمل</div>
       </div>
-      <i class="fas fa-bell text-white text-3xl"></i>
+      <i class="fas fa-solid fa-circle-half-stroke text-white text-3xl"></i>
     </div>
 
     <!-- Active Tasks -->
