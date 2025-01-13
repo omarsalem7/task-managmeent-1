@@ -31,9 +31,20 @@ export class TaskService {
     );
   }
 
-  exportExcel(): Observable<Blob> {
+  exportExcel(inputFilter?: any): Observable<Blob> {
+    let params = new HttpParams();
+
+    if (inputFilter) {
+      Object.keys(inputFilter).forEach((key) => {
+        if (inputFilter[key] !== '' && inputFilter[key] !== null) {
+          params = params.set(key, inputFilter[key]);
+        }
+      });
+    }
+
     return this.http
       .get(`${this.baseUrl}/api/Downloads/download-excel-TaskItems`, {
+        params,
         responseType: 'blob',
       })
       .pipe(

@@ -159,7 +159,7 @@ export class AttendanceListComponent {
   }
 
   exportExcel() {
-    this.attendanceService.exportExcel().subscribe((file) => {
+    this.attendanceService.exportExcel(this.filters).subscribe((file) => {
       ExportExcel(file, 'attendance');
     });
   }

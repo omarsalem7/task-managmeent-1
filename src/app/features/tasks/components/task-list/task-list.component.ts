@@ -59,7 +59,6 @@ export interface PeriodicElement {
     ToastModule,
     DropdownModule,
     HasRoleDirective,
-    InputNumber,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -257,7 +256,7 @@ export class TaskListComponent {
   }
 
   exportExcel() {
-    this.taskService.exportExcel().subscribe((file) => {
+    this.taskService.exportExcel(this.filters).subscribe((file) => {
       ExportExcel(file, 'attendance');
     });
   }
