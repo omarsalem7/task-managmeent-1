@@ -60,7 +60,7 @@ export class SidebarComponent {
       label: 'التعميم',
       icon: 'fas fa-chart-bar',
       route: '/notification',
-      visible: ['Admin', 'SuperAdmin'].includes(this.currentRole),
+      visible: true,
     },
     {
       label: 'الحضور والانصراف',
