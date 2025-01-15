@@ -12,6 +12,7 @@ import { DatePicker } from 'primeng/datepicker';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Knob } from 'primeng/knob';
+import { StatTenantsComponent } from '../components/stat-tenants/stat-tenants.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,7 @@ import { Knob } from 'primeng/knob';
     CommonModule,
     FormsModule,
     Knob,
+    StatTenantsComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
