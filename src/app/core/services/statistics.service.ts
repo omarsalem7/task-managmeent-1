@@ -36,6 +36,19 @@ export class StatisticsService {
     return this.http.get(`${this.baseUrl}/api/Statistics/statusesOverYear`);
   }
 
+  // /api/Statistics/employee-performanceByTenant/{tenantId}
+  getEmployeePerformanceByTenant(tenantId: any) {
+    return this.http.get(
+      `${this.baseUrl}/api/Statistics/employee-performanceByTenant/${tenantId}`
+    );
+  }
+  // /api/Statistics/tasks-status-count-ByTenant/{tenantId}
+  getTasksCountByTent(tenantId: any) {
+    return this.http.get(
+      `${this.baseUrl}/api/Statistics/tasks-status-count-ByTenant/${tenantId}`
+    );
+  }
+
   getEmpPerformance(inputFilter?: any) {
     let params = new HttpParams();
 
