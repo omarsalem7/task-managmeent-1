@@ -22,6 +22,7 @@ import { TenantsService } from '../../../../core/services/tenants';
 import { EmployeeService } from '../../../../core/services/employee';
 import { LoadingSpinnerComponent } from '../../../../shared/ui/loading-spinner/loading-spinner.component';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-deals-form',
@@ -38,6 +39,7 @@ import { MatSpinner } from '@angular/material/progress-spinner';
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
+    Toast,
   ],
   templateUrl: './deals-form.component.html',
   styleUrls: ['./deals-form.component.scss'],
@@ -72,7 +74,6 @@ export class DealsFormComponent implements OnInit {
       this.isEditMode = true;
       console.log(this.data.record);
       this.dealForm.patchValue(this.data.record);
-      
     }
     this.dealForm.patchValue({ status: 'Pending' });
   }
@@ -80,8 +81,12 @@ export class DealsFormComponent implements OnInit {
   ngOnInit(): void {
     this.tentants.getList().subscribe((res: any) => {
       this.tentantsList = res.data;
-      this.dealForm.patchValue({ tenantId: this.tentantsList.filter( t => t.tenantName === this.data.record.tenantName)[0].id });
-      this.getEmployees(this.dealForm.value.tenantId)
+      this.dealForm.patchValue({
+        tenantId: this.tentantsList.filter(
+          (t) => t.tenantName === this.data.record.tenantName
+        )[0].id,
+      });
+      this.getEmployees(this.dealForm.value.tenantId);
     });
   }
 
@@ -91,13 +96,17 @@ export class DealsFormComponent implements OnInit {
       next: (res: any) => {
         console.log(res);
         this.employeesList = res;
-        console.log(res, this.data.record, this.employeesList
-            .filter(e => this.data.record.employeeNames.includes(e.fullName))
-            .map(e => e.id))
+        console.log(
+          res,
+          this.data.record,
+          this.employeesList
+            .filter((e) => this.data.record.employeeNames.includes(e.fullName))
+            .map((e) => e.id)
+        );
         this.dealForm.patchValue({
           employeeIds: this.employeesList
-            .filter(e => this.data.record.employeeNames.includes(e.fullName)) // Filter employees who match names
-            .map(e => e.id) // Extract their IDs
+            .filter((e) => this.data.record.employeeNames.includes(e.fullName)) // Filter employees who match names
+            .map((e) => e.id), // Extract their IDs
         });
       },
       error: (er) => console.log(er),
@@ -144,7 +153,9 @@ export class DealsFormComponent implements OnInit {
               summary: 'تم الحفظ',
               detail: 'تم إضافة العقد بنجاح',
             });
-            this.dialogRef.close('refresh');
+            setTimeout(() => {
+              this.dialogRef.close('refresh');
+            }, 1300);
           },
           error: () => {
             this.isLoading = false;
