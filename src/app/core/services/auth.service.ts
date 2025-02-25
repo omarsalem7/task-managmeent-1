@@ -39,6 +39,15 @@ export class AuthService {
         })
       );
   }
+
+  requestPass(formData: any) {
+    return this.http.post(`${this.baseUrl}/api/support`, {
+      ...formData,
+      issueType: 1,
+      fullname: formData.email,
+    });
+  }
+
   newPassword(newPassDto: any): Observable<any> {
     return this.http
       .post<any>(`${this.baseUrl}/Auth/change-password`, {

@@ -20,6 +20,7 @@ import { HasRoleDirective } from '../../../../core/directives/has-role.directive
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
 import { ExportExcel } from '../../../../shared/utils/exportExcel';
+import { EmployeeService } from '../../../../core/services/employee';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -53,6 +54,7 @@ export interface PeriodicElement {
 export class AttendanceListComponent {
   filters = {
     tenantId: null,
+    employeeId: null,
     searchTerm: '',
     PageNumber: 1,
     PageSize: 5,
@@ -79,7 +81,8 @@ export class AttendanceListComponent {
 
   constructor(
     private attendanceService: AttendanceService,
-    private tenantsService: TenantsService
+    private tenantsService: TenantsService,
+    private empStat: EmployeeService
   ) {
     this.searchSubject
       .pipe(
@@ -106,9 +109,23 @@ export class AttendanceListComponent {
     // this.openDialog();
   }
   tenants = [];
+  employees = [];
   getLookup() {
     this.tenantsService.getList({ pageSize: 1000 }).subscribe((res: any) => {
       this.tenants = res.data;
+    });
+  }
+
+  getEmployees(tenantId: string) {
+    console.log(tenantId);
+    this.empStat.getEmployeesbyTanentId(tenantId).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.employees = res;
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
     });
   }
 

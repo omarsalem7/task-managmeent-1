@@ -1,6 +1,17 @@
+@use "@angular/material" as mat;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.expansion-overrides(
+    (
+      container-background-color: primary,
+      container-text-color: white,
+    )
+  );
+}
 
 @layer components {
   .custom-button {

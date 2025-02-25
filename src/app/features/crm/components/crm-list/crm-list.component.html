@@ -1,0 +1,132 @@
+<app-list-header header="CRM" [count]="totalCount">
+  <button
+    class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2"
+    *appHasRole="['SuperAdmin']"
+    (click)="navigateToForm()"
+  >
+    إضافة عميل
+    <i class="fa fa-plus"></i>
+  </button>
+</app-list-header>
+
+<app-filter-list header="CRM" (searchChange)="updateSearch($event)">
+  <div class="flex gap-6 mb-4 flex-wrap items-center">
+    <mat-form-field class="w-48">
+      <mat-label>تاريخ البدء</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="filters.StartDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-48">
+      <mat-label>تاريخ الانتهاء</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.EndDate" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div class="flex gap-3">
+      <button class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200" (click)="filterHandler()">بحث</button>
+      <button class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200" (click)="filterHandler(true)">إلغاء</button>
+    </div>
+  </div>
+</app-filter-list>
+
+<div *ngIf="dataSource.length > 0" class="p-6 bg-white rounded-lg shadow-md">
+  <div class="flex flex-col gap-6">
+    <!-- Name and pagination  -->
+    <div class="flex justify-between items-center">
+      <div class="flex gap-4 items-center">
+        <h2 class="text-2xl font-bold text-gray-800">{{ dataSource[0]?.responsibleName }}</h2>
+        <span class="text-sm text-gray-500">{{ dataSource[0]?.responsiblePosition }}</span>
+
+        <!-- Show and edit buttons -->
+        <button
+          class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2 z-50"
+          *appHasRole="['SuperAdmin']"
+          (click)="show(dataSource[0])"
+        >
+          عرض تفاصيل
+          <i class="fa fa-eye"></i>
+        </button>
+
+        <button 
+          class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2 z-50"
+          *appHasRole="['SuperAdmin']"
+          (click)="editRecord(dataSource[0].id)"
+        >
+          تعديل
+          <i class="fa fa-edit"></i>
+        </button>
+      </div>
+
+      <mat-paginator
+        [length]="totalCount"
+        [pageSize]="filters.PageSize"
+        (page)="onPageChange($event)"
+      ></mat-paginator>
+    </div>
+
+    <!-- Data Tables -->
+    <div class="flex gap-8">
+      <!-- Left Table -->
+      <table class="w-1/2 border border-black">
+        <tr class="border-b border-black">
+          <td class="border-black border py-2 text-gray-600 font-medium text-center">رقم الهاتف</td>
+          <td class="border-black border py-2 text-center">{{ dataSource[0]?.phoneNumber }}</td>
+        </tr>
+        <tr class="border-b border-black">
+          <td class="border-black border py-2 text-gray-600 font-medium text-center">رقم الجوال</td>
+          <td class="border-black border py-2 text-center">{{ dataSource[0]?.mobileNumber }}</td>
+        </tr>
+        <tr class="border-b border-black">
+          <td class="border-black border py-2 text-gray-600 font-medium text-center">الايميل</td>
+          <td class="border-black border py-2 text-center">{{ dataSource[0]?.email }}</td>
+        </tr>
+      </table>
+
+      <!-- Right Tables -->
+      <div class="flex flex-col gap-4 w-1/2">
+        <div class="flex gap-8">
+          <table class="w-1/2 border border-black">
+            <tr class="border-b border-black">
+              <td class="border-black border py-2 text-gray-600 font-medium text-center">حالة العميل</td>
+              <td class="border-black border py-2 text-center">{{ dataSource[0]?.status }}</td>
+            </tr>
+          </table>
+          <table class="w-1/2 border border-black">
+            <tr class="border-b border-black">
+              <td class="border-black border py-2 text-gray-600 font-medium text-center">الاجراء</td>
+              <td class="border-black border py-2 text-center">{{ dataSource[0]?.action }}</td>
+            </tr>            
+          </table>
+        </div>
+        <table class="border border-black">
+          <tr class="border-b border-black">
+            <td class="border-black border py-2 text-gray-600 font-medium text-center">المستخدم المسؤل</td>
+            <td class="border-black border py-2 text-center">{{ dataSource[0]?.createdByUserName }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Notes  -->
+    <h3 class="py-2 text-gray-600 font-bold">الملاحظات</h3>
+    <td class="border-black border py-2 text-center">{{ dataSource[0]?.notes || 'لا يوجد' }}</td>
+  </div>
+</div>
+
+<div *ngIf="dataSource.length === 0 && !loading" class="no-data text-center py-6 text-gray-500">
+  لا يوجد بيانات
+</div>
+
+<p-toast />

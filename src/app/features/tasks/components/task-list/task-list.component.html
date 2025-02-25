@@ -146,7 +146,7 @@
         *appHasRole="['SuperAdmin', 'Admin']"
         mat-button
         color="primary"
-        (click)="editTask(element); menu.toggle($event)"
+        (click)="editTask(element); setDone(element);menu.toggle($event)"
       >
         <i class="pi pi-ellipsis-v"></i>
       </button>

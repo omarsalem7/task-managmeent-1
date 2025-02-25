@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { HasRoleDirective } from '../../../core/directives/has-role.directive';
 
 interface MenuItem {
@@ -13,7 +14,7 @@ interface MenuItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, HasRoleDirective],
+  imports: [RouterModule, MatExpansionModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -39,10 +40,22 @@ export class SidebarComponent {
       visible: ['Admin', 'SuperAdmin'].includes(this.currentRole),
     },
     {
-      label: 'إدارة الشركات',
-      icon: 'fas fa-chart-line',
-      route: '/tenants',
-      visible: ['SuperAdmin'].includes(this.currentRole),
+      label: 'CRM',
+      icon: 'fa fa-bars',
+      route: '/crm',
+      visible: this.currentRole === 'SuperAdmin',
+    },
+    {
+      label: 'فتح العقد',
+      icon: 'fas fa-chart-bar',
+      route: '/deals',
+      visible: this.currentRole === 'SuperAdmin',
+    },
+    {
+      label: 'الفواتير',
+      icon: 'fas fa-chart-bar',
+      route: '/bills',
+      visible: this.currentRole === 'SuperAdmin',
     },
     {
       label: 'التدريب',
@@ -54,7 +67,7 @@ export class SidebarComponent {
       label: 'الملفات',
       icon: 'fas fa-file-invoice',
       route: '/files',
-      visible: true,
+      visible: this.currentRole !== 'SuperAdmin',
     },
     {
       label: 'التعميم',
@@ -76,18 +89,30 @@ export class SidebarComponent {
     },
   ];
 
-  // settingsItems: MenuItem[] = [
-  //   { label: 'الاعدادات', icon: 'fas fa-cog', route: '/settings' },
-  //   {
-  //     label: 'ادارة مستخدمين النظام',
-  //     icon: 'fas fa-users-cog',
-  //     route: '/user-management',
-  //   },
-  //   {
-  //     label: 'اعدادات النظام',
-  //     icon: 'fas fa-tools',
-  //     route: '/system-settings',
-  //   },
-  //   { label: 'الدعم الفني', icon: 'fas fa-headset', route: '/support' },
-  // ];
+  settingsItems: MenuItem[] = [
+    {
+      label: 'إدارة مستخدمي النظام',
+      icon: 'fas fa-user',
+      route: '/validities',
+      visible: this.currentRole === 'SuperAdmin',
+    },
+    {
+      label: 'اعدادات النظام',
+      icon: 'fas fa-tools',
+      route: '/system-settings',
+      visible: this.currentRole === 'SuperAdmin',
+    },
+    {
+      label: 'إدارة الشركات',
+      icon: 'fas fa-chart-line',
+      route: '/tenants',
+      visible: this.currentRole === 'SuperAdmin',
+    },
+    {
+      label: 'الدعم افني',
+      icon: 'fas fa-headset',
+      route: '/support',
+      visible: true,
+    },
+  ];
 }

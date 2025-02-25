@@ -11,6 +11,11 @@ if (environment.production) {
   console.debug = function (): void {};
   console.warn = function (): void {};
   console.info = function (): void {};
+} else {
+  // const originalLog = console.log;
+  // console.log = (...args) => {
+  //   originalLog(new Date().toLocaleTimeString() + ': ', ...args);
+  // };
 }
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>

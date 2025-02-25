@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import { InputNumber } from 'primeng/inputnumber';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   debounceTime,
@@ -31,6 +30,7 @@ import { HasRoleDirective } from '../../../../core/directives/has-role.directive
 import { DropdownModule } from 'primeng/dropdown';
 import { TenantsService } from '../../../../core/services/tenants';
 import { ExportExcel } from '../../../../shared/utils/exportExcel';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -74,6 +74,7 @@ export class TaskListComponent {
   };
   snackBar = inject(MatSnackBar);
   readonly dialog = inject(MatDialog);
+  params: any;
 
   taskStatusesAr: any = {
     Completed: 'مكتمله',
@@ -83,6 +84,11 @@ export class TaskListComponent {
     New: 'جديده',
   };
   openDialog() {
+    if(this.done ){
+      // this.taskService.downloadTask(this.taskToDownload);
+      confirm(`Are you sure you want to download ${this.taskToDownload.description}?`)
+      return;
+    }
     const dialogRef = this.dialog.open(TaskFormComponent, {
       width: '35vw',
       data: {
@@ -102,8 +108,12 @@ export class TaskListComponent {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private taskService: TaskService,
-    private tenantsService: TenantsService
+    private tenantsService: TenantsService,
+    private router: ActivatedRoute
   ) {
+    this.router.queryParams.subscribe((params: any) => {
+      this.params = params;
+    });
     this.searchSubject
       .pipe(
         debounceTime(600),
@@ -139,39 +149,71 @@ export class TaskListComponent {
     this.record = null;
     this.openDialog();
   }
-  items = [
-    { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
-    {
-      label: 'حذف',
-      icon: 'pi pi-trash',
-      command: (event: any) => {
-        this.confirmationService.confirm({
-          target: event.target as EventTarget,
-          message: 'هل انت متاكد من حذف المهمه ؟',
-          header: '',
-          icon: 'pi pi-info-circle',
-          acceptButtonStyleClass: 'p-button-danger p-button-text',
-          rejectButtonStyleClass: 'p-button-text p-button-text',
-          acceptLabel: 'نعم انا متاكد',
-          rejectLabel: 'لا اريد ان احذف',
-          acceptIcon: 'none',
-          rejectIcon: 'none',
 
-          accept: () => {
-            console.log('rec', this.record);
-            this.taskService.delete(this.record.id).subscribe(() => {
-              this.messageService.add({
-                severity: 'success',
-                summary: 'تم الحذف',
-                detail: 'تم حذف المهمه بنجاح',
-              });
-              this.getList();
-            });
-          },
-        });
+  done: boolean = false;
+  taskToDownload: any;
+
+  private _items: any[] = [];
+
+  setDone(value: any) {
+    this.taskToDownload = value;
+    this.done = value.status === 'Completed' ? true : false;
+    console.log(this.done);
+    this.updateItems(); // Update the items array when done changes
+  }
+
+  private updateItems() {
+    this._items = [
+      ...(this.done
+        ? [
+            {
+              label: 'تنزيل',
+              icon: 'pi pi-download',
+              command: () => this.openDialog(),
+            },
+          ]
+        : []),
+      {
+        label: 'تعديل',
+        icon: 'pi pi-pencil',
+        command: () => this.openDialog(),
       },
-    },
-  ];
+      {
+        label: 'حذف',
+        icon: 'pi pi-trash',
+        command: (event: any) => {
+          this.confirmationService.confirm({
+            target: event.target as EventTarget,
+            message: 'هل انت متاكد من حذف المهمه ؟',
+            header: '',
+            icon: 'pi pi-info-circle',
+            acceptButtonStyleClass: 'p-button-danger p-button-text',
+            rejectButtonStyleClass: 'p-button-text p-button-text',
+            acceptLabel: 'نعم انا متاكد',
+            rejectLabel: 'لا اريد ان احذف',
+            acceptIcon: 'none',
+            rejectIcon: 'none',
+
+            accept: () => {
+              console.log('rec', this.record);
+              this.taskService.delete(this.record.id).subscribe(() => {
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'تم الحذف',
+                  detail: 'تم حذف المهمه بنجاح',
+                });
+                this.getList();
+              });
+            },
+          });
+        },
+      },
+    ];
+  }
+
+  get items() {
+    return this._items; // Return the cached array
+  }
 
   updatePercent(id: any, event: any): void {
     if (+event.value > 100 || +event.value < 0) {
@@ -242,7 +284,11 @@ export class TaskListComponent {
   loading = true;
   getList() {
     this.taskService.getList(this.filters).subscribe((res: any) => {
-      this.dataSource = res.data;
+      const data: any[] = res.data;
+      console.log(data);
+      this.dataSource = this.params.s
+        ? data.filter((d: any) => this.params.s == d.status)
+        : data;
       this.totalCount = res.totalCount;
       this.loading = false;
     });

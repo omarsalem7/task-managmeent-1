@@ -4,6 +4,14 @@ import { noAuthGuard } from './core/guards/no-auth.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./features/landing-page/landing-page.routes').then(
+        (m) => m.LANDING_PAGE_ROUTES
+      ),
+    canActivate: [noAuthGuard],
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
@@ -37,6 +45,24 @@ export const routes: Routes = [
       import('./features/employee/employee.routes').then(
         (m) => m.EMPLOYEE_ROUTES
       ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'crm',
+    loadChildren: () =>
+      import('./features/crm/crm.routes').then((m) => m.CRM_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'deals',
+    loadChildren: () =>
+      import('./features/deals/deals.routes').then((m) => m.DEALS_ROUTE),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'bills',
+    loadChildren: () =>
+      import('./features/bills/bills.routes').then((m) => m.BILLS_ROUTES),
     canActivate: [authGuard],
   },
   {
@@ -74,9 +100,26 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    path: 'system-settings',
+    loadChildren: () =>
+      import('./features/system-settings/systemSettings.routes').then(
+        (m) => m.systemSettings_routes
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'support',
+    loadChildren: () =>
+      import('./features/support/support.routes').then((m) => m.SUPPORT_ROUTES),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'validities',
+    loadChildren: () =>
+      import('./features/validities/validities.routes').then(
+        (m) => m.VALIDITIES_ROUTES
+      ),
+    canActivate: [authGuard],
   },
   {
     path: '**',

@@ -8,12 +8,11 @@ import {
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
-import { HasRoleDirective } from '../../../core/directives/has-role.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, HasRoleDirective],
+  imports: [RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -36,10 +35,12 @@ export class NavbarComponent {
   getHeaderName() {
     if (this.currentRole === 'Admin') {
       this.headerName = localStorage.getItem('tenantName') ?? '';
+      console.log(this.headerName);
     } else if (this.currentRole === 'SuperAdmin') {
       this.headerName = 'مكتب الهويه الاولي للخدمات التجاريه';
     } else {
       const currentUser = localStorage.getItem('currentUser');
+      console.log(currentUser);
       this.headerName = currentUser
         ? JSON.parse(currentUser).fullName ?? JSON.parse(currentUser).email
         : '';

@@ -39,8 +39,19 @@
         id="tenantId"
         [(ngModel)]="filters.tenantId"
         [options]="tenants"
+        (onChange)="getEmployees($event.value)"
         placeholder="اسم الشركه"
         optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+    </div>
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <p-dropdown
+        id="tenantId"
+        [(ngModel)]="filters.employeeId"
+        [options]="employees"
+        placeholder="اسم الموظف"
+        optionLabel="fullName"
         optionValue="id"
       ></p-dropdown>
     </div>

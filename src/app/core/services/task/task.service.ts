@@ -85,4 +85,9 @@ export class TaskService {
   delete(id: string) {
     return this.http.delete(`${this.baseUrl}/api/TaskItems/${id}`);
   }
+
+  // Download
+  downloadTask(task: any){
+    // return this.http.get(`${this.baseUrl}/api/Downloads/download-task-file/${task.taskId}`, {responseType: 'blob'});
+  }
 }

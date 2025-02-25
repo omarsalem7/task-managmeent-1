@@ -5,7 +5,7 @@ export const NEWPASSWORD_ROUTES: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    data: { title: 'الحضور والانصراف' },
+    data: { title: 'كلمة سر جديده' },
     children: [
       {
         path: '',

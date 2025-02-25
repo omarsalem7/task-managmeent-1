@@ -29,6 +29,7 @@ export class EmployeeService {
   getById(id: string) {
     return this.http.get(`${this.baseUrl}/Employees/${id}`);
   }
+
   exportExcel(): Observable<Blob> {
     return this.http
       .get(`${this.baseUrl}/api/Downloads/download-excel-Employee`, {
@@ -43,6 +44,7 @@ export class EmployeeService {
         })
       );
   }
+
   getEmployeesbyTanentId(id: string) {
     return this.http.get(
       `${this.baseUrl}/Employees/GetEmployeesBasedOnTenantIdAsync/${id}`

@@ -10,6 +10,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { definePreset } from '@primeng/themes';
+import { provideNativeDateAdapter } from '@angular/material/core';
+
 const MyPreset = definePreset(Aura, {
   semantic: {
     primary: {
@@ -32,6 +34,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideNativeDateAdapter(),
     provideAnimations(),
     provideAnimationsAsync(),
     providePrimeNG({

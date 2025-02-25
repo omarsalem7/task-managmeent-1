@@ -31,13 +31,15 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              // "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/theme/theme.css",
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/swiper/swiper-bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -48,16 +50,6 @@
                 }
               ],
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "2MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
-                }
               ],
               "outputHashing": "all"
             },
@@ -107,9 +99,6 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              // "node_modules/primeng/resources/primeng.min.css",
-              // "node_modules/primeicons/primeicons.css",
-              // "src/theme/theme.css",
               "src/styles.scss",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],

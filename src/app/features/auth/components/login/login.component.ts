@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -13,6 +13,8 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { RequestPassComponent } from '../request-pass/request-pass.component';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +48,29 @@ export class LoginComponent {
     { label: 'الموظف', value: 'employee' },
   ];
   loginForm!: FormGroup;
+
+  // change password dialog
+  // dialog is used to inject the MatDialog service
+  readonly dialog = inject(MatDialog);
+
+  // the openDialog function is used to open the dialog
+  openDialog() {
+    const dialogRef = this.dialog.open(RequestPassComponent, {
+      width: '50vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // if (result == 'refresh') {
+      //   this.getlist();
+      // }
+    });
+  }
+
+  requestPass() {
+    this.openDialog();
+  }
+
   onLogin() {
     if (this.loginForm.valid) {
       this.isLoading = true;

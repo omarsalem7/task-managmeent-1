@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { TasksClassificationComponent } from '../components/tasks-classification/tasks-classification.component';
 import { AllTasksComponent } from '../components/all-tasks/all-tasks.component';
 import { HasRoleDirective } from '../../../core/directives/has-role.directive';
@@ -13,6 +13,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Knob } from 'primeng/knob';
 import { StatTenantsComponent } from '../components/stat-tenants/stat-tenants.component';
+import { StatEmployeesComponent } from '../components/stat-employees/stat-employees.component';
+import { Chart } from 'chart.js';
+import { ClientsManagementComponent } from '../superAdmin/clients-management/clients-management.component';
+import { SalesManagementComponent } from '../superAdmin/sales-management/sales-management.component';
+import { StatContractsComponent } from '../superAdmin/stat-contracts/stat-contracts.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +27,7 @@ import { StatTenantsComponent } from '../components/stat-tenants/stat-tenants.co
     TasksClassificationComponent,
     AllTasksComponent,
     HasRoleDirective,
+    ClientsManagementComponent,
     DatePipe,
     TasksDaysComponent,
     DatePicker,
@@ -28,6 +35,8 @@ import { StatTenantsComponent } from '../components/stat-tenants/stat-tenants.co
     FormsModule,
     Knob,
     StatTenantsComponent,
+    SalesManagementComponent,
+    StatContractsComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -37,14 +46,26 @@ export class DashboardComponent {
   attendanceService = inject(AttendanceService);
   statService = inject(StatisticsService);
   snackBar = inject(MatSnackBar);
+  router = inject(Router);
   currentRole = localStorage.getItem('role') ?? '';
   protected date = signal([]);
   today = new Date();
   isLiked = false;
+  tentantId = '';
+  progress = 750;
+  target = 1000;
+
+  @ViewChild(StatEmployeesComponent)
+  statEmployeesComponent!: StatEmployeesComponent;
+
   react() {
     this.notiService.react(this.currentNoti.id).subscribe(() => {
       this.isLiked = true;
     });
+  }
+
+  navToTasks(t: string) {
+    this.router.navigate(['/tasks'], { queryParams: { s: t } });
   }
 
   checkIn() {
@@ -53,6 +74,7 @@ export class DashboardComponent {
       this.getCurrentAttendance();
     });
   }
+
   checkOut(id: number) {
     this.attendanceService.checkOut(id).subscribe(() => {
       this.showMessage('تم تسجيل الانصراف بنجاح ✅✅');
@@ -72,6 +94,7 @@ export class DashboardComponent {
     currentStat: {},
     completionPercent: 0,
   };
+
   currentStat: any;
 
   completionPercent: any = 0;
@@ -79,13 +102,13 @@ export class DashboardComponent {
     this.statService.getStatsTent().subscribe((res: any) => {
       this.currentStat = res;
       const total = res?.continuedTasks + res?.newTasks + res?.overdue;
-      // console.log('total:', total, 'res.completedTasks:', res.completedTasks);
       this.completionPercent = total > 0 ? total / res.completedTasks : 0;
       if (res.completedTasks == 0) {
         this.completionPercent = 0;
       }
     });
   }
+
   getStatsEmp() {
     this.statService.getStatsEmp().subscribe((res: any) => {
       this.currentStat = {
@@ -110,16 +133,18 @@ export class DashboardComponent {
       this.currentNoti = res;
     });
   }
-  // currentUtcDate = new Date().toISOString();
+
   currentAttendance: any;
   currentNoti: any;
 
   superCount: any;
   getCountSuper() {
     this.statService.getTasksCountSuper().subscribe((res) => {
+      console.log(res);
       this.superCount = res;
     });
   }
+
   ngOnInit(): void {
     if (this.currentRole === 'Employee') {
       this.getCurrentAttendance();
