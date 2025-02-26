@@ -10,6 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ToastModule } from 'primeng/toast';
 import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
@@ -47,6 +48,7 @@ export interface PeriodicElement {
     DropdownModule,
     ToastModule,
     HasRoleDirective,
+    MultiSelectModule,
   ],
   templateUrl: './attendance-list.component.html',
   styleUrl: './attendance-list.component.scss',
@@ -95,7 +97,16 @@ export class AttendanceListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = ['checkIn', 'checkOut', 'date'];
+  allColumns: any[] = [
+    { key: 'employeeName', label: 'اسم الموظف', selected: true },
+    { key: 'tenantName', label: 'الشركة', selected: true },
+    { key: 'checkIn', label: 'وقت الحضور', selected: true },
+    { key: 'checkOut', label: 'وقت الانصراف', selected: true },
+    { key: 'date', label: 'التاريخ', selected: true },
+    // { key: 'actions', label: 'الإجراءات', selected: true },
+  ];
+  selectedColumns: any[] = [...this.allColumns];
+  displayedColumns: string[] = this.selectedColumns.map((col) => col.key);
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();
@@ -115,6 +126,9 @@ export class AttendanceListComponent {
       this.tenants = res.data;
     });
   }
+  onColumnSelectionChange(event: any) {
+    this.displayedColumns = this.selectedColumns.map((col) => col.key);
+  }
 
   getEmployees(tenantId: string) {
     console.log(tenantId);
@@ -128,39 +142,6 @@ export class AttendanceListComponent {
       },
     });
   }
-
-  // items = [
-  //   { label: 'تعديل', icon: 'pi pi-pencil', command: () => this.openDialog() },
-  //   {
-  //     label: 'حذف',
-  //     icon: 'pi pi-trash',
-  //     command: (event: any) => {
-  //       this.confirmationService.confirm({
-  //         target: event.target as EventTarget,
-  //         message: 'هل انت متاكد من الحذف ؟',
-  //         header: '',
-  //         icon: 'pi pi-info-circle',
-  //         acceptButtonStyleClass: 'p-button-danger p-button-text',
-  //         rejectButtonStyleClass: 'p-button-text p-button-text',
-  //         acceptLabel: 'نعم انا متاكد',
-  //         rejectLabel: 'لا اريد ان احذف',
-  //         acceptIcon: 'none',
-  //         rejectIcon: 'none',
-
-  //         accept: () => {
-  //           this.tenantsService.delete(this.record.id).subscribe(() => {
-  //             this.messageService.add({
-  //               severity: 'success',
-  //               summary: 'تم الحذف',
-  //               detail: 'تم حذف بنجاح',
-  //             });
-  //             this.getList();
-  //           });
-  //         },
-  //       });
-  //     },
-  //   },
-  // ];
 
   onPageChange(event: any) {
     console.log(event);
@@ -227,14 +208,21 @@ export class AttendanceListComponent {
 
   currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
-    if (this.currentRole === 'Admin') {
-      this.displayedColumns.unshift('employeeName');
+    console.log(this.currentRole);
+    if (this.currentRole !== 'SuperAdmin') {
+      this.allColumns = this.allColumns.filter(
+        (col) => col.key !== 'tenantName'
+      );
     }
-    if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.unshift('tenantName');
-      this.displayedColumns.unshift('employeeName');
-      this.getLookup();
+    if (this.currentRole !== 'Admin' && this.currentRole !== 'SuperAdmin') {
+      this.allColumns = this.allColumns.filter(
+        (col) => col.key !== 'employeeName'
+      );
+      // Also remove actions column for Employee role
+      this.allColumns = this.allColumns.filter((col) => col.key !== 'actions');
     }
     this.getList();
+    this.selectedColumns = [...this.allColumns];
+    this.displayedColumns = this.selectedColumns.map((col) => col.key);
   }
 }
