@@ -61,15 +61,15 @@ export class DealsListComponent {
   deals: any[] = [];
   totalCount: number = 0;
   deal: any = [];
-  statusOptions = [ 'تحت الإجراء', 'مقبول', 'مرفوض', 'معلق'];
+  statusOptions = ['تحت الإجراء', 'مقبول', 'مرفوض', 'معلق'];
 
   changeStatus(element: any) {
     // Handle status change logic here
-    element.status = this.statusOptions.indexOf(element.status) + 1
+    element.status = this.statusOptions.indexOf(element.status) + 1;
     this.dealsService.updateDealStatus(element).subscribe({
       next: (response) => {
         console.log('Status changed: ', response);
-        this.getList()
+        this.getList();
       },
       error: (error) => {
         console.log(error);
@@ -77,6 +77,8 @@ export class DealsListComponent {
     });
   }
   readonly dialog = inject(MatDialog);
+
+  currentRole = localStorage.getItem('role') ?? '';
 
   getStatusColor(status: string): string {
     switch (status) {
@@ -139,7 +141,7 @@ export class DealsListComponent {
     'contractValue',
     'projectDuration',
     'startDate',
-    'user',
+    'createdByUserName',
     'createdOn',
     'status',
     'edit',
@@ -252,7 +254,6 @@ export class DealsListComponent {
     });
   }
 
-  currentRole = localStorage.getItem('role');
   ngOnInit(): void {
     this.getList();
   }

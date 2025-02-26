@@ -56,17 +56,22 @@
     <th mat-header-cell *matHeaderCellDef>رقم العقد</th>
     <td mat-cell *matCellDef="let element">{{ element.contractNumber }}</td>
   </ng-container>
-  
+
   <ng-container matColumnDef="tenantId" *appHasRole="['SuperAdmin']">
     <th mat-header-cell *matHeaderCellDef>الشركة</th>
     <td mat-cell *matCellDef="let element">{{ element.tenantId }}</td>
   </ng-container>
-  
+
   <ng-container matColumnDef="employeeNames">
     <th mat-header-cell *matHeaderCellDef>موظفين المشروع</th>
-    <td mat-cell *matCellDef="let element">{{ element.employeeNames[0] + (element.employeeNames.length > 1 ? '...' : '') }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{
+        element.employeeNames[0] +
+          (element.employeeNames.length > 1 ? "..." : "")
+      }}
+    </td>
   </ng-container>
-  
+
   <ng-container matColumnDef="contractValue">
     <th mat-header-cell *matHeaderCellDef>قيمة العقد</th>
     <td mat-cell *matCellDef="let element">{{ element.contractValue }}</td>
@@ -74,7 +79,9 @@
 
   <ng-container matColumnDef="projectDuration">
     <th mat-header-cell *matHeaderCellDef>مدة المشروع</th>
-    <td mat-cell *matCellDef="let element">{{ element.projectDuration + " شهر" }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.projectDuration + " شهر" }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="startDate">
@@ -82,9 +89,9 @@
     <td mat-cell *matCellDef="let element">{{ element.startDate | date }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="user">
+  <ng-container matColumnDef="createdByUserName">
     <th mat-header-cell *matHeaderCellDef>المستخدم</th>
-    <td mat-cell *matCellDef="let element">{{ element.user }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.createdByUserName }}</td>
   </ng-container>
 
   <ng-container matColumnDef="createdOn">
@@ -94,18 +101,28 @@
 
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>حالة العقد</th>
-    <td mat-cell *matCellDef="let element" [ngClass]="getStatusColor(element.status)">
-      <mat-form-field class="rounded-lg" [ngClass]="getStatusColor(element.status)">
-        <mat-select class="" [(value)]="element.status" (selectionChange)="changeStatus(element)">
+    <td
+      mat-cell
+      *matCellDef="let element"
+      [ngClass]="getStatusColor(element.status)"
+    >
+      <mat-form-field
+        class="rounded-lg"
+        [ngClass]="getStatusColor(element.status)"
+      >
+        <mat-select
+          [disabled]="currentRole !== 'SuperAdmin'"
+          class=""
+          [(value)]="element.status"
+          (selectionChange)="changeStatus(element)"
+        >
           <mat-option *ngFor="let status of statusOptions" [value]="status">
             {{ status }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-
     </td>
   </ng-container>
-
 
   <!-- Edit Action Column -->
   <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin']">

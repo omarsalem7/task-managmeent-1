@@ -25,9 +25,7 @@ export class BillDetailsComponent {
       // Prepend base URL to relative image paths
       const logoUrl = this.getAbsoluteUrl(res.data.logoUrl);
       const stampUrl = this.getAbsoluteUrl(res.data.stampUrl);
-      console.log(this.data);
       this.bill = { ...this.data.bill, ...res.data, logoUrl, stampUrl };
-      console.log(this.bill);
     });
   }
 
