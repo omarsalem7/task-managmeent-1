@@ -37,25 +37,27 @@ export class SidebarComponent {
       label: 'إدارة الموظفين',
       icon: 'fas fa-users',
       route: '/employee',
-      visible: ['Admin', 'SuperAdmin'].includes(this.currentRole),
+      visible: ['Admin', 'SuperAdmin', 'HRSpecialist'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'CRM',
       icon: 'fa fa-bars',
       route: '/crm',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
     },
     {
       label: 'فتح العقد',
       icon: 'fas fa-chart-bar',
       route: '/deals',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
     },
     {
       label: 'الفواتير',
       icon: 'fas fa-chart-bar',
       route: '/bills',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
     },
     {
       label: 'التدريب',
@@ -73,7 +75,9 @@ export class SidebarComponent {
       label: 'التعميم',
       icon: 'fas fa-chart-bar',
       route: '/notification',
-      visible: true,
+      visible: ['Admin', 'SuperAdmin', 'HRSpecialist'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'الحضور والانصراف',
@@ -94,7 +98,7 @@ export class SidebarComponent {
       label: 'إدارة مستخدمي النظام',
       icon: 'fas fa-user',
       route: '/validities',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['OperationsManager', 'SuperAdmin'].includes(this.currentRole),
     },
     {
       label: 'اعدادات النظام',
