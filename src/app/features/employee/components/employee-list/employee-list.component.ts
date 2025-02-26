@@ -15,18 +15,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterListComponent } from '../../../../shared/ui/filter-list/filter-list.component';
 import { ListHeaderComponent } from '../../../../shared/ui/list-header/list-header.component';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  Subject,
-  firstValueFrom,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeeService } from '../../../../core/services/employee';
 import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 import { ExportExcel } from '../../../../shared/utils/exportExcel';
+import { MatSelectModule } from '@angular/material/select';
 
 export interface PeriodicElement {
   name: string;
@@ -54,6 +49,7 @@ export interface PeriodicElement {
     ConfirmDialogModule,
     ToastModule,
     HasRoleDirective,
+    MatSelectModule,
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss',
@@ -89,6 +85,11 @@ export class EmployeeListComponent {
     private messageService: MessageService,
     private employeeService: EmployeeService
   ) {
+    this.visibleColumns = this.allColumns
+      .filter((col) => col.initiallyVisible || col.always)
+      .map((col) => col.key);
+
+    this.updateDisplayedColumns();
     this.searchSubject
       .pipe(
         debounceTime(600),
@@ -102,17 +103,77 @@ export class EmployeeListComponent {
       });
   }
 
-  displayedColumns: string[] = [
-    'fullName',
-    'jobNumber',
-    'email',
-    'phoneNumber',
-    'nationality',
-    'identityNumber',
-    'jobTitle',
-    'password',
-    'createdOn',
+  allColumns: any[] = [
+    {
+      key: 'fullName',
+      label: 'اسم الموظف',
+      always: true,
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'jobNumber',
+      label: 'الرقم الوظيفي',
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'email',
+      label: 'البريد الالكتروني',
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'phoneNumber',
+      label: 'رقم الهاتف',
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'nationality',
+      label: 'الجنسية',
+      initiallyVisible: false,
+      sortable: true,
+    },
+    {
+      key: 'identityNumber',
+      label: 'رقم الهوية',
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'jobTitle',
+      label: 'المسمي الوظيفي',
+      initiallyVisible: true,
+      sortable: true,
+    },
+    {
+      key: 'password',
+      label: 'كلمه السر',
+      initiallyVisible: false,
+      sortable: false,
+    },
+    {
+      key: 'createdOn',
+      label: 'تاريخ الانشاء',
+      initiallyVisible: true,
+      sortable: true,
+    },
   ];
+
+  visibleColumns: string[] = [];
+  displayedColumns: string[] = [];
+
+  updateDisplayedColumns() {
+    this.displayedColumns = this.allColumns
+      .filter((col) => col.always || this.visibleColumns.includes(col.key))
+      .map((col) => col.key);
+  }
+
+  onColumnSelectionChange(event: any) {
+    this.visibleColumns = event.value;
+    this.updateDisplayedColumns();
+  }
 
   dataSource: any[] = [];
   private searchSubject = new Subject<string>();

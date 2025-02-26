@@ -45,6 +45,22 @@
       <button class="btn-outline" (click)="filterHandler()">بحث</button>
       <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
     </div>
+    <mat-form-field class="w-64">
+      <mat-label class="font-arabic">عرض/اخفاء الأعمدة</mat-label>
+      <mat-select
+        [value]="visibleColumns"
+        multiple
+        (selectionChange)="onColumnSelectionChange($event)"
+      >
+        <mat-option
+          *ngFor="let col of allColumns"
+          [value]="col.key"
+          [disabled]="col.always"
+        >
+          {{ col.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </app-filter-list>
 
