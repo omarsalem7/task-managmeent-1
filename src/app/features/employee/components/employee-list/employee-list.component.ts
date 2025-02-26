@@ -270,8 +270,23 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.getList();
     if (this.currentRole === 'SuperAdmin') {
-      this.displayedColumns.splice(2, 0, 'tenantName');
-      this.displayedColumns.push('edit');
+      this.allColumns.splice(2, 0, {
+        key: 'tenantName',
+        label: 'الشركة',
+        initiallyVisible: true,
+        sortable: true,
+      });
+      this.allColumns.push({
+        key: 'edit',
+        label: 'إجراء',
+        initiallyVisible: true,
+      });
+
+      this.visibleColumns = this.allColumns
+        .filter((col) => col.initiallyVisible || col.always)
+        .map((col) => col.key);
+
+      this.updateDisplayedColumns();
     }
   }
 }
