@@ -19,6 +19,7 @@ import { debounceTime, distinctUntilChanged, switchMap, Subject } from 'rxjs';
 import { TenantsFormComponent } from '../tenants-form/tenants-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TenantsService } from '../../../../core/services/tenants';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 export interface PeriodicElement {
   name: string;
@@ -45,6 +46,7 @@ export interface PeriodicElement {
     MenuModule,
     ConfirmDialogModule,
     ToastModule,
+    MultiSelectModule,
   ],
   templateUrl: './tenants-list.component.html',
   styleUrl: './tenants-list.component.scss',
@@ -92,17 +94,21 @@ export class TenantsListComponent {
         this.totalCount = results.totalCount;
       });
   }
-  displayedColumns: string[] = [
-    'tenantName',
-    'email',
-    'password',
-    'subscriptionFee',
-    'phoneNumber',
-    'startDate',
-    'endDate',
-    'notes',
-    'status',
+  allColumns: any[] = [
+    { key: 'tenantName', label: 'الاسم', selected: true },
+    { key: 'email', label: 'البريد الالكتروني', selected: true },
+    { key: 'password', label: 'الرقم السري', selected: false },
+    { key: 'subscriptionFee', label: 'قيمة الاشتراك', selected: true },
+    { key: 'phoneNumber', label: 'رقم الهاتف', selected: true },
+    { key: 'startDate', label: 'تاريخ الانشاء', selected: true },
+    { key: 'endDate', label: 'تاريخ الانتهاء', selected: true },
+    { key: 'notes', label: 'ملاحظات', selected: true },
+    { key: 'status', label: 'الحاله', selected: true },
   ];
+
+  // Initialize selectedColumns and displayedColumns.
+  selectedColumns: any[] = this.allColumns.filter((col) => col.selected);
+  displayedColumns: string[] = this.selectedColumns.map((col) => col.key);
 
   getStatus(expirationDate: string): string {
     if (!expirationDate) return 'منتهي';
@@ -126,6 +132,17 @@ export class TenantsListComponent {
   newRecord() {
     this.record = null;
     this.openDialog();
+  }
+
+  onColumnSelectionChange(event: any) {
+    this.displayedColumns = this.selectedColumns.map((col) => col.key);
+    // If the current role is SuperAdmin, append the 'edit' column if not already present.
+    if (
+      this.currentRole === 'SuperAdmin' &&
+      !this.displayedColumns.includes('edit')
+    ) {
+      this.displayedColumns.push('edit');
+    }
   }
 
   items = [
@@ -208,6 +225,8 @@ export class TenantsListComponent {
   currentRole = localStorage.getItem('role') ?? '';
 
   ngOnInit(): void {
+    this.selectedColumns = this.allColumns.filter((col) => col.selected);
+    this.displayedColumns = this.selectedColumns.map((col) => col.key);
     if (this.currentRole == 'SuperAdmin') this.displayedColumns.push('edit');
     this.getList();
   }

@@ -4,7 +4,7 @@
   <button class="custom-button">تصدير Excel</button> -->
 </app-list-header>
 <app-filter-list
-  [isFilter]="false"
+  [isFilter]="true"
   header="الشركات"
   (searchChange)="updateSearch($event)"
 >
@@ -37,6 +37,17 @@
     <div class="flex gap-3">
       <button class="btn-outline" (click)="filterHandler()">بحث</button>
       <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+    </div>
+    <div class="mb-3">
+      <p-multiSelect
+        [options]="allColumns"
+        [(ngModel)]="selectedColumns"
+        optionLabel="label"
+        selectedItemsLabel="{0} أعمدة مختارة"
+        [style]="{ minWidth: '200px' }"
+        placeholder="اختر الأعمدة"
+        (onChange)="onColumnSelectionChange($event)"
+      ></p-multiSelect>
     </div>
   </div>
 </app-filter-list>
