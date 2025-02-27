@@ -85,6 +85,9 @@ export class LoginComponent {
             case 'HRSpecialist':
               this.router.navigateByUrl('/employee');
               break;
+            case 'SalesSpecialist':
+              this.router.navigateByUrl('/crm');
+              break;
             default:
               this.router.navigateByUrl('/dashboard');
               ``;

@@ -202,11 +202,6 @@ export class BillsListComponent {
   // get list
   getList() {
     this.billsService.getBills(this.filters).subscribe((res: any) => {
-      // res.data.map((tent: any) => {
-      //   this.getTentantName(tent.companyName).subscribe((res: any) => {
-      //     tent.companyName = res.tenantName;
-      //   });
-      // });
       this.bills = res.data;
       this.totalCount = res.totalCount ?? res.data.length;
       console.log(this.totalCount, res);
@@ -266,6 +261,9 @@ export class BillsListComponent {
 
   // on init
   ngOnInit() {
+    if (this.currentRole !== 'SuperAdmin') {
+      this.displayedColumns.pop();
+    }
     this.getList();
   }
 }
