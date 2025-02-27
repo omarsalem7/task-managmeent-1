@@ -35,12 +35,10 @@ export class NavbarComponent {
   getHeaderName() {
     if (this.currentRole === 'Admin') {
       this.headerName = localStorage.getItem('tenantName') ?? '';
-      console.log(this.headerName);
     } else if (this.currentRole === 'SuperAdmin') {
       this.headerName = 'مكتب الهويه الاولي للخدمات التجاريه';
     } else {
       const currentUser = localStorage.getItem('currentUser');
-      console.log(currentUser);
       this.headerName = currentUser
         ? JSON.parse(currentUser).fullName ?? JSON.parse(currentUser).email
         : '';

@@ -80,7 +80,15 @@ export class LoginComponent {
         next: () => {
           this.tokenService.setRole();
           this.isLoading = false;
-          this.router.navigateByUrl('/dashboard');
+          const currentRole = localStorage.getItem('role') ?? '';
+          switch (currentRole) {
+            case 'HRSpecialist':
+              this.router.navigateByUrl('/employee');
+              break;
+            default:
+              this.router.navigateByUrl('/dashboard');
+              ``;
+          }
         },
         error: () => {
           this.isLoading = false;

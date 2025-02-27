@@ -56,7 +56,6 @@ export class ValiditiesListComponent {
         switchMap(() => this.validitiesService.getEmployees())
       )
       .subscribe((results: any) => {
-        console.log(results);
         this.employees = results;
         this.totalCount = results.length;
       });
@@ -173,7 +172,6 @@ export class ValiditiesListComponent {
   getList() {
     this.validitiesService.getEmployees(this.filters).subscribe((res: any) => {
       this.employees = res.data;
-      console.log(this.employees);
       this.totalCount = res.totalCount;
       this.loading = false;
     });
@@ -225,6 +223,9 @@ export class ValiditiesListComponent {
 
   // on init
   ngOnInit() {
+    if (this.currentRole !== 'SuperAdmin') {
+      this.displayedColumns.pop();
+    }
     this.getList();
   }
 }

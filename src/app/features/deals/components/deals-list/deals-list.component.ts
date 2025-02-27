@@ -249,12 +249,17 @@ export class DealsListComponent {
         });
       });
       this.deals = res.data;
-      console.log(this.deals);
+
       this.totalCount = res.totalCount;
     });
   }
 
   ngOnInit(): void {
+    if (this.currentRole !== 'SuperAdmin') {
+      this.displayedColumns = this.displayedColumns.filter(
+        (c) => !['tenantId', 'edit'].includes(c)
+      );
+    }
     this.getList();
   }
 }

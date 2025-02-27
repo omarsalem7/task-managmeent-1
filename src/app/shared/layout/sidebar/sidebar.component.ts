@@ -25,65 +25,100 @@ export class SidebarComponent {
       label: 'الرئيسية',
       icon: 'fas fa-home',
       route: '/dashboard',
-      visible: true,
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'OperationsManager',
+        'Employee',
+      ].includes(this.currentRole),
     },
     {
       label: 'إدارة المهام',
       icon: 'fas fa-tasks',
       route: '/tasks',
-      visible: true,
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'HRSpecialist',
+        'Employee',
+        'OperationsManager',
+      ].includes(this.currentRole),
     },
     {
       label: 'إدارة الموظفين',
       icon: 'fas fa-users',
       route: '/employee',
-      visible: ['Admin', 'SuperAdmin', 'HRSpecialist'].includes(
-        this.currentRole
-      ),
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'HRSpecialist',
+        'OperationsManager',
+      ].includes(this.currentRole),
     },
     {
       label: 'CRM',
       icon: 'fa fa-bars',
       route: '/crm',
-      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
+      visible: ['SalesSpecialist', 'SuperAdmin', 'OperationsManager'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'فتح العقد',
       icon: 'fas fa-chart-bar',
       route: '/deals',
-      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
+      visible: ['SalesSpecialist', 'SuperAdmin', 'OperationsManager'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'الفواتير',
       icon: 'fas fa-chart-bar',
       route: '/bills',
-      visible: ['SalesSpecialist', 'SuperAdmin'].includes(this.currentRole),
+      visible: ['SalesSpecialist', 'SuperAdmin', 'OperationsManager'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'التدريب',
       icon: 'fas fa-file-contract',
       route: '/train',
-      visible: true,
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'HRSpecialist',
+        'Employee',
+        'OperationsManager',
+      ].includes(this.currentRole),
     },
     {
       label: 'الملفات',
       icon: 'fas fa-file-invoice',
       route: '/files',
-      visible: this.currentRole !== 'SuperAdmin',
+      visible: ['Admin', 'Employee'].includes(this.currentRole),
     },
     {
       label: 'التعميم',
       icon: 'fas fa-chart-bar',
       route: '/notification',
-      visible: ['Admin', 'SuperAdmin', 'HRSpecialist'].includes(
-        this.currentRole
-      ),
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'HRSpecialist',
+        'OperationsManager',
+      ].includes(this.currentRole),
     },
     {
       label: 'الحضور والانصراف',
       icon: 'fas fa-chart-bar',
       route: '/attendance',
-      visible: true,
+      visible: [
+        'Admin',
+        'SuperAdmin',
+        'HRSpecialist',
+        'Employee',
+        'OperationsManager',
+      ].includes(this.currentRole),
     },
     {
       label: 'اعداد كلمة السر',
