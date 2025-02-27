@@ -1,0 +1,15 @@
+<article
+  class="grow shrink p-6 rounded-lg min-w-60 w-[294px] max-md:px-5"
+  [ngClass]="isDark ? 'bg-blue-950 text-orange-50 shadow-xl' : 'text-blue-950'"
+>
+  <header class="flex flex-col w-full text-2xl font-semibold leading-8">
+    <div
+      class="flex self-end rounded h-[52px] min-h-[52px] w-[52px]"
+      [ngClass]="isDark ? 'bg-indigo-900 backdrop-blur' : 'bg-blue-950'"
+    ></div>
+    <h3 class="mt-6">{{ title }}</h3>
+  </header>
+  <p class="mt-6 text-lg tracking-normal leading-7">
+    {{ description }}
+  </p>
+</article>
