@@ -7,13 +7,11 @@ import {
   RouterModule,
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
-import { AuthService } from '../../../core/services/auth.service';
-import { HasRoleDirective } from '../../../core/directives/has-role.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, HasRoleDirective],
+  imports: [RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -22,8 +20,7 @@ export class NavbarComponent {
   constructor(
     private titleService: Title,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private activatedRoute: ActivatedRoute
   ) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -52,8 +49,4 @@ export class NavbarComponent {
   }
 
   currentRole = localStorage.getItem('role');
-
-  logout() {
-    this.authService.logout();
-  }
 }

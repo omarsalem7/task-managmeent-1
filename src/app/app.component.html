@@ -1,11 +1,2 @@
-<div class="flex gap-2">
-  @if (isAuth) {
-  <app-sidebar></app-sidebar>
-  }
-  <div class="flex flex-col w-full me-2">
-    @if (isAuth) { <app-navbar></app-navbar> }
-    <router-outlet />
-  </div>
-</div>
-<!-- <app-navbar></app-navbar>
-<router-outlet /> -->
+<app-navbar></app-navbar>
+<router-outlet />

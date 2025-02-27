@@ -1,66 +1,10 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
-import { noAuthGuard } from './core/guards/no-auth.guard';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
   {
-    path: 'auth',
-    loadChildren: () =>
-      import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
-    canActivate: [noAuthGuard],
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('./features/dashboard/dashboard.routes').then(
-        (m) => m.DASHBOARD_ROUTES
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tasks',
-    loadChildren: () =>
-      import('./features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'employee',
-    loadChildren: () =>
-      import('./features/employee/employee.routes').then(
-        (m) => m.EMPLOYEE_ROUTES
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'tenants',
-    loadChildren: () =>
-      import('./features/tenants/tenants.routes').then((m) => m.TENANTS_ROUTES),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'notification',
-    loadChildren: () =>
-      import('./features/notification/notification.routes').then(
-        (m) => m.NOTIFICATION_ROUTES
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'train',
-    loadChildren: () =>
-      import('./features/train/train.routes').then((m) => m.TRAIN_ROUTES),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'files',
-    loadChildren: () =>
-      import('./features/files/files.routes').then((m) => m.FILES_ROUTES),
-    canActivate: [authGuard],
-  },
-  {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    component: HomeComponent,
   },
   {
     path: '**',
