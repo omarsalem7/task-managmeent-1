@@ -12,7 +12,18 @@ export const noAuthGuard = () => {
     map((isAuthenticated) => {
       if (isAuthenticated) {
         // If user is authenticated, redirect to dashboard
-        router.navigate(['/dashboard']);
+        const currentRole = localStorage.getItem('role') ?? '';
+        switch (currentRole) {
+          case 'HRSpecialist':
+            router.navigateByUrl('/employee');
+            break;
+          case 'SalesSpecialist':
+            router.navigateByUrl('/crm');
+            break;
+          default:
+            router.navigateByUrl('/dashboard');
+            break;
+        }
         return false;
       }
       return true;

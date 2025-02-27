@@ -90,7 +90,7 @@ export class LoginComponent {
               break;
             default:
               this.router.navigateByUrl('/dashboard');
-              ``;
+              break;
           }
         },
         error: () => {
