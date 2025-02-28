@@ -13,9 +13,15 @@ import { FooterComponent } from './shared/layout/footer/footer.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'task-management-app';
+  isLoading: boolean = true;
   ngOnInit() {
-    // Use browser language if available
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+    this.getLanguageBrowser();
+  }
+
+  getLanguageBrowser() {
     const browserLang = this.translate.getBrowserLang();
     const lang = localStorage.getItem('language') ?? browserLang;
     if (lang) {
@@ -32,8 +38,6 @@ export class AppComponent {
 
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
-
-    // Languages supported by your app
     translate.addLangs(['en', 'ar']);
   }
 }
