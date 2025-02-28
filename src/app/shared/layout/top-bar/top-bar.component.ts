@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RawImg } from '../../../../shared/ui/raw-img.component';
+import { RawImg } from '../../ui/raw-img.component';
 
 @Component({
   selector: 'top-bar',

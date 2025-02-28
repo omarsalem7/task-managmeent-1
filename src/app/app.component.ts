@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TopBar } from './features/home/components/top-bar/top-bar.component';
+import { TopBar } from './shared/layout/top-bar/top-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { NavBar } from './features/home/components/navigation/navigation.component';
+import { NavBar } from './shared/layout/navigation/navigation.component';
+import { FooterComponent } from './shared/layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TranslateModule, TopBar, NavBar],
+  imports: [RouterOutlet, TranslateModule, TopBar, NavBar, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
