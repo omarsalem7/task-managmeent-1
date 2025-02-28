@@ -2,12 +2,12 @@
   <section
     class="overflow-hidden pt-14 relative mx-auto my-0 w-full bg-blue-950 max-md:px-5 max-md:py-10 max-sm:p-5"
   >
-    <div class="flex justify-between">
+    <div class="flex justify-around">
       <div class="px-10">
         <h2
-          class="mb-6 text-3xl font-bold tracking-wider text-right ltr:text-left text-white uppercase leading-[49.2px] max-sm:text-2xl"
+          class="mb-6 text-3xl font-bold tracking-wider text-white uppercase leading-[49.2px] max-sm:text-2xl"
         >
-          خدمات دانات
+          {{ "home.services.title" | translate }}
         </h2>
 
         <ul class="flex flex-col gap-5">
@@ -35,7 +35,7 @@
             <p
               class="text-3xl tracking-wide text-right text-white uppercase leading-[50.96px] max-w-[565px] max-sm:text-xl"
             >
-              اصدار كل الفواتير الخاصة بعمليات البيع والشراء
+              {{ "home.services.list1" | translate }}
             </p>
           </li>
 
@@ -63,7 +63,7 @@
             <p
               class="text-3xl tracking-wide text-right text-white uppercase leading-[50.96px] max-w-[565px] max-sm:text-xl"
             >
-              ايضا فواتير المرتجعات والفواتير الضريبية وغيرها
+              {{ "home.services.list2" | translate }}
             </p>
           </li>
 
@@ -91,8 +91,7 @@
             <p
               class="text-3xl tracking-wide text-right text-white uppercase leading-[50.96px] max-w-[565px] max-sm:text-xl"
             >
-              متابعة كل التقارير ا��خاص بكل عمليات البيع والشراء وغيرهم من
-              العمليات اللي دارت حول السنة من خلال منصة العربى.
+              {{ "home.services.list3" | translate }}
             </p>
           </li>
         </ul>

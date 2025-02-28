@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   template: `
-    <section class="relative p-6">
+    <section class="relative p-10">
       <article class=" ">
         <h1
           class="mb-2 md:mb-8 md:pt-10 text-5xl font-semibold max-sm:text-3xl text-white"
@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </h1>
 
         <p
-          class=" text-xl font-semibold text-white opacity-70  max-sm:text-base"
+          class=" text-xl font-semibold text-white opacity-70 md:leading-10 max-sm:text-base lg:max-w-[50%] "
         >
           {{ 'home.heroSubTitle' | translate }}
         </p>

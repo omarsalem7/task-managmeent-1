@@ -1,10 +1,105 @@
 {
-  "HELLO": "Hello",
-  "WELCOME": "Welcome to the translation demo",
+  "contactUs": "Contact Us Now",
+  "myHome": "Home",
+  "about": "About Us",
+  "whyUs": "Why Us",
+  "services": "Services",
+  "packages": "Packages",
+  "employment": "Employment",
+  "requestService": "Request Service",
+  "danatPlatform": "Danat Platform",
   "home": {
     "title": "Your Best Choice for Managing Your Project",
-    "heroSubTitle": "Everything your project needs in one place, accessible on all devices. Now you can manage your business from anywhere at any time with Al-Arabi ERP, the all-in-one solution for accounting and business management. Join now!",
+    "heroSubTitle": "Everything your project needs in one place, accessible from any device. Now you can manage your business from anywhere and at any time with Al Arabi ERP, the comprehensive solution for accounting and business. Join now...",
     "startFreeTrial": "Start Your Free Trial",
-    "subscribeNow": "Subscribe Now"
+    "subscribeNow": "Subscribe Now",
+    "improve": {
+      "preTitle": "Improve Performance Levels in Your Management",
+      "postTitle": "Immediately",
+      "subTitle": "This text is an example of a placeholder text that can be replaced in the same space. It has been generated initially now.",
+      "1main": "This is the main text",
+      "2main": "This is the main text",
+      "3main": "This is the main text",
+      "1sub": "Track time through attendance and departure logging",
+      "2sub": "Assign company-specific tasks to employees",
+      "3sub": "Plan and schedule your team’s shifts accurately"
+    },
+    "choose": {
+      "preTitle": "Why Choose",
+      "postTitle": "DANAT",
+      "subTitle": "This text is an example of a placeholder text that can be replaced in the same space. It has been generated initially now.",
+      "1main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "2main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "3main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "4main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "5main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "6main": "This text is an example of a placeholder that can be replaced in the same space.",
+      "1sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
+      "2sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
+      "3sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
+      "4sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
+      "5sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
+      "6sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text."
+    },
+    "services": {
+      "title": "Danat Services",
+      "list1": "Issuance of all invoices for sales and purchase transactions",
+      "list2": "Also includes return invoices, tax invoices, and more",
+      "list3": "Track all reports related to sales, purchases, and other transactions over the year through the Al Arabi platform."
+    },
+    "pricing": {
+      "title": "Join Now and Get a 25% Discount",
+      "subTitle": "Get the Best Offers",
+      "PLANS": {
+        "BASIC": {
+          "NAME": "Basic Plan",
+          "TYPE": "SAR / Monthly",
+          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "FEATURES": {
+            "FEATURE1": "All features of the Advanced Plan",
+            "FEATURE2": "Customer and supplier management",
+            "FEATURE3": "Electronic invoicing",
+            "FEATURE4": "Tax support",
+            "FEATURE5": "Branch management"
+          }
+        },
+        "SILVER": {
+          "NAME": "Silver Plan",
+          "TYPE": "SAR / Monthly",
+          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "FEATURES": {
+            "FEATURE1": "All features of the Advanced Plan",
+            "FEATURE2": "Customer and supplier management",
+            "FEATURE3": "Electronic invoicing",
+            "FEATURE4": "Tax support",
+            "FEATURE5": "Branch management"
+          }
+        },
+        "PLATINUM_REMOTE": {
+          "NAME": "Platinum Plan (Remote)",
+          "TYPE": "SAR / Monthly",
+          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "FEATURES": {
+            "FEATURE1": "All features of the Advanced Plan",
+            "FEATURE2": "Customer and supplier management",
+            "FEATURE3": "Electronic invoicing",
+            "FEATURE4": "Tax support",
+            "FEATURE5": "Branch management"
+          }
+        },
+        "PLATINUM_CENTERS": {
+          "NAME": "Platinum Plan (Centers)",
+          "TYPE": "SAR / Monthly",
+          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "FEATURES": {
+            "FEATURE1": "All features of the Advanced Plan",
+            "FEATURE2": "Customer and supplier management",
+            "FEATURE3": "Electronic invoicing",
+            "FEATURE4": "Tax support",
+            "FEATURE5": "Branch management"
+          }
+        }
+      }
+    }
   }
 }

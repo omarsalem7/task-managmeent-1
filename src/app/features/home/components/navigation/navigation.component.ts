@@ -17,13 +17,27 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         class="h-[60px] w-[202px]"
       />
       <div class="flex gap-8 max-md:flex-wrap max-md:justify-center ">
-        <a href="#" class="text-lg font-semibold text-white">الرئيسية</a>
-        <a href="#" class="text-lg font-semibold text-white">من نحن</a>
-        <a href="#" class="text-lg font-semibold text-white">لماذا نحن</a>
-        <a href="#" class="text-lg font-semibold text-white">الخدمات</a>
-        <a href="#" class="text-lg font-semibold text-white">الباقات</a>
-        <a href="#" class="text-lg font-semibold text-white">التوظيف</a>
-        <a href="#" class="text-lg font-semibold text-white">طلب الخدمة</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'myHome' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'about' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'whyUs' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'services' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'packages' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'employment' | translate
+        }}</a>
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'requestService' | translate
+        }}</a>
       </div>
 
       <div class="flex gap-5 items-center max-sm:flex-col">
@@ -48,12 +62,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         <button
           class="px-5 py-2 text-lg font-semibold text-white rounded-xl border-2 border-solid border-white border-opacity-70 max-sm:w-full max-sm:text-center"
         >
-          منصة دانات
+          {{ 'danatPlatform' | translate }}
         </button>
       </div>
     </nav>
     <div
-      class="mt-6 hidden md:flex ms-6  justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
+      class="ms-10 mt-6 hidden md:flex   justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
     >
       <raw-img
         image="https://cdn.builder.io/api/v1/image/assets/TEMP/594c66d72416e778cc11418a75c6cf5cdee0a25e"
@@ -82,5 +96,5 @@ export class NavBar {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
   }
-  currentLang = this.translate.currentLang;
+  currentLang = localStorage.getItem('language') ?? 'en';
 }

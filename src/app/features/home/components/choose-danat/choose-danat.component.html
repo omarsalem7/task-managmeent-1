@@ -9,15 +9,14 @@
         alt=""
       />
       <span class="self-stretch my-auto max-w-full">
-        لماذا تقوم بأختيار
+        {{ "home.choose.preTitle" | translate }}
         <span style="letter-spacing: 7px; color: rgba(223, 131, 23, 1)">
-          DANAT
+          {{ "home.choose.postTitle" | translate }}
         </span>
       </span>
     </h1>
     <p class="mt-4 text-base text-slate-500 max-md:max-w-full">
-      هذا النص هو مثال لنص غير حقيقي يمكن ان يستبدل في نفس المساحة لقد تم توليد
-      هذا النص بشكل مبدئي الان
+      {{ "home.choose.subTitle" | translate }}
     </p>
   </header>
   <div
@@ -25,33 +24,34 @@
   >
     <app-feature-card
       [isDark]="true"
-      title="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
+      [title]="'home.choose.1main' | translate"
+      [description]="'home.choose.1sub' | translate"
     />
     <app-feature-card
       [isDark]="false"
-      title="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
+      [title]="'home.choose.2main' | translate"
+      [description]="'home.choose.2sub' | translate"
+    />
+
+    <app-feature-card
+      [isDark]="true"
+      [title]="'home.choose.1main' | translate"
+      [description]="'home.choose.1sub' | translate"
+    />
+    <app-feature-card
+      [isDark]="false"
+      [title]="'home.choose.2main' | translate"
+      [description]="'home.choose.2sub' | translate"
     />
     <app-feature-card
       [isDark]="true"
-      title="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
+      [title]="'home.choose.1main' | translate"
+      [description]="'home.choose.1sub' | translate"
     />
     <app-feature-card
       [isDark]="false"
-      title="هذا النص هو مثا�� لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
-    />
-    <app-feature-card
-      [isDark]="true"
-      title="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
-    />
-    <app-feature-card
-      [isDark]="false"
-      title="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة"
-      description="هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص."
+      [title]="'home.choose.2main' | translate"
+      [description]="'home.choose.2sub' | translate"
     />
   </div>
 </section>
