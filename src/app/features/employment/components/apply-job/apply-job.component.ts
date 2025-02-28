@@ -17,6 +17,7 @@ import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-ha
 })
 export class ApplyJobComponent {
   form: FormGroup;
+  isSubmited: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -25,6 +26,11 @@ export class ApplyJobComponent {
       phone: ['', [Validators.required, Validators.pattern('^5[0-9]{8}$')]],
       resume: ['', [Validators.required]],
     });
+
+    const savedFormData = sessionStorage.getItem('isSubmited');
+    if (savedFormData) {
+      this.isSubmited = true; // Mark as submitted if data exists
+    }
   }
 
   isFileRequired: boolean = false;
@@ -64,5 +70,8 @@ export class ApplyJobComponent {
     if (this.form.invalid) return;
     console.log(this.form.value);
     console.log(this.uploadedLogo);
+
+    this.isSubmited = true;
+    sessionStorage.setItem('isSubmited', 'yes');
   }
 }

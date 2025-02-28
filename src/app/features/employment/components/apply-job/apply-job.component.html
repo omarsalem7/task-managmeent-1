@@ -34,10 +34,18 @@
       {{ "employmentPage.applyJob.subTitle" | translate }}
     </p>
   </header>
-
   <div class="max-w-2xl mx-auto mt-10 p-6">
+    @if (isSubmited) {
+    <div class="text-center text-3xl font-bold">
+      <h3 class="text-[#DF8317] pb-4">
+        {{ "employmentPage.thanks" | translate }}
+      </h3>
+      <h4 class="text-[#000000]">
+        {{ "employmentPage.workingOnRequest" | translate }}
+      </h4>
+    </div>
+    }@else {
     <form [formGroup]="form" (ngSubmit)="submitForm()">
-      <!-- الاسم الكامل -->
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2"
           >{{ "employmentPage.applyJob.fullName" | translate }} *</label
@@ -127,5 +135,6 @@
         {{ "employmentPage.send" | translate }}
       </button>
     </form>
+    }
   </div>
 </div>

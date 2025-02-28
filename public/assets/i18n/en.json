@@ -101,5 +101,39 @@
         }
       }
     }
+  },
+  "employmentPage": {
+    "send": "Send",
+    "delete": "Delete",
+    "thanks": "Thank you for reaching out to us,",
+    "workingOnRequest": "We are reviewing your request, and the coordinator will contact you as soon as possible.",
+    "reUpload": "Re-upload",
+    "browse": "Browse Files",
+    "dragDrop": "Drag and drop files here",
+    "improve": {
+      "preTitle": "Improve performance levels in your management",
+      "postTitle": "Immediately",
+      "subTitle": "This text is a placeholder and can be replaced in the same space. It has been generated as an initial example.",
+      "1main": "This is the main text",
+      "2main": "This is the main text",
+      "3main": "This is the main text",
+      "1sub": "Track time through attendance and departure logging",
+      "2sub": "Assign company-specific tasks to employees",
+      "3sub": "Plan and schedule your team's shifts accurately"
+    },
+    "applyJob": {
+      "preTitle": "Apply for a job at",
+      "postTitle": "DANAT",
+      "subTitle": "This text is a placeholder and can be replaced in the same space. It has been generated as an initial example.",
+      "fullName": "Full Name",
+      "fullNamePlaceHolder": "Enter your full name",
+      "required": "This field is required",
+      "email": "Enter your email address",
+      "emailPlaceHolder": "Email",
+      "emailError": "Enter a valid email",
+      "phone": "Mobile Number",
+      "phoneError": "Enter a valid number starting with 5",
+      "resume": "Resume"
+    }
   }
 }
