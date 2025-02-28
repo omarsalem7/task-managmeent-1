@@ -40,37 +40,47 @@
       <!-- الاسم الكامل -->
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2"
-          >الاسم بالكامل *</label
+          >{{ "employmentPage.applyJob.fullName" | translate }} *</label
         >
         <input
           type="text"
           formControlName="fullName"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="قم بكتابة الاسم كامل"
+          [placeholder]="
+            'employmentPage.applyJob.fullNamePlaceHolder' | translate
+          "
         />
         @if (form.controls['fullName'].invalid &&
         form.controls['fullName'].touched) {
-        <p class="text-red-500 text-sm">هذا الحقل مطلوب</p>
+        <p class="text-red-500 text-sm">
+          {{ "employmentPage.applyJob.required" | translate }}
+        </p>
         }
       </div>
 
       <!-- البريد الإلكتروني -->
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">البريد *</label>
+        <label class="block text-gray-700 font-bold mb-2"
+          >{{ "employmentPage.applyJob.email" | translate }} *</label
+        >
         <input
           type="email"
           formControlName="email"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="قم بكتابة البريد الخاص بك"
+          [placeholder]="'employmentPage.applyJob.emailPlaceHolder' | translate"
         />
         @if (form.controls['email'].invalid && form.controls['email'].touched) {
-        <p class="text-red-500 text-sm">أدخل بريدًا صحيحًا</p>
+        <p class="text-red-500 text-sm">
+          {{ "employmentPage.applyJob.emailError" | translate }}
+        </p>
         }
       </div>
 
       <!-- رقم الجوال -->
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">رقم الجوال *</label>
+        <label class="block text-gray-700 font-bold mb-2"
+          >{{ "employmentPage.applyJob.phone" | translate }} *</label
+        >
         <div class="flex items-center border rounded-lg overflow-hidden">
           <span class="bg-green-600 text-white px-3 py-2">+966</span>
           <input
@@ -81,23 +91,30 @@
           />
         </div>
         @if (form.controls['phone'].invalid && form.controls['phone'].touched) {
-        <p class="text-red-500 text-sm">أدخل رقمًا صحيحًا يبدأ بـ 5</p>
+        <p class="text-red-500 text-sm">
+          {{ "employmentPage.applyJob.phoneError" | translate }}
+        </p>
         }
       </div>
 
       <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2"
-          >السيره الذاتيه *</label
+        <label for="resume" class="block text-gray-700 font-bold mb-2"
+          >{{ "employmentPage.applyJob.resume" | translate }} *</label
         >
-        <input
-          type="email"
-          formControlName="resume"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="قم بكتابة البريد الخاص بك"
-        />
+        <app-file-upload-handler
+          [isFile]="true"
+          [imagePreview]="imagePreview"
+          (fileSelected)="handleFileSelected($event)"
+          (cancelClicked)="handleCancelClicked()"
+          [fileName]="form.value.resume"
+          [idInput]="'resume'"
+        ></app-file-upload-handler>
+        <input type="hidden" formControlName="resume" />
         @if (form.controls['resume'].invalid && form.controls['resume'].touched)
         {
-        <p class="text-red-500 text-sm">هذا الحقل مطلوب</p>
+        <p class="text-red-500 text-sm">
+          {{ "employmentPage.applyJob.required" | translate }}
+        </p>
         }
       </div>
 
@@ -107,7 +124,7 @@
         class="w-full cursor-pointer bg-[#111C55] text-white font-bold py-2 rounded-lg mt-4 hover:bg-[#0a1b72] disabled:opacity-10 disabled:cursor-not-allowed"
         [disabled]="form.invalid"
       >
-        إرسال
+        {{ "employmentPage.send" | translate }}
       </button>
     </form>
   </div>

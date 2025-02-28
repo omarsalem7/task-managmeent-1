@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-file-upload-handler',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './file-upload-handler.component.html',
   styleUrl: './file-upload-handler.component.scss',
 })

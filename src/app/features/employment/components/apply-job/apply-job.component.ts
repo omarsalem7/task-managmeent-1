@@ -27,7 +27,42 @@ export class ApplyJobComponent {
     });
   }
 
+  isFileRequired: boolean = false;
+  uploadedLogo: any = null;
+  imagePreview: any = null;
+  handleFileSelected(file: File) {
+    this.form.patchValue({ resume: file.name });
+    this.uploadedLogo = file;
+    this.handleFile(file);
+  }
+
+  handleCancelClicked() {
+    this.removeImage();
+  }
+
+  private removeImage() {
+    this.imagePreview = null;
+    this.form.patchValue({ resume: '' });
+    this.form.get('resume')?.updateValueAndValidity();
+    this.uploadedLogo = null;
+  }
+
+  private handleFile(file: File) {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.imagePreview =
+        'https://cdn-icons-png.flaticon.com/512/2457/2457802.png';
+    }
+  }
+
   submitForm() {
     if (this.form.invalid) return;
+    console.log(this.form.value);
+    console.log(this.uploadedLogo);
   }
 }

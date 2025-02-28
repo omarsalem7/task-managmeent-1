@@ -22,12 +22,16 @@
       <div class="flex gap-2 items-center">
         <div class="cancel-button" (click)="onCancelClick($event)">
           <span class="pi pi-trash"> </span>
-          <span class="underline">حذف</span>
+          <span class="underline">{{
+            "employmentPage.delete" | translate
+          }}</span>
         </div>
         <div class="vr-line"></div>
         <div class="cancel-button">
           <span class="pi pi-upload"> </span>
-          <span class="underline">إعاده تحميل</span>
+          <span class="underline"
+            >{{ "employmentPage.reUpload" | translate }}
+          </span>
         </div>
       </div>
     </div>
@@ -42,8 +46,8 @@
           src="https://cdn-icons-png.flaticon.com/512/3097/3097412.png"
         />
       </div>
-      <p class="text-sm mb-2">تصفخ الملفات</p>
-      <p class="text-xs">قم بسحب وإسقاط الملفات هنا</p>
+      <p class="text-sm mb-2">{{ "employmentPage.browse" | translate }}</p>
+      <p class="text-xs">{{ "employmentPage.dragDrop" | translate }}</p>
     </div>
     }
   </label>
