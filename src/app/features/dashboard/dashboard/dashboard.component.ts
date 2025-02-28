@@ -157,7 +157,7 @@ export class DashboardComponent {
     if (this.currentRole === 'Admin') {
       this.getStatsComp();
     }
-    if (this.currentRole === 'SuperAdmin') {
+    if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.getCountSuper();
     }
   }

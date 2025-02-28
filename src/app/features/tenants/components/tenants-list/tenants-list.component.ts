@@ -20,6 +20,7 @@ import { TenantsFormComponent } from '../tenants-form/tenants-form.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TenantsService } from '../../../../core/services/tenants';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { HasRoleDirective } from '../../../../core/directives/has-role.directive';
 
 export interface PeriodicElement {
   name: string;
@@ -47,6 +48,7 @@ export interface PeriodicElement {
     ConfirmDialogModule,
     ToastModule,
     MultiSelectModule,
+    HasRoleDirective,
   ],
   templateUrl: './tenants-list.component.html',
   styleUrl: './tenants-list.component.scss',
@@ -138,7 +140,7 @@ export class TenantsListComponent {
     this.displayedColumns = this.selectedColumns.map((col) => col.key);
     // If the current role is SuperAdmin, append the 'edit' column if not already present.
     if (
-      this.currentRole === 'SuperAdmin' &&
+      ['SuperAdmin', 'OperationsManager'].includes(this.currentRole) &&
       !this.displayedColumns.includes('edit')
     ) {
       this.displayedColumns.push('edit');
@@ -227,7 +229,8 @@ export class TenantsListComponent {
   ngOnInit(): void {
     this.selectedColumns = this.allColumns.filter((col) => col.selected);
     this.displayedColumns = this.selectedColumns.map((col) => col.key);
-    if (this.currentRole == 'SuperAdmin') this.displayedColumns.push('edit');
+    if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole))
+      this.displayedColumns.push('edit');
     this.getList();
   }
 }

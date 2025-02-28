@@ -255,7 +255,7 @@ export class DealsListComponent {
   }
 
   ngOnInit(): void {
-    if (this.currentRole !== 'SuperAdmin') {
+    if (!['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.displayedColumns = this.displayedColumns.filter(
         (c) => !['tenantId', 'edit'].includes(c)
       );

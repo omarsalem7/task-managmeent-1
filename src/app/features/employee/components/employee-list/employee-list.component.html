@@ -1,7 +1,7 @@
 <app-list-header header="عدد الموظفين" [count]="totalCount">
   <button
     class="custom-button"
-    *appHasRole="['SuperAdmin']"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
     (click)="newRecord()"
   >
     اضافة موظف
@@ -78,7 +78,10 @@
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="tenantName" *appHasRole="['SuperAdmin']">
+  <ng-container
+    matColumnDef="tenantName"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>الشركة</th>
     <td mat-cell *matCellDef="let element">{{ element.tenantName }}</td>
   </ng-container>
@@ -119,7 +122,10 @@
   </ng-container>
 
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin']">
+  <ng-container
+    matColumnDef="edit"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button

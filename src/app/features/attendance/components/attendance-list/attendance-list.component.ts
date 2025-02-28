@@ -209,12 +209,14 @@ export class AttendanceListComponent {
   currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
     console.log(this.currentRole);
-    if (this.currentRole !== 'SuperAdmin') {
+    if (!['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.allColumns = this.allColumns.filter(
         (col) => col.key !== 'tenantName'
       );
     }
-    if (this.currentRole !== 'Admin' && this.currentRole !== 'SuperAdmin') {
+    if (
+      !['SuperAdmin', 'OperationsManager', 'Admin'].includes(this.currentRole)
+    ) {
       this.allColumns = this.allColumns.filter(
         (col) => col.key !== 'employeeName'
       );

@@ -95,7 +95,9 @@ export class SidebarComponent {
       label: 'الملفات',
       icon: 'fas fa-file-invoice',
       route: '/files',
-      visible: ['Admin', 'Employee'].includes(this.currentRole),
+      visible: ['Admin', 'Employee', 'OperationsManager'].includes(
+        this.currentRole
+      ),
     },
     {
       label: 'التعميم',
@@ -139,13 +141,13 @@ export class SidebarComponent {
       label: 'اعدادات النظام',
       icon: 'fas fa-tools',
       route: '/system-settings',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['SuperAdmin', 'OperationsManager'].includes(this.currentRole),
     },
     {
       label: 'إدارة الشركات',
       icon: 'fas fa-chart-line',
       route: '/tenants',
-      visible: this.currentRole === 'SuperAdmin',
+      visible: ['SuperAdmin', 'OperationsManager'].includes(this.currentRole),
     },
     {
       label: 'الدعم افني',

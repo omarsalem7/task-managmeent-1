@@ -2,7 +2,7 @@
   <button
     class="custom-button"
     (click)="newRecord()"
-    *appHasRole="['SuperAdmin', 'Admin']"
+    *appHasRole="['SuperAdmin', 'Admin', 'OperationsManager']"
   >
     اضافة مهمه
   </button>
@@ -10,7 +10,7 @@
   <button
     class="custom-button"
     (click)="exportExcel()"
-    *appHasRole="['SuperAdmin', 'Admin']"
+    *appHasRole="['SuperAdmin', 'Admin', 'OperationsManager']"
   >
     تصدير Excel
   </button>
@@ -42,7 +42,7 @@
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
-    <div class="mb-3" *appHasRole="['SuperAdmin']">
+    <div class="mb-3" *appHasRole="['SuperAdmin', 'OperationsManager']">
       <p-dropdown
         id="tenantId"
         [(ngModel)]="filters.tenantId"
@@ -143,10 +143,10 @@
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button
-        *appHasRole="['SuperAdmin', 'Admin']"
+        *appHasRole="['SuperAdmin', 'Admin', 'OperationsManager']"
         mat-button
         color="primary"
-        (click)="editTask(element); setDone(element);menu.toggle($event)"
+        (click)="editTask(element); setDone(element); menu.toggle($event)"
       >
         <i class="pi pi-ellipsis-v"></i>
       </button>

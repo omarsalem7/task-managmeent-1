@@ -153,7 +153,7 @@ export class BillsListComponent {
   ];
 
   // user role
-  currentRole = localStorage.getItem('role');
+  currentRole = localStorage.getItem('role') ?? '';
 
   // methods //
 
@@ -261,7 +261,7 @@ export class BillsListComponent {
 
   // on init
   ngOnInit() {
-    if (this.currentRole !== 'SuperAdmin') {
+    if (!['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.displayedColumns.pop();
     }
     this.getList();

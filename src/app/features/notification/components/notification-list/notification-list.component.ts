@@ -182,13 +182,15 @@ export class NotificationListComponent {
     });
   }
 
-  currentRole = localStorage.getItem('role');
+  currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
     this.getList();
-    if (this.currentRole === 'SuperAdmin') {
+    if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.displayedColumns.push('tenantName');
     }
-    if (this.currentRole === 'SuperAdmin' || this.currentRole === 'Admin') {
+    if (
+      ['SuperAdmin', 'OperationsManager', 'Admin'].includes(this.currentRole)
+    ) {
       this.displayedColumns.push('edit');
     }
   }

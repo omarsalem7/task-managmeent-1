@@ -2,7 +2,7 @@
 <app-list-header header="الفواتير" [count]="totalCount">
   <button
     class="custom-button"
-    *appHasRole="['SuperAdmin']"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
     (click)="addBill()"
   >
     اضافة فاتورة
@@ -101,7 +101,10 @@
   </ng-container>
 
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin']">
+  <ng-container
+    matColumnDef="edit"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button

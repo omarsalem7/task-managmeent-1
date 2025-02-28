@@ -35,7 +35,7 @@ export class NavbarComponent {
   getHeaderName() {
     if (this.currentRole === 'Admin') {
       this.headerName = localStorage.getItem('tenantName') ?? '';
-    } else if (this.currentRole === 'SuperAdmin') {
+    } else if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.headerName = 'مكتب الهويه الاولي للخدمات التجاريه';
     } else {
       const currentUser = localStorage.getItem('currentUser');
@@ -66,7 +66,7 @@ export class NavbarComponent {
     this.getHeaderName();
   }
 
-  currentRole = localStorage.getItem('role');
+  currentRole = localStorage.getItem('role') ?? '';
 
   logout() {
     this.authService.logout();

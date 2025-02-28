@@ -1,7 +1,7 @@
 <app-list-header header="CRM" [count]="totalCount">
   <button
     class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2"
-    *appHasRole="['SuperAdmin']"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
     (click)="navigateToForm()"
   >
     إضافة عميل
@@ -35,8 +35,18 @@
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
     <div class="flex gap-3">
-      <button class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200" (click)="filterHandler()">بحث</button>
-      <button class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200" (click)="filterHandler(true)">إلغاء</button>
+      <button
+        class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200"
+        (click)="filterHandler()"
+      >
+        بحث
+      </button>
+      <button
+        class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200"
+        (click)="filterHandler(true)"
+      >
+        إلغاء
+      </button>
     </div>
   </div>
 </app-filter-list>
@@ -46,22 +56,26 @@
     <!-- Name and pagination  -->
     <div class="flex justify-between items-center">
       <div class="flex gap-4 items-center">
-        <h2 class="text-2xl font-bold text-gray-800">{{ dataSource[0]?.responsibleName }}</h2>
-        <span class="text-sm text-gray-500">{{ dataSource[0]?.responsiblePosition }}</span>
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ dataSource[0]?.responsibleName }}
+        </h2>
+        <span class="text-sm text-gray-500">{{
+          dataSource[0]?.responsiblePosition
+        }}</span>
 
         <!-- Show and edit buttons -->
         <button
           class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2 z-50"
-          *appHasRole="['SuperAdmin']"
+          *appHasRole="['SuperAdmin', 'OperationsManager']"
           (click)="show(dataSource[0])"
         >
           عرض تفاصيل
           <i class="fa fa-eye"></i>
         </button>
 
-        <button 
+        <button
           class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2 z-50"
-          *appHasRole="['SuperAdmin']"
+          *appHasRole="['SuperAdmin', 'OperationsManager']"
           (click)="editRecord(dataSource[0].id)"
         >
           تعديل
@@ -81,16 +95,34 @@
       <!-- Left Table -->
       <table class="w-1/2 border border-black">
         <tr class="border-b border-black">
-          <td class="border-black border py-2 text-gray-600 font-medium text-center">رقم الهاتف</td>
-          <td class="border-black border py-2 text-center">{{ dataSource[0]?.phoneNumber }}</td>
+          <td
+            class="border-black border py-2 text-gray-600 font-medium text-center"
+          >
+            رقم الهاتف
+          </td>
+          <td class="border-black border py-2 text-center">
+            {{ dataSource[0]?.phoneNumber }}
+          </td>
         </tr>
         <tr class="border-b border-black">
-          <td class="border-black border py-2 text-gray-600 font-medium text-center">رقم الجوال</td>
-          <td class="border-black border py-2 text-center">{{ dataSource[0]?.mobileNumber }}</td>
+          <td
+            class="border-black border py-2 text-gray-600 font-medium text-center"
+          >
+            رقم الجوال
+          </td>
+          <td class="border-black border py-2 text-center">
+            {{ dataSource[0]?.mobileNumber }}
+          </td>
         </tr>
         <tr class="border-b border-black">
-          <td class="border-black border py-2 text-gray-600 font-medium text-center">الايميل</td>
-          <td class="border-black border py-2 text-center">{{ dataSource[0]?.email }}</td>
+          <td
+            class="border-black border py-2 text-gray-600 font-medium text-center"
+          >
+            الايميل
+          </td>
+          <td class="border-black border py-2 text-center">
+            {{ dataSource[0]?.email }}
+          </td>
         </tr>
       </table>
 
@@ -99,21 +131,39 @@
         <div class="flex gap-8">
           <table class="w-1/2 border border-black">
             <tr class="border-b border-black">
-              <td class="border-black border py-2 text-gray-600 font-medium text-center">حالة العميل</td>
-              <td class="border-black border py-2 text-center">{{ dataSource[0]?.status }}</td>
+              <td
+                class="border-black border py-2 text-gray-600 font-medium text-center"
+              >
+                حالة العميل
+              </td>
+              <td class="border-black border py-2 text-center">
+                {{ dataSource[0]?.status }}
+              </td>
             </tr>
           </table>
           <table class="w-1/2 border border-black">
             <tr class="border-b border-black">
-              <td class="border-black border py-2 text-gray-600 font-medium text-center">الاجراء</td>
-              <td class="border-black border py-2 text-center">{{ dataSource[0]?.action }}</td>
-            </tr>            
+              <td
+                class="border-black border py-2 text-gray-600 font-medium text-center"
+              >
+                الاجراء
+              </td>
+              <td class="border-black border py-2 text-center">
+                {{ dataSource[0]?.action }}
+              </td>
+            </tr>
           </table>
         </div>
         <table class="border border-black">
           <tr class="border-b border-black">
-            <td class="border-black border py-2 text-gray-600 font-medium text-center">المستخدم المسؤل</td>
-            <td class="border-black border py-2 text-center">{{ dataSource[0]?.createdByUserName }}</td>
+            <td
+              class="border-black border py-2 text-gray-600 font-medium text-center"
+            >
+              المستخدم المسؤل
+            </td>
+            <td class="border-black border py-2 text-center">
+              {{ dataSource[0]?.createdByUserName }}
+            </td>
           </tr>
         </table>
       </div>
@@ -121,11 +171,16 @@
 
     <!-- Notes  -->
     <h3 class="py-2 text-gray-600 font-bold">الملاحظات</h3>
-    <td class="border-black border py-2 text-center">{{ dataSource[0]?.notes || 'لا يوجد' }}</td>
+    <td class="border-black border py-2 text-center">
+      {{ dataSource[0]?.notes || "لا يوجد" }}
+    </td>
   </div>
 </div>
 
-<div *ngIf="dataSource.length === 0 && !loading" class="no-data text-center py-6 text-gray-500">
+<div
+  *ngIf="dataSource.length === 0 && !loading"
+  class="no-data text-center py-6 text-gray-500"
+>
   لا يوجد بيانات
 </div>
 

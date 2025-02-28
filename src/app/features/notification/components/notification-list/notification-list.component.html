@@ -64,12 +64,18 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="tenantName" *appHasRole="['SuperAdmin']">
+  <ng-container
+    matColumnDef="tenantName"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>اسم الشركة</th>
     <td mat-cell *matCellDef="let element">{{ element.tenantName }}</td>
   </ng-container>
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin', 'Admin']">
+  <ng-container
+    matColumnDef="edit"
+    *appHasRole="['SuperAdmin', 'Admin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button

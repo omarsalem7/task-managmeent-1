@@ -2,7 +2,7 @@
 <app-list-header header="إدارة الصلاحيات" [count]="totalCount">
   <button
     class="custom-button"
-    *appHasRole="['SuperAdmin']"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
     (click)="addEmployee()"
   >
     اضافة موظف
@@ -11,7 +11,7 @@
 </app-list-header>
 
 <!-- Filter -->
-<app-filter-list header="الصلاحيات"(searchChange)="updateSearch($event)">
+<app-filter-list header="الصلاحيات" (searchChange)="updateSearch($event)">
   <div class="flex gap-6 mb-4 flex-wrap items-center">
     <mat-form-field>
       <mat-label class="font-arabic">تاريخ البدء</mat-label>
@@ -52,7 +52,7 @@
     <th mat-header-cell *matHeaderCellDef>اسم الموظف</th>
     <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
   </ng-container>
-  
+
   <ng-container matColumnDef="jobNumber">
     <th mat-header-cell *matHeaderCellDef>الرقم الوظيفي</th>
     <td mat-cell *matCellDef="let element">{{ element.jobNumber }}</td>
@@ -89,7 +89,10 @@
   </ng-container>
 
   <!-- Edit Action Column -->
-  <ng-container matColumnDef="edit" *appHasRole="['SuperAdmin']">
+  <ng-container
+    matColumnDef="edit"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <th mat-header-cell *matHeaderCellDef>إجراء</th>
     <td mat-cell *matCellDef="let element">
       <button
@@ -115,7 +118,6 @@
     </td>
   </tr>
 </table>
-
 
 <!-- Pagination -->
 <mat-paginator

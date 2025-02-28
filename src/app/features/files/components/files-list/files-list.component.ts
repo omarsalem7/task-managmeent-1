@@ -207,10 +207,10 @@ export class FilesListComponent {
       this.totalCount = res.totalCount;
     });
   }
-  currentRole = localStorage.getItem('role');
+  currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
     this.getList();
-    if (this.currentRole === 'SuperAdmin') {
+    if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.displayedColumns.splice(
         this.displayedColumns.length - 1,
         0,

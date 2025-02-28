@@ -1,7 +1,10 @@
 <div class="flex flex-col gap-5 mt-5">
   <!-- todo: Header remains the same -->
   <div class="flex flex-row-reverse">
-    <div class="flex justify-between w-full" *appHasRole="['SuperAdmin']">
+    <div
+      class="flex justify-between w-full"
+      *appHasRole="['SuperAdmin', 'OperationsManager']"
+    >
       <h1 class="text-3xl m-3 text-primary">إدارة المهام</h1>
       <!-- <label for="startDate"> فلتر بالتاريخ</label> -->
       <p-datepicker
@@ -128,7 +131,10 @@
   </div>
 
   <!-- todo -->
-  <div class="grid grid-cols-5 gap-4 mb-4" *appHasRole="['SuperAdmin']">
+  <div
+    class="grid grid-cols-5 gap-4 mb-4"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <!-- Total Tasks -->
     <div
       class="bg-primary cursor-pointer rounded-lg shadow p-8 flex justify-between items-center"
@@ -230,11 +236,17 @@
   }
 
   <!-- todo -->
-  <div class="grid grid-cols-5 gap-4" *appHasRole="['SuperAdmin']">
+  <div
+    class="grid grid-cols-5 gap-4"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
     <div class="col-span-3">
       <app-tasks-classification></app-tasks-classification>
     </div>
-    <div class="col-span-2 col-start-4" *appHasRole="['SuperAdmin']">
+    <div
+      class="col-span-2 col-start-4"
+      *appHasRole="['SuperAdmin', 'OperationsManager']"
+    >
       <app-all-tasks [(date)]="date"></app-all-tasks>
     </div>
   </div>
@@ -257,21 +269,26 @@
   </div>
 
   <!-- todo -->
-  <div *appHasRole="['SuperAdmin']">
+  <div *appHasRole="['SuperAdmin', 'OperationsManager']">
     <app-stat-tenants [(date)]="date"></app-stat-tenants>
   </div>
 
-  <hr class="w-full bg-black h-1" *appHasRole="['SuperAdmin']"/>
+  <hr
+    class="w-full bg-black h-1"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  />
 
   <!-- Customers services -->
   <app-clients-management></app-clients-management>
 
-  <hr class="w-full bg-black h-1"*appHasRole="['SuperAdmin']"/>
+  <hr
+    class="w-full bg-black h-1"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  />
 
   <!-- Sales management -->
   <app-sales-management></app-sales-management>
 
   <!-- Contract statistics -->
   <app-stat-contracts></app-stat-contracts>
-  
 </div>

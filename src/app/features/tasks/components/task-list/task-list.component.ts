@@ -84,9 +84,11 @@ export class TaskListComponent {
     New: 'جديده',
   };
   openDialog() {
-    if(this.done ){
+    if (this.done) {
       // this.taskService.downloadTask(this.taskToDownload);
-      confirm(`Are you sure you want to download ${this.taskToDownload.description}?`)
+      confirm(
+        `Are you sure you want to download ${this.taskToDownload.description}?`
+      );
       return;
     }
     const dialogRef = this.dialog.open(TaskFormComponent, {
@@ -307,7 +309,7 @@ export class TaskListComponent {
     });
   }
   ngOnInit(): void {
-    if (this.currentRole !== 'SuperAdmin') {
+    if (!['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.displayedColumns = this.displayedColumns.filter(
         (x) => x !== 'tenantName'
       );

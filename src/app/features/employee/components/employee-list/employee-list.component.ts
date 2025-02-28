@@ -266,10 +266,10 @@ export class EmployeeListComponent {
       this.totalCount = res.totalCount;
     });
   }
-  currentRole = localStorage.getItem('role');
+  currentRole = localStorage.getItem('role') ?? '';
   ngOnInit(): void {
     this.getList();
-    if (this.currentRole === 'SuperAdmin') {
+    if (['SuperAdmin', 'OperationsManager'].includes(this.currentRole)) {
       this.allColumns.splice(2, 0, {
         key: 'tenantName',
         label: 'الشركة',

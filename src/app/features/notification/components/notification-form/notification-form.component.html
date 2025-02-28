@@ -17,7 +17,7 @@
       <app-form-error [control]="taskForm.get('message')"></app-form-error>
     </div>
     @if (!data?.id) {
-    <div class="mb-3" *appHasRole="['SuperAdmin']">
+    <div class="mb-3" *appHasRole="['SuperAdmin', 'OperationsManager']">
       <label for="tenantId">اسم الشركه</label>
       <p-dropdown
         id="tenantId"
