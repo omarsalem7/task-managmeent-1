@@ -6,10 +6,10 @@
     {{ "home.pricing.subTitle" | translate }}
   </div>
 </div>
-<div class="flex justify-center items-center gap-6 py-10 px-4">
+<div class="flex justify-center max-sm:flex-wrap items-center gap-6 py-10 px-4">
   <div
     *ngFor="let plan of plans; let i = index"
-    class="w-1/4 p-6 border rounded-xl transition-all duration-300 shadow-lg cursor-pointer"
+    class="w-1/4 max-sm:min-w-[310px] p-6 border rounded-xl transition-all duration-300 shadow-lg cursor-pointer"
     [ngClass]="{
       'bg-[#222751] text-white': plan.hovered,
       'bg-white text-gray-800': !plan.hovered

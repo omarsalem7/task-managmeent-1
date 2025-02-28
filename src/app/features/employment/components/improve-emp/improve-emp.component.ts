@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-improve-levels',
+  selector: 'app-improve-emp',
   standalone: true,
   imports: [TranslateModule],
   template: `<main class="p-0 mx-auto my-0 w-full max-w-[1290px]">
@@ -10,10 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
       <div class="flex items-center">
         <h1 class="mb-2.5 text-4xl font-bold text-center max-sm:text-3xl">
           <span class="text-indigo-950">
-            {{ 'home.improve.preTitle' | translate }}
+            {{ 'employmentPage.improve.preTitle' | translate }}
           </span>
           <span class="text-amber-600">
-            {{ 'home.improve.postTitle' | translate }}</span
+            {{ 'employmentPage.improve.postTitle' | translate }}</span
           >
         </h1>
         <div class="mb-2.5">
@@ -38,7 +38,7 @@ import { TranslateModule } from '@ngx-translate/core';
       <p
         class="mx-auto my-0 text-xl text-center max-w-[678px] text-slate-500 max-sm:px-5 max-sm:py-0 max-sm:text-base"
       >
-        {{ 'home.improve.subTitle' | translate }}
+        {{ 'employmentPage.improve.subTitle' | translate }}
       </p>
     </header>
 
@@ -78,10 +78,10 @@ import { TranslateModule } from '@ngx-translate/core';
           <h2
             class="mb-2.5 text-2xl font-semibold text-slate-800 max-sm:text-xl"
           >
-            {{ 'home.improve.1main' | translate }}
+            {{ 'employmentPage.improve.1main' | translate }}
           </h2>
           <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.1sub' | translate }}
+            {{ 'employmentPage.improve.1sub' | translate }}
           </p>
         </div>
       </article>
@@ -140,10 +140,10 @@ import { TranslateModule } from '@ngx-translate/core';
           <h2
             class="mb-2.5 text-2xl font-semibold text-slate-800 max-sm:text-xl"
           >
-            {{ 'home.improve.2main' | translate }}
+            {{ 'employmentPage.improve.2main' | translate }}
           </h2>
           <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.2sub' | translate }}
+            {{ 'employmentPage.improve.2sub' | translate }}
           </p>
         </div>
       </article>
@@ -202,14 +202,14 @@ import { TranslateModule } from '@ngx-translate/core';
           <h2
             class="mb-2.5 text-2xl font-semibold text-slate-800 max-sm:text-xl"
           >
-            {{ 'home.improve.3main' | translate }}
+            {{ 'employmentPage.improve.3main' | translate }}
           </h2>
           <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.3sub' | translate }}
+            {{ 'employmentPage.improve.3sub' | translate }}
           </p>
         </div>
       </article>
     </section>
   </main> `,
 })
-export class ImproveLevelsComponent {}
+export class ImproveEmpComponent {}

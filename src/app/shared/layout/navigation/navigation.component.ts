@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styles: `
   .active{
     color: #DF8317;
-    border-bottom: 1px solid #DF8317;
+    border-bottom: 3px solid #DF8317;
     padding-bottom:6px;
   }
   `,
