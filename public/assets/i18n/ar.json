@@ -1,8 +1,10 @@
 {
-  "HELLO": "Bonjour",
-  "WELCOME": "Bienvenue à la démo de traduction",
-  "HOME": {
-    "TITLE": "Accueil",
-    "DESCRIPTION": "C'est la page d'accueil"
+  "HELLO": "Hello",
+  "WELCOME": "Welcome to the translation demo",
+  "home": {
+    "title": "اختيارك الافضل لادارة مشروعك",
+    "heroSubTitle": "كل ما يلزم المشروع خاصتك في مكان واحد لكل الاجهزة الان يمكنك إدارة عملك من أي مكان وفي أي لحظة فقط  عبر العربي اي ار بي المتكاملة للمحاسبة والاعمال التجارية انضم الان..",
+    "startFreeTrial": " أبدا تجربتك المجانية ",
+    "subscribeNow": "اشترك الأن"
   }
 }
