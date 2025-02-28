@@ -1,4 +1,4 @@
-<div class="md:w-[65%] shadow-lg mx-auto bg-white rounded-lg">
+<div class="md:w-[65%] shadow-lg mx-auto bg-white rounded-lg mb-8">
   <header class="flex flex-col items-center py-6">
     <div class="flex items-center">
       <h1 class="mb-2.5 text-4xl font-bold text-center max-sm:text-3xl">
@@ -82,6 +82,22 @@
         </div>
         @if (form.controls['phone'].invalid && form.controls['phone'].touched) {
         <p class="text-red-500 text-sm">أدخل رقمًا صحيحًا يبدأ بـ 5</p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2"
+          >السيره الذاتيه *</label
+        >
+        <input
+          type="email"
+          formControlName="resume"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="قم بكتابة البريد الخاص بك"
+        />
+        @if (form.controls['resume'].invalid && form.controls['resume'].touched)
+        {
+        <p class="text-red-500 text-sm">هذا الحقل مطلوب</p>
         }
       </div>
 
