@@ -53,7 +53,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
       </div>
     </nav>
     <div
-      class="mt-6 ms-6 flex justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
+      class="mt-6 hidden md:flex ms-6  justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
     >
       <raw-img
         image="https://cdn.builder.io/api/v1/image/assets/TEMP/594c66d72416e778cc11418a75c6cf5cdee0a25e"

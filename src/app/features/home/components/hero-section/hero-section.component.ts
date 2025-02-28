@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
     <section class="relative p-6">
       <article class=" ">
         <h1
-          class="mb-8 pt-10 text-5xl font-semibold max-sm:text-3xl text-white"
+          class="mb-2 md:mb-8 md:pt-10 text-5xl font-semibold max-sm:text-3xl text-white"
         >
           {{ 'home.title' | translate }}
         </h1>
@@ -29,7 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </div> -->
 
         <div
-          class="flex gap-10 mt-16 max-md:flex-col max-md:items-center max-sm:w-full"
+          class="flex gap-10 mt-6 md:mt-16 max-md:flex-col max-md:items-center max-sm:w-full relative z-10 "
         >
           <button
             class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#D05508] rounded-md max-sm:w-full max-sm:text-center"

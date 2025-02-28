@@ -13,11 +13,9 @@ import { FooterComponent } from './components/footer/footer.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    NavBar,
     HeroSection,
     DecorativeElements,
     RawImg,
-    TopBar,
     ImproveLevelsComponent,
     ChooseDanatComponent,
     ServicesComponent,

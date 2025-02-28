@@ -3,12 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { TopBar } from './features/home/components/top-bar/top-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavBar } from './features/home/components/navigation/navigation.component';
-import { RawImg } from './shared/ui/raw-img.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TranslateModule, RawImg, TopBar, NavBar],
+  imports: [RouterOutlet, TranslateModule, TopBar, NavBar],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -19,7 +18,10 @@ export class AppComponent {
     const browserLang = this.translate.getBrowserLang();
     const lang = localStorage.getItem('language') ?? browserLang;
     if (lang) {
-      this.translate.use(lang.match(/en|ar/) ? lang : 'en');
+      const matched = lang.match(/en|ar/) ? lang : 'en';
+      this.translate.use(matched);
+      document.documentElement.lang = matched;
+      document.documentElement.dir = matched === 'ar' ? 'rtl' : 'ltr';
     }
   }
 
