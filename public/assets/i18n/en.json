@@ -1,0 +1,8 @@
+{
+  "HELLO": "Hello",
+  "WELCOME": "Welcome to the translation demo",
+  "HOME": {
+    "TITLE": "Home",
+    "DESCRIPTION": "This is the home page"
+  }
+}
