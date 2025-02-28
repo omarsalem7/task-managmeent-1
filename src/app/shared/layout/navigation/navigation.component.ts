@@ -2,11 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RawImg } from '../../ui/raw-img.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'nav-bar',
   standalone: true,
-  imports: [CommonModule, RawImg, TranslateModule],
+  imports: [CommonModule, RawImg, TranslateModule, RouterModule],
+  styles: `
+  .active{
+    color: #DF8317;
+    border-bottom: 1px solid #DF8317;
+    padding-bottom:6px;
+  }
+  `,
   template: `
     <nav
       class="flex justify-between items-center px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
@@ -17,9 +25,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         class="h-[60px] w-[202px]"
       />
       <div class="flex gap-8 max-md:flex-wrap max-md:justify-center ">
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'myHome' | translate
-        }}</a>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          class="text-lg font-semibold text-white"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ 'myHome' | translate }}</a
+        >
         <a href="#" class="text-lg font-semibold text-white">{{
           'about' | translate
         }}</a>
@@ -32,9 +44,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         <a href="#" class="text-lg font-semibold text-white">{{
           'packages' | translate
         }}</a>
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'employment' | translate
-        }}</a>
+        <a
+          routerLink="/employment"
+          routerLinkActive="active"
+          class="text-lg font-semibold text-white"
+          >{{ 'employment' | translate }}</a
+        >
         <a href="#" class="text-lg font-semibold text-white">{{
           'requestService' | translate
         }}</a>
