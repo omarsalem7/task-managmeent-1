@@ -14,6 +14,13 @@ import { RouterModule } from '@angular/router';
     border-bottom: 3px solid #DF8317;
     padding-bottom:6px;
   }
+
+  a:hover{
+    color: #DF8317;
+    border-bottom: 3px solid #DF8317;
+    padding-bottom:6px;
+    transition: color 0.7s;
+  }
   `,
   template: `
     <nav
@@ -90,7 +97,7 @@ import { RouterModule } from '@angular/router';
         }
 
         <button
-          class="px-5 py-2 text-lg font-semibold text-white rounded-xl border-2 border-solid border-white border-opacity-70 max-sm:w-full max-sm:text-center"
+          class="px-5 py-2 text-lg font-semibold hover:border-[#DF8317] transition-all transition-duration-1000 text-white rounded-xl border-2 border-solid border-white border-opacity-70 max-sm:w-full max-sm:text-center"
         >
           {{ 'danatPlatform' | translate }}
         </button>
