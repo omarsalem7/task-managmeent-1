@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
       class="flex justify-between items-center px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
     >
       <raw-img
-        image="https://cdn.builder.io/api/v1/image/assets/TEMP/e4f66df1b7cf473c633733fe70fd8dbd52c4a5f7"
+        image="images/logo.png"
         altText="Logo"
         class="h-[60px] w-[202px]"
       />
@@ -99,20 +99,11 @@ import { RouterModule } from '@angular/router';
     <div
       class="ms-10 mt-6 hidden md:flex   justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
     >
-      <raw-img
-        image="https://cdn.builder.io/api/v1/image/assets/TEMP/594c66d72416e778cc11418a75c6cf5cdee0a25e"
-        class="h-[29px]"
-      />
+      <raw-img image="images/motsaql-work.png" class="h-[29px]" />
       <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
-      <raw-img
-        image="https://cdn.builder.io/api/v1/image/assets/TEMP/535976c80b30116aee07ca4442c951bc14dc3184"
-        class="h-[29px]"
-      />
+      <raw-img image="images/work1.png" class="h-[29px]" />
       <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
-      <raw-img
-        image="https://cdn.builder.io/api/v1/image/assets/TEMP/3257be3839da3130e99ec791538f935d8f067739"
-        class="h-[29px]"
-      />
+      <raw-img image="images/hr.png" class="h-[29px]" />
     </div>
   `,
 })
