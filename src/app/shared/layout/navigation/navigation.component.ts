@@ -28,8 +28,8 @@ import { RouterModule } from '@angular/router';
         <a
           routerLink="/"
           routerLinkActive="active"
-          class="text-lg font-semibold text-white"
           [routerLinkActiveOptions]="{ exact: true }"
+          class="text-lg font-semibold text-white"
           >{{ 'myHome' | translate }}</a
         >
         <a href="#" class="text-lg font-semibold text-white">{{
@@ -38,9 +38,13 @@ import { RouterModule } from '@angular/router';
         <a href="#" class="text-lg font-semibold text-white">{{
           'whyUs' | translate
         }}</a>
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'services' | translate
-        }}</a>
+        <a
+          routerLink="/services"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-lg font-semibold text-white"
+          >{{ 'services' | translate }}</a
+        >
         <a href="#" class="text-lg font-semibold text-white">{{
           'packages' | translate
         }}</a>

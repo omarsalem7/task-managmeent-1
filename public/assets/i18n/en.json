@@ -135,5 +135,39 @@
       "phoneError": "Enter a valid number starting with 5",
       "resume": "Resume"
     }
+  },
+  "servicePage": {
+    "send": "Send",
+    "delete": "Delete",
+    "thanks": "Thank you for contacting us,",
+    "workingOnRequest": "We are reviewing your request, and the coordinator will contact you as soon as possible.",
+    "reUpload": "Re-upload",
+    "browse": "Browse files",
+    "dragDrop": "Drag and drop files here",
+    "improve": {
+      "preTitle": "Improve performance levels in your management",
+      "postTitle": "immediately",
+      "subTitle": "This text is an example of placeholder text that can be replaced in the same space. This text has been initially generated now.",
+      "1main": "This is the main text",
+      "2main": "This is the main text",
+      "3main": "This is the main text",
+      "1sub": "Track time by recording attendance and departure",
+      "2sub": "Assign company-specific tasks to employees",
+      "3sub": "Plan and schedule your team's shifts accurately"
+    },
+    "requestService": {
+      "preTitle": "Request a job inside",
+      "postTitle": "DANAT",
+      "subTitle": "This text is an example of placeholder text that can be replaced in the same space. This text has been initially generated now.",
+      "fullName": "Full Name",
+      "fullNamePlaceHolder": "Enter your full name",
+      "required": "This field is required",
+      "email": "Enter your email",
+      "emailPlaceHolder": "Email",
+      "emailError": "Enter a valid email",
+      "phone": "Mobile number",
+      "phoneError": "Enter a valid number starting with 5",
+      "inquiryDetails": "Inquiry details"
+    }
   }
 }
