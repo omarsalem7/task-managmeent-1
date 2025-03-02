@@ -11,5 +11,6 @@ import { CommonModule } from '@angular/common';
 export class FeatureCardComponent {
   @Input() title!: string;
   @Input() description!: string;
+  @Input() icon!: string;
   @Input() isDark: boolean = false;
 }

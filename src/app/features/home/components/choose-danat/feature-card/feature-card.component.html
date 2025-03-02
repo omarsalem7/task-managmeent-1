@@ -4,9 +4,11 @@
 >
   <header class="flex flex-col w-full text-2xl font-semibold leading-8">
     <div
-      class="flex self-end rounded h-[52px] min-h-[52px] w-[52px]"
-      [ngClass]="isDark ? 'bg-indigo-900 backdrop-blur' : 'bg-blue-950'"
-    ></div>
+      class="flex self-end justify-center items-center rounded h-[52px] min-h-[52px] w-[52px]"
+      [ngClass]="isDark ? 'bg-indigo-900' : 'bg-blue-950'"
+    >
+      <i [class]="icon + ' text-white'"></i>
+    </div>
     <h3 class="mt-6">{{ title }}</h3>
   </header>
   <p class="mt-6 text-lg tracking-normal leading-7">
