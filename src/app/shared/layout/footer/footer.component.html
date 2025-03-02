@@ -25,16 +25,16 @@
       <div class="w-24 bg-amber-600 h-[4px] mb-4"></div>
       <div class="flex flex-col gap-5">
         <div class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-map-pin text-xl text-amber-600"></i>
+          <i class="pi pi-map-marker text-xl text-amber-600"></i>
           <span>الرياض-السعودية</span>
         </div>
         <div class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-mail text-xl text-amber-600"></i>
+          <i class="pi pi-envelope text-xl text-amber-600"></i>
           <span>Elaraby<span>&#64;</span>Gmail.Com</span>
         </div>
         <div class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-phone text-xl text-amber-600"></i>
-          <span>91+585-656-658</span>
+          <i class="pi pi-phone text-xl text-amber-600"></i>
+          <span>+96685-656-658</span>
         </div>
       </div>
     </section>
@@ -44,22 +44,36 @@
       <div class="w-14 bg-amber-600 h-[4px] mb-4"></div>
       <ul class="flex flex-col gap-5">
         <li class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-chevron-left text-xl text-amber-600"></i>
-          <a href="#" class="hover:text-amber-600 transition-colors"
+          <i class="pi pi-angle-left text-xl text-amber-600"></i>
+          <a [routerLink]="['/']" class="hover:text-amber-600 transition-colors"
             >الرئيسية</a
           >
         </li>
         <li class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-chevron-left text-xl text-amber-600"></i>
-          <a href="#" class="hover:text-amber-600 transition-colors">الاسعار</a>
+          <i class="pi pi-angle-left text-xl text-amber-600"></i>
+          <a
+            [routerLink]="['/']"
+            fragment="packages"
+            class="hover:text-amber-600 transition-colors"
+            >الاسعار</a
+          >
         </li>
         <li class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-chevron-left text-xl text-amber-600"></i>
-          <a href="#" class="hover:text-amber-600 transition-colors">الخدمات</a>
+          <i class="pi pi-angle-left text-xl text-amber-600"></i>
+          <a
+            href="#"
+            routerLink="/services"
+            class="hover:text-amber-600 transition-colors"
+            >الخدمات</a
+          >
         </li>
-        <li class="flex gap-2.5 items-center text-base text-white">
-          <i class="ti ti-chevron-left text-xl text-amber-600"></i>
-          <a href="#" class="hover:text-amber-600 transition-colors">البرامج</a>
+        <li class="flex rt gap-2.5 items-center text-base text-white">
+          <i class="pi pi-angle-left text-xl text-amber-600"></i>
+          <a
+            routerLink="/employment"
+            class="hover:text-amber-600 transition-colors"
+            >الشركاء</a
+          >
         </li>
       </ul>
     </nav>
