@@ -6,12 +6,11 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [TranslateModule, ReactiveFormsModule, FileUploadHandlerComponent],
+  imports: [TranslateModule, ReactiveFormsModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
