@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { TopBar } from './shared/layout/top-bar/top-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavBar } from './shared/layout/navigation/navigation.component';
@@ -26,7 +26,7 @@ export class AppComponent {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 3000);
+    }, 100);
     this.getLanguageBrowser();
   }
 
