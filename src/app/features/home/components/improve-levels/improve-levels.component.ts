@@ -70,7 +70,7 @@ import { TranslateModule } from '@ngx-translate/core';
             x="48%"
             y="60%"
           >
-            <tspan>3</tspan>
+            <tspan>1</tspan>
           </text>
         </svg>
 
@@ -78,10 +78,10 @@ import { TranslateModule } from '@ngx-translate/core';
           <h2
             class="mb-2.5 text-2xl font-semibold text-slate-800 max-sm:text-xl"
           >
-            {{ 'home.improve.1main' | translate }}
+            {{ 'home.improve.3main' | translate }}
           </h2>
           <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.1sub' | translate }}
+            {{ 'home.improve.3sub' | translate }}
           </p>
         </div>
       </article>
@@ -168,8 +168,6 @@ import { TranslateModule } from '@ngx-translate/core';
           />
         </svg>
       </div>
-
-      <!-- Step 1 -->
       <article
         class="flex flex-col items-center text-center w-[236px] max-sm:w-full max-sm:max-w-[280px]"
       >
@@ -194,7 +192,7 @@ import { TranslateModule } from '@ngx-translate/core';
             x="48%"
             y="60%"
           >
-            <tspan>1</tspan>
+            <tspan>3</tspan>
           </text>
         </svg>
 
@@ -202,13 +200,14 @@ import { TranslateModule } from '@ngx-translate/core';
           <h2
             class="mb-2.5 text-2xl font-semibold text-slate-800 max-sm:text-xl"
           >
-            {{ 'home.improve.3main' | translate }}
+            {{ 'home.improve.1main' | translate }}
           </h2>
           <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.3sub' | translate }}
+            {{ 'home.improve.1sub' | translate }}
           </p>
         </div>
       </article>
+      <!-- Step 1 -->
     </section>
   </main> `,
 })
