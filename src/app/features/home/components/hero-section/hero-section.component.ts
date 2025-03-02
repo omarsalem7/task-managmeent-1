@@ -32,12 +32,12 @@ import { TranslateModule } from '@ngx-translate/core';
           class="flex gap-10 mt-6 md:mt-16 max-md:flex-col max-md:items-center max-sm:w-full relative z-10 "
         >
           <button
-            class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#D05508] rounded-md max-sm:w-full max-sm:text-center"
+            class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#D05508] hover:bg-[#fff] hover:text-blue-950 transition-all transition-duration-2000   rounded-md max-sm:w-full max-sm:text-center"
           >
             {{ 'home.startFreeTrial' | translate }}
           </button>
           <button
-            class="px-7 py-3.5 text-2xl font-semibold text-white rounded-md border border-[#D05508] border-solid max-sm:w-full max-sm:text-center"
+            class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#ffffff1f] hover:bg-[#D05508] transition-all transition-duration-2000 rounded-md border border-[#D05508] border-solid max-sm:w-full max-sm:text-center"
           >
             {{ 'home.subscribeNow' | translate }}
           </button>
