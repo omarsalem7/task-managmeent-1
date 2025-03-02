@@ -38,6 +38,10 @@ import { RouterModule } from '@angular/router';
         <a href="#" class="text-lg font-semibold text-white">{{
           'whyUs' | translate
         }}</a>
+
+        <a href="#" class="text-lg font-semibold text-white">{{
+          'packages' | translate
+        }}</a>
         <a
           routerLink="/services"
           routerLinkActive="active"
@@ -45,18 +49,12 @@ import { RouterModule } from '@angular/router';
           class="text-lg font-semibold text-white"
           >{{ 'services' | translate }}</a
         >
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'packages' | translate
-        }}</a>
         <a
           routerLink="/employment"
           routerLinkActive="active"
           class="text-lg font-semibold text-white"
           >{{ 'employment' | translate }}</a
         >
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'requestService' | translate
-        }}</a>
       </div>
 
       <div class="flex gap-5 items-center max-sm:flex-col">

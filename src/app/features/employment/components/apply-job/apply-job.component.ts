@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { JobService } from '../../../../core/services/job.service';
 import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
 
 @Component({
@@ -19,11 +20,14 @@ export class ApplyJobComponent {
   form: FormGroup;
   isSubmited: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private jobService: JobService) {
     this.form = this.fb.group({
-      fullName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^5[0-9]{8}$')]],
+      PhoneNumber: [
+        '',
+        [Validators.required, Validators.pattern('^5[0-9]{8}$')],
+      ],
       resume: ['', [Validators.required]],
     });
 
@@ -68,10 +72,14 @@ export class ApplyJobComponent {
 
   submitForm() {
     if (this.form.invalid) return;
-    console.log(this.form.value);
-    console.log(this.uploadedLogo);
-
-    this.isSubmited = true;
-    sessionStorage.setItem('isSubmited', 'yes');
+    this.jobService
+      .create({
+        ...this.form.value,
+        attachment: this.uploadedLogo,
+      })
+      .subscribe(() => {
+        this.isSubmited = true;
+        sessionStorage.setItem('isSubmited', 'yes');
+      });
   }
 }
