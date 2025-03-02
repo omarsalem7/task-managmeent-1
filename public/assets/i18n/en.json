@@ -170,5 +170,12 @@
       "phoneError": "Enter a valid number starting with 5",
       "inquiryDetails": "Inquiry details"
     }
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "address": "Riyadh, Saudi Arabia",
+    "links": "Links",
+    "rightsReserved": "All rights reserved to Danat Company",
+    "aboutInfo": "This text is a placeholder text occupying temporary space. This text is a placeholder text occupying temporary space. This text is a placeholder text occupying temporary space."
   }
 }
