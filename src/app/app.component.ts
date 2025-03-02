@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TopBar } from './shared/layout/top-bar/top-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavBar } from './shared/layout/navigation/navigation.component';
@@ -22,6 +22,7 @@ import { ChatbotComponent } from './shared/layout/chatbot/chatbot.component';
 })
 export class AppComponent {
   isLoading: boolean = true;
+
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;

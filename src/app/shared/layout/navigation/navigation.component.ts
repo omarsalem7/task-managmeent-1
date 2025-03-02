@@ -32,16 +32,29 @@ import { RouterModule } from '@angular/router';
           class="text-lg font-semibold text-white"
           >{{ 'myHome' | translate }}</a
         >
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'about' | translate
-        }}</a>
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'whyUs' | translate
-        }}</a>
+        <a
+          [routerLink]="['/']"
+          fragment="about"
+          class="text-lg font-semibold text-white"
+        >
+          {{ 'about' | translate }}
+        </a>
 
-        <a href="#" class="text-lg font-semibold text-white">{{
-          'packages' | translate
-        }}</a>
+        <a
+          [routerLink]="['/']"
+          fragment="whyUs"
+          class="text-lg font-semibold text-white"
+        >
+          {{ 'whyUs' | translate }}
+        </a>
+
+        <a
+          [routerLink]="['/']"
+          fragment="packages"
+          class="text-lg font-semibold text-white"
+        >
+          {{ 'packages' | translate }}
+        </a>
         <a
           routerLink="/services"
           routerLinkActive="active"

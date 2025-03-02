@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-improve-levels',
   standalone: true,
   imports: [TranslateModule],
-  template: `<main class="p-0 mx-auto my-0 w-full max-w-[1290px]">
+  template: `<main id="about" class="p-0 mx-auto my-0 w-full max-w-[1290px]">
     <header class="flex flex-col items-center py-6">
       <div class="flex items-center">
         <h1 class="mb-2.5 text-4xl font-bold text-center max-sm:text-3xl">
