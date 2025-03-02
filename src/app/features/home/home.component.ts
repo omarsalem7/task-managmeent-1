@@ -6,6 +6,7 @@ import { ImproveLevelsComponent } from './components/improve-levels/improve-leve
 import { ChooseDanatComponent } from './components/choose-danat/choose-danat.component';
 import { ServicesComponent } from './components/services/services.component';
 import { PricingComponent } from './components/pricing/pricing.component';
+import { SponsorsComponent } from './components/sponsors/sponsors.component';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { PricingComponent } from './components/pricing/pricing.component';
     ChooseDanatComponent,
     ServicesComponent,
     PricingComponent,
+    SponsorsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

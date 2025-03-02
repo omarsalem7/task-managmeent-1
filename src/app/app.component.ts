@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 2000);
+    }, 200);
     this.getLanguageBrowser();
   }
 

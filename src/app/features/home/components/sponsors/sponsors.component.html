@@ -1,0 +1,16 @@
+<div class="sponsor-container py-5">
+  <div class="flex justify-center items-center py-5">
+    <h1
+      class="text-4xl font-bold text-[#4FB8EE] border-b-[5px] border-[#4FB8EE]"
+    >
+      {{ "partners" | translate }}
+    </h1>
+  </div>
+  <div class="sponsor-list my-5">
+    @for (item of sponsoreList; track $index) {
+    <div class="sponsor_card">
+      <app-sponsor-card [sponsor]="item"></app-sponsor-card>
+    </div>
+    }
+  </div>
+</div>
