@@ -52,14 +52,13 @@
         >
         <input
           type="text"
-          formControlName="fullName"
+          formControlName="name"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           [placeholder]="
             'servicePage.requestService.fullNamePlaceHolder' | translate
           "
         />
-        @if (form.controls['fullName'].invalid &&
-        form.controls['fullName'].touched) {
+        @if (form.controls['name'].invalid && form.controls['name'].touched) {
         <p class="text-red-500 text-sm">
           {{ "servicePage.requestService.required" | translate }}
         </p>
@@ -95,12 +94,13 @@
           <span class="bg-green-600 text-white px-3 py-2">+966</span>
           <input
             type="text"
-            formControlName="phone"
+            formControlName="mobileNumber"
             class="w-full px-3 py-2 focus:outline-none"
             placeholder="5X XXX XXXX"
           />
         </div>
-        @if (form.controls['phone'].invalid && form.controls['phone'].touched) {
+        @if (form.controls['mobileNumber'].invalid &&
+        form.controls['mobileNumber'].touched) {
         <p class="text-red-500 text-sm">
           {{ "servicePage.requestService.phoneError" | translate }}
         </p>
@@ -108,7 +108,7 @@
       </div>
 
       <div class="mb-4">
-        <label for="inqury" class="block text-gray-700 font-bold mb-2"
+        <label for="indetailsqury" class="block text-gray-700 font-bold mb-2"
           >{{
             "servicePage.requestService.inquiryDetails" | translate
           }}
@@ -116,11 +116,11 @@
         >
         <textarea
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          formControlName="inqury"
+          formControlName="details"
           rows="5"
         ></textarea>
-        @if (form.controls['inqury'].invalid && form.controls['inqury'].touched)
-        {
+        @if (form.controls['details'].invalid &&
+        form.controls['details'].touched) {
         <p class="text-red-500 text-sm">
           {{ "servicePage.requestService.required" | translate }}
         </p>
