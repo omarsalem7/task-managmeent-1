@@ -4,11 +4,19 @@ import { TopBar } from './shared/layout/top-bar/top-bar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NavBar } from './shared/layout/navigation/navigation.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
+import { ChatbotComponent } from './shared/layout/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TranslateModule, TopBar, NavBar, FooterComponent],
+  imports: [
+    RouterOutlet,
+    TranslateModule,
+    TopBar,
+    NavBar,
+    FooterComponent,
+    ChatbotComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
