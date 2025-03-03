@@ -1,10 +1,4 @@
-[[redirects]]
-  from = "http://*"
-  to = "https://:splat"
-  status = 301
-  force = true
 
-# Then handle SPA routing (must come after the HTTPS redirect)
 [[redirects]]
   from = "/*"
   to = "/index.html"
