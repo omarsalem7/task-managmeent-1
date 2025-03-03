@@ -21,10 +21,18 @@ import { RouterModule } from '@angular/router';
     padding-bottom:6px;
     transition: color 0.7s;
   }
+
+//   nav {
+//   position: sticky;
+//   top: 0;
+//   z-index: 50;
+//   background: #172554; /* Adjust to match your design */
+//   transition: top 0.3s ease-in-out;
+// }
   `,
   template: `
     <nav
-      class="flex justify-between items-center px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
+      class="md:sticky md:top-0 md:z-50 transition-[top] bg-blue-950 duration-500 ease-in-out flex justify-between items-center px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
     >
       <raw-img
         image="images/logo.png"
@@ -103,14 +111,16 @@ import { RouterModule } from '@angular/router';
         </button>
       </div>
     </nav>
-    <div
-      class="ms-10 mt-6 hidden md:flex   justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
-    >
-      <raw-img image="images/motsaql-work.png" class="h-[29px]" />
-      <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
-      <raw-img image="images/work1.png" class="h-[29px]" />
-      <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
-      <raw-img image="images/hr.png" class="h-[29px]" />
+    <div class="bg-blue-950 pt-10 max-md:pt-0">
+      <div
+        class="ms-10  hidden md:flex justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
+      >
+        <raw-img image="images/motsaql-work.jpg" class="h-[29px]" />
+        <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
+        <raw-img image="images/work1.webp" class="h-[29px]" />
+        <div class="w-0.5 bg-zinc-300 h-[30px]"></div>
+        <raw-img image="images/hr.png" class="h-[29px]" />
+      </div>
     </div>
   `,
 })
