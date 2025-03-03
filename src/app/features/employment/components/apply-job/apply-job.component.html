@@ -130,9 +130,13 @@
       <button
         type="submit"
         class="w-full cursor-pointer bg-[#111C55] text-white font-bold py-2 rounded-lg mt-4 hover:bg-[#0a1b72] disabled:opacity-10 disabled:cursor-not-allowed"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || loading"
       >
-        {{ "employmentPage.send" | translate }}
+        {{
+          loading
+            ? ("loadingSend" | translate)
+            : ("employmentPage.send" | translate)
+        }}
       </button>
     </form>
     }
