@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { OurServiceService } from '../../../../core/services/our-service.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -35,12 +36,16 @@ export class OrderComponent {
       this.isSubmited = true; // Mark as submitted if data exists
     }
   }
-
+  loading: boolean = false;
   submitForm() {
     if (this.form.invalid) return;
-    this.service.create(this.form.value).subscribe(() => {
-      this.isSubmited = true;
-      sessionStorage.setItem('isService', 'yes');
-    });
+    this.loading = true;
+    this.service
+      .create(this.form.value)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe(() => {
+        this.isSubmited = true;
+        sessionStorage.setItem('isService', 'yes');
+      });
   }
 }

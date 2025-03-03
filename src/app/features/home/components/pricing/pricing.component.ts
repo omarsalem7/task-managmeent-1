@@ -24,6 +24,7 @@ export class PricingComponent {
         'home.pricing.PLANS.BASIC.FEATURES.FEATURE5',
       ],
       hovered: false,
+      img: 'images/pricing/Basic.png',
     },
     {
       name: 'home.pricing.PLANS.SILVER.NAME',
@@ -38,6 +39,7 @@ export class PricingComponent {
         'home.pricing.PLANS.SILVER.FEATURES.FEATURE5',
       ],
       hovered: false,
+      img: 'images/pricing/Silver.png',
     },
     {
       name: 'home.pricing.PLANS.PLATINUM_REMOTE.NAME',
@@ -52,6 +54,7 @@ export class PricingComponent {
         'home.pricing.PLANS.PLATINUM_REMOTE.FEATURES.FEATURE5',
       ],
       hovered: false,
+      img: 'images/pricing/Gold.png',
     },
     {
       name: 'home.pricing.PLANS.PLATINUM_CENTERS.NAME',
@@ -66,10 +69,24 @@ export class PricingComponent {
         'home.pricing.PLANS.PLATINUM_CENTERS.FEATURES.FEATURE5',
       ],
       hovered: false,
+      img: 'images/pricing/Platinum.png',
     },
   ];
 
+  showPopup = false;
+  selectedPlan: any = null;
+
   setHover(index: number, value: boolean) {
     this.plans[index].hovered = value;
+  }
+
+  openFeaturePopup(plan: any) {
+    this.selectedPlan = plan;
+    this.showPopup = true;
+  }
+
+  closePopup() {
+    this.showPopup = false;
+    this.selectedPlan = null;
   }
 }

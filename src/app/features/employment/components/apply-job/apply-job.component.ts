@@ -8,6 +8,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { JobService } from '../../../../core/services/job.service';
 import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-apply-job',
@@ -69,14 +70,16 @@ export class ApplyJobComponent {
         'https://cdn-icons-png.flaticon.com/512/2457/2457802.png';
     }
   }
-
+  loading: boolean = false;
   submitForm() {
     if (this.form.invalid) return;
+    this.loading = true;
     this.jobService
       .create({
         ...this.form.value,
         attachment: this.uploadedLogo,
       })
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe(() => {
         this.isSubmited = true;
         sessionStorage.setItem('isSubmited', 'yes');
