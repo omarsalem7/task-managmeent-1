@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
       class="md:sticky md:top-0 md:z-50 transition-[top] bg-blue-950 duration-500 ease-in-out flex justify-between items-center max-sm:px-4 px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
     >
       <raw-img
-        image="images/logo.png"
+        image="images/logo-white.png"
         altText="Logo"
         class="h-[60px] w-[202px]"
       />
