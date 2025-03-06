@@ -32,25 +32,25 @@ import { RouterModule } from '@angular/router';
   `,
   template: `
     <nav
-      class="md:sticky md:top-0 md:z-50 transition-[top] bg-blue-950 duration-500 ease-in-out flex justify-between items-center px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
+      class="md:sticky md:top-0 md:z-50 transition-[top] bg-blue-950 duration-500 ease-in-out flex justify-between items-center max-sm:px-4 px-10 py-5 border-b border-solid border-b-zinc-300 max-md:flex-col max-md:gap-5"
     >
       <raw-img
         image="images/logo.png"
         altText="Logo"
         class="h-[60px] w-[202px]"
       />
-      <div class="flex gap-8 max-md:flex-wrap max-md:justify-center ">
+      <div class="flex gap-8 max-sm:gap-3 ">
         <a
           routerLink="/"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
           >{{ 'myHome' | translate }}</a
         >
         <a
           [routerLink]="['/']"
           fragment="about"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
         >
           {{ 'about' | translate }}
         </a>
@@ -58,7 +58,7 @@ import { RouterModule } from '@angular/router';
         <a
           [routerLink]="['/']"
           fragment="whyUs"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
         >
           {{ 'whyUs' | translate }}
         </a>
@@ -66,7 +66,7 @@ import { RouterModule } from '@angular/router';
         <a
           [routerLink]="['/']"
           fragment="packages"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
         >
           {{ 'packages' | translate }}
         </a>
@@ -74,13 +74,13 @@ import { RouterModule } from '@angular/router';
           routerLink="/services"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
           >{{ 'services' | translate }}</a
         >
         <a
           routerLink="/employment"
           routerLinkActive="active"
-          class="text-lg font-semibold text-white"
+          class="text-lg max-sm:text-sm font-semibold text-white"
           >{{ 'employment' | translate }}</a
         >
       </div>
@@ -104,16 +104,17 @@ import { RouterModule } from '@angular/router';
         </button>
         }
 
-        <button
+        <a
+          href="http://platform.danatsharqa.com.sa"
           class="px-5 py-2 text-lg font-semibold hover:border-[#DF8317] transition-all transition-duration-1000 text-white rounded-xl border-2 border-solid border-white border-opacity-70 max-sm:w-full max-sm:text-center"
         >
           {{ 'danatPlatform' | translate }}
-        </button>
+        </a>
       </div>
     </nav>
     <div class="bg-blue-950 pt-10 max-md:pt-0">
       <div
-        class="ms-10  hidden md:flex justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
+        class="ms-10 flex justify-between items-center p-5 bg-white rounded-md w-[357px] max-md:m-0 max-md:w-full"
       >
         <raw-img image="images/motsaql-work.jpg" class="h-[29px]" />
         <div class="w-0.5 bg-zinc-300 h-[30px]"></div>

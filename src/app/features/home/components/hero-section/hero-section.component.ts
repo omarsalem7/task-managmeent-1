@@ -6,8 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslateModule],
   template: `
-    <section class="relative p-10">
-      <article class=" ">
+    <section class="relative p-10 max-sm:min-h-[40vh]">
+      <article class="max-sm:py-6">
         <h1
           class="mb-2 md:mb-8 md:pt-10 text-5xl font-semibold max-sm:text-3xl text-white"
         >
