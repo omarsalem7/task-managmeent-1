@@ -7,13 +7,13 @@ import {
 } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { JobService } from '../../../../core/services/job.service';
-import { FileUploadHandlerComponent } from '../../../../shared/ui/file-upload-handler/file-upload-handler.component';
+import { FileUploadResumeComponent } from '../../../../shared/ui/file-upload-resume/file-upload-resume.component';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-apply-job',
   standalone: true,
-  imports: [TranslateModule, ReactiveFormsModule, FileUploadHandlerComponent],
+  imports: [TranslateModule, ReactiveFormsModule, FileUploadResumeComponent],
   templateUrl: './apply-job.component.html',
   styleUrl: './apply-job.component.scss',
 })

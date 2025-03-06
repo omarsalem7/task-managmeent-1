@@ -125,14 +125,14 @@
         <label for="resume" class="block text-gray-700 font-bold mb-2"
           >{{ "employmentPage.applyJob.resume" | translate }} *</label
         >
-        <app-file-upload-handler
+        <app-file-upload-resume
           [isFile]="true"
           [imagePreview]="imagePreview"
           (fileSelected)="handleFileSelected($event)"
           (cancelClicked)="handleCancelClicked()"
           [fileName]="form.value.resume"
           [idInput]="'resume'"
-        ></app-file-upload-handler>
+        ></app-file-upload-resume>
         <input type="hidden" formControlName="resume" />
         @if (form.controls['resume'].invalid && form.controls['resume'].touched)
         {

@@ -1,13 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 @Component({
-  selector: 'app-file-upload-handler',
+  selector: 'app-file-upload-resume',
   standalone: true,
   imports: [TranslateModule],
-  templateUrl: './file-upload-handler.component.html',
-  styleUrl: './file-upload-handler.component.scss',
+  templateUrl: './file-upload-resume.component.html',
+  styleUrl: './file-upload-resume.component.scss',
 })
-export class FileUploadHandlerComponent {
+export class FileUploadResumeComponent {
   @Input('size') maxFileSize: number = 6;
   @Input() imagePreview: string | ArrayBuffer | null = null;
   @Input() isRequired: boolean = false;
