@@ -10,6 +10,9 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './pricing.component.scss',
 })
 export class PricingComponent {
+  stopPropagation(event: any): void {
+    event.stopPropagation();
+  }
   plans = [
     {
       name: 'home.pricing.PLANS.BASIC.NAME',
