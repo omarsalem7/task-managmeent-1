@@ -80,9 +80,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'employmentPage.improve.1main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'employmentPage.improve.1sub' | translate }}
-          </p>
         </div>
       </article>
 
@@ -142,9 +139,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'employmentPage.improve.2main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'employmentPage.improve.2sub' | translate }}
-          </p>
         </div>
       </article>
 
@@ -204,9 +198,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'employmentPage.improve.3main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'employmentPage.improve.3sub' | translate }}
-          </p>
         </div>
       </article>
     </section>

@@ -23,12 +23,9 @@ export class ApplyJobComponent {
 
   constructor(private fb: FormBuilder, private jobService: JobService) {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: [
-        '',
-        [Validators.required, Validators.pattern('^5[0-9]{8}$')],
-      ],
+      name: [''],
+      email: ['', [Validators.email]],
+      PhoneNumber: ['', [Validators.pattern('^5[0-9]{8}$')]],
       resume: ['', [Validators.required]],
     });
 

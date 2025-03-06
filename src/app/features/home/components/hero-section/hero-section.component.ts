@@ -19,29 +19,6 @@ import { TranslateModule } from '@ngx-translate/core';
         >
           {{ 'home.heroSubTitle' | translate }}
         </p>
-
-        <!-- <div class="mt-10 ">
-          <h2 class="mb-5 text-3xl text-white">نظام معتمد من</h2>
-          <raw-img
-            image="https://cdn.builder.io/api/v1/image/assets/TEMP/3cd906ff88579a8eadd769e88b1a50e37f8cf8bd"
-            class="mb-5 h-[105px] w-[145px]"
-          />
-        </div> -->
-
-        <div
-          class="flex gap-10 mt-6 md:mt-16 max-md:flex-col max-md:items-center max-sm:w-full relative z-10 "
-        >
-          <button
-            class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#D05508] hover:bg-[#fff] hover:text-blue-950 transition-all transition-duration-2000   rounded-md max-sm:w-full max-sm:text-center"
-          >
-            {{ 'home.startFreeTrial' | translate }}
-          </button>
-          <button
-            class="px-7 py-3.5 text-2xl font-semibold text-white bg-[#ffffff1f] hover:bg-[#D05508] transition-all transition-duration-2000 rounded-md border border-[#D05508] border-solid max-sm:w-full max-sm:text-center"
-          >
-            {{ 'home.subscribeNow' | translate }}
-          </button>
-        </div>
       </article>
     </section>
   `,

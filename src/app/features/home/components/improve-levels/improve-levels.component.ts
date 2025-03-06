@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-improve-levels',
   standalone: true,
   imports: [TranslateModule],
-  template: `<main id="about" class="p-0 mx-auto my-0 w-full max-w-[1290px]">
+  template: `<main id="about" class="p-0 mx-auto my-5 w-full max-w-[1290px]">
     <header class="flex flex-col items-center py-6">
       <div class="flex items-center">
         <h1 class="mb-2.5 text-4xl font-bold text-center max-sm:text-3xl">
@@ -35,11 +35,11 @@ import { TranslateModule } from '@ngx-translate/core';
           </svg>
         </div>
       </div>
-      <p
+      <!-- <p
         class="mx-auto my-0 text-xl text-center max-w-[678px] text-slate-500 max-sm:px-5 max-sm:py-0 max-sm:text-base"
       >
         {{ 'home.improve.subTitle' | translate }}
-      </p>
+      </p> -->
     </header>
 
     <section
@@ -80,9 +80,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'home.improve.3main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.3sub' | translate }}
-          </p>
         </div>
       </article>
 
@@ -142,9 +139,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'home.improve.2main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.2sub' | translate }}
-          </p>
         </div>
       </article>
 
@@ -202,9 +196,6 @@ import { TranslateModule } from '@ngx-translate/core';
           >
             {{ 'home.improve.1main' | translate }}
           </h2>
-          <p class="text-xl leading-8 text-neutral-600 max-sm:text-base">
-            {{ 'home.improve.1sub' | translate }}
-          </p>
         </div>
       </article>
       <!-- Step 1 -->

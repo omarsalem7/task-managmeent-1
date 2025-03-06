@@ -1,21 +1,20 @@
-<section class="flex flex-col items-center" id="whyUs">
+<section class="flex flex-col items-center py-12" id="whyUs">
   <header class="flex flex-col items-center max-w-full text-center">
     <h1
-      class="flex flex-wrap justify-center items-center text-4xl font-bold text-blue-950 max-md:max-w-full"
+      class="flex flex-wrap justify-center gap-6 items-center text-4xl font-bold text-blue-950 max-md:max-w-full"
     >
+      <span class="self-stretch my-auto max-w-full">
+        <span style="letter-spacing: 7px; color: rgba(223, 131, 23, 1)">
+          {{ "home.choose.postTitle" | translate }}
+        </span>
+      </span>
       <img
         src="images/choose-mark.svg"
         class="object-contain shrink-0 self-stretch my-auto aspect-square w-[35px]"
         alt=""
       />
-      <span class="self-stretch my-auto max-w-full">
-        {{ "home.choose.preTitle" | translate }}
-        <span style="letter-spacing: 7px; color: rgba(223, 131, 23, 1)">
-          {{ "home.choose.postTitle" | translate }}
-        </span>
-      </span>
     </h1>
-    <p class="mt-4 text-base text-slate-500 max-md:max-w-full">
+    <p class="mt-4 text-2xl text-[#12174378] lg:max-w-[50%] max-md:max-w-full">
       {{ "home.choose.subTitle" | translate }}
     </p>
   </header>
@@ -24,40 +23,22 @@
   >
     <app-feature-card
       [isDark]="true"
-      icon="pi pi-chart-bar"
+      icon="pi pi-video"
       [title]="'home.choose.1main' | translate"
       [description]="'home.choose.1sub' | translate"
     />
     <app-feature-card
       [isDark]="false"
-      icon="pi pi-chart-pie"
+      icon="images/cast.svg"
       [title]="'home.choose.2main' | translate"
       [description]="'home.choose.2sub' | translate"
     />
 
     <app-feature-card
       [isDark]="true"
-      icon="pi pi-asterisk"
-      [title]="'home.choose.1main' | translate"
-      [description]="'home.choose.1sub' | translate"
-    />
-    <app-feature-card
-      [isDark]="false"
-      icon="pi pi-trophy"
-      [title]="'home.choose.2main' | translate"
-      [description]="'home.choose.2sub' | translate"
-    />
-    <app-feature-card
-      [isDark]="true"
-      icon="pi pi-calendar"
-      [title]="'home.choose.1main' | translate"
-      [description]="'home.choose.1sub' | translate"
-    />
-    <app-feature-card
-      [isDark]="false"
       icon="pi pi-shopping-bag"
-      [title]="'home.choose.2main' | translate"
-      [description]="'home.choose.2sub' | translate"
+      [title]="'home.choose.3main' | translate"
+      [description]="'home.choose.3sub' | translate"
     />
   </div>
 </section>
