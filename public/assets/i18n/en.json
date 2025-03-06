@@ -1,182 +1,126 @@
 {
   "contactUs": "Contact Us Now",
-  "loadingSend": "Sending ...",
+  "loadingSend": "Sending...",
   "myHome": "Home",
   "about": "About Us",
-  "whyUs": "Why Us",
-  "services": "Services",
+  "whyUs": "Training",
+  "services": "Request Service",
   "packages": "Packages",
   "employment": "Employment",
   "requestService": "Request Service",
   "danatPlatform": "Danat Platform",
-  "partners": "Our Partners",
+  "partners": "Danat Partners",
+  "optional": "Optional",
   "home": {
-    "title": "Your Best Choice for Managing Your Project",
-    "heroSubTitle": "Everything your project needs in one place, accessible from any device. Now you can manage your business from anywhere and at any time with Al Arabi ERP, the comprehensive solution for accounting and business. Join now...",
+    "title": "Certified Remote Employment Service Provider",
+    "heroSubTitle": "Developing, employing, and training national workforce by connecting remote workers through the Remote Work Platform",
     "startFreeTrial": "Start Your Free Trial",
     "subscribeNow": "Subscribe Now",
     "improve": {
-      "preTitle": "Improve Performance Levels in Your Management",
+      "preTitle": "Improve Performance Levels in Your Organization",
       "postTitle": "Immediately",
-      "subTitle": "This text is an example of a placeholder text that can be replaced in the same space. It has been generated initially now.",
-      "1main": "This is the main text",
-      "2main": "This is the main text",
-      "3main": "This is the main text",
-      "1sub": "Track time through attendance and departure logging",
-      "2sub": "Assign company-specific tasks to employees",
-      "3sub": "Plan and schedule your team’s shifts accurately"
+      "subTitle": "This text is an example of a non-real text that can be replaced in the same space. This text has been generated as a placeholder.",
+      "1main": "Attracting National Workforce",
+      "2main": "Connecting Remote Workers",
+      "3main": "Training, Monitoring, and Performance Measurement"
     },
     "choose": {
-      "preTitle": "Why Choose",
-      "postTitle": "DANAT",
-      "subTitle": "This text is an example of a placeholder text that can be replaced in the same space. It has been generated initially now.",
-      "1main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "2main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "3main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "4main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "5main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "6main": "This text is an example of a placeholder that can be replaced in the same space.",
-      "1sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
-      "2sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
-      "3sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
-      "4sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
-      "5sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text.",
-      "6sub": "This text is an example of a placeholder that can be replaced in the same space. It has been generated from the Arabic text generator, where you can generate similar text."
+      "postTitle": "Training",
+      "subTitle": "Danat Al-Sharqiya is a leading Saudi company offering a wide range of services to enhance quality and improve organizational efficiency in Saudi Arabia through the employment and training of national workforce.",
+      "1main": "Remote Training",
+      "2main": "On-Site Training",
+      "3main": "Diplomas",
+      "1sub": "Through accredited institutes for remote training for a period of 12 months",
+      "2sub": "Through specialized institutes accredited by the Technical and Vocational Training Corporation",
+      "3sub": "By establishing a strategic partnership with the Industrial Secondary Institute to provide employees with specialized and accredited training courses and diplomas"
     },
     "services": {
       "title": "Danat Services",
-      "list1": "Issuance of all invoices for sales and purchase transactions",
-      "list2": "Also includes return invoices, tax invoices, and more",
-      "list3": "Track all reports related to sales, purchases, and other transactions over the year through the Al Arabi platform."
+      "list1": "Issuing all invoices related to sales and purchases",
+      "list2": "Including return invoices, tax invoices, and others",
+      "list3": "Tracking all reports related to sales, purchases, and other transactions over the year through the Al-Arabi platform.",
+      "list4": "Providing consultancy on structuring and managing remote workers",
+      "list5": "Connecting remote workers with the Ministry of Human Resources platform"
     },
     "pricing": {
-      "title": "Join Now and Get a 25% Discount",
-      "subTitle": "Get the Best Offers",
+      "title": "Danat Subscriptions for Remote Work",
+      "subTitle": "Choose the subscription that suits you from Danat's remote work platform. Whether your company is small, medium, or large, we have the right subscription to meet your business needs and budget.",
       "PLANS": {
         "BASIC": {
-          "NAME": "Basic Plan",
+          "NAME": "Danat Basic",
           "TYPE": "SAR / Monthly",
-          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "title": "A limited-feature subscription suitable for small enterprises",
           "FEATURES": {
-            "FEATURE1": "All features of the Advanced Plan",
-            "FEATURE2": "Customer and supplier management",
-            "FEATURE3": "Electronic invoicing",
-            "FEATURE4": "Tax support",
-            "FEATURE5": "Branch management"
+            "FEATURE1": "Time tracking and productivity monitoring",
+            "FEATURE2": "Sending periodic electronic reports",
+            "FEATURE3": "Employee registration in the Remote Work Portal of the Ministry of Human Resources and Social Development",
+            "FEATURE4": "Employment services",
+            "FEATURE5": "Training",
+            "FEATURE6": "Compatible with all operating systems and devices"
           }
         },
         "SILVER": {
-          "NAME": "Silver Plan",
+          "NAME": "Danat Silver",
           "TYPE": "SAR / Monthly",
-          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "title": "A subscription that meets the basic needs of small and medium enterprises",
           "FEATURES": {
-            "FEATURE1": "All features of the Advanced Plan",
-            "FEATURE2": "Customer and supplier management",
-            "FEATURE3": "Electronic invoicing",
-            "FEATURE4": "Tax support",
-            "FEATURE5": "Branch management"
+            "FEATURE1": "Includes Danat Basic features",
+            "FEATURE2": "Complete management of the hiring process",
+            "FEATURE3": "Selection of remote employees who meet the requirements",
+            "FEATURE4": "One-week self-training for employees and managers in the organization",
+            "FEATURE5": "Complete management of the hiring process, including selection, job interviews, scheduling and management of personal interviews, CV management, search, evaluation, classification, and nomination until the employment contract signing stage",
+            "FEATURE6": "Assistance in registering all remote employees in the Remote Work Portal of the Ministry of Human Resources and Social Development (through delegation to Danat Al-Sharqiya to complete and follow up all registration procedures)",
+            "FEATURE7": "Providing organizational, technical capabilities, and systems for companies to communicate with remote employees in measurable tasks.",
+            "FEATURE8": "Providing backup copies of all data",
+            "FEATURE9": "Managing all maintenance, operation, security, and software tools to benefit from technical advancements",
+            "FEATURE10": "Automated integration with the Ministry of Human Resources and Social Development systems",
+            "FEATURE11": "Continuous updates with no additional costs for the organization",
+            "FEATURE12": "Completion of hiring processes within a maximum of 10 working days"
           }
         },
         "PLATINUM_REMOTE": {
-          "NAME": "Platinum Plan (Remote)",
+          "NAME": "Danat Gold",
           "TYPE": "SAR / Monthly",
-          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
+          "title": "A subscription that meets the professional needs of large enterprises and those requiring specialized services",
           "FEATURES": {
-            "FEATURE1": "All features of the Advanced Plan",
-            "FEATURE2": "Customer and supplier management",
-            "FEATURE3": "Electronic invoicing",
-            "FEATURE4": "Tax support",
-            "FEATURE5": "Branch management"
-          }
-        },
-        "PLATINUM_CENTERS": {
-          "NAME": "Platinum Plan (Centers)",
-          "TYPE": "SAR / Monthly",
-          "title": "Provides the highest level of service for large and medium enterprises. Enjoy peace of mind.",
-          "FEATURES": {
-            "FEATURE1": "All features of the Advanced Plan",
-            "FEATURE2": "Customer and supplier management",
-            "FEATURE3": "Electronic invoicing",
-            "FEATURE4": "Tax support",
-            "FEATURE5": "Branch management"
+            "FEATURE1": "Includes Silver Plan features",
+            "FEATURE2": "Comprehensive training for 3 months",
+            "FEATURE3": "One-time employee replacement every 6 months at no extra charge",
+            "FEATURE4": "Continuous productivity monitoring with monthly performance reports",
+            "FEATURE5": "Providing and implementing remote employment plans for each profession",
+            "FEATURE6": "Assisting in job classification for remote work and providing job classification details",
+            "FEATURE7": "Supervising remote employees during the first three months with a structured training and qualification program",
+            "FEATURE8": "Sending monthly reports for project management systems and remote employee performance measurement",
+            "FEATURE9": "Providing organizations with necessary reports to obtain direct financial support from the Human Resources Development Fund",
+            "FEATURE10": "24/7 technical, administrative, and consultancy support",
+            "FEATURE11": "Comprehensive remote work management solutions through a range of services tailored to remote work environments",
+            "FEATURE12": "A monthly visit by the service execution team to the organization's headquarters to complete implementation and address needs for better service utilization",
+            "FEATURE13": "Providing suitable replacements for remote employees in case of resignation"
           }
         }
       }
     }
   },
   "employmentPage": {
-    "send": "Send",
+    "send": "Submit Your Application Now",
     "delete": "Delete",
     "thanks": "Thank you for reaching out to us,",
-    "workingOnRequest": "We are reviewing your request, and the coordinator will contact you as soon as possible.",
+    "workingOnRequest": "Your request is under review, and a coordinator will contact you as soon as possible.",
     "reUpload": "Re-upload",
-    "browse": "Browse Files",
+    "browse": "Upload Resume *",
     "dragDrop": "Drag and drop files here",
-    "improve": {
-      "preTitle": "Improve performance levels in your management",
-      "postTitle": "Immediately",
-      "subTitle": "This text is a placeholder and can be replaced in the same space. It has been generated as an initial example.",
-      "1main": "This is the main text",
-      "2main": "This is the main text",
-      "3main": "This is the main text",
-      "1sub": "Track time through attendance and departure logging",
-      "2sub": "Assign company-specific tasks to employees",
-      "3sub": "Plan and schedule your team's shifts accurately"
-    },
     "applyJob": {
-      "preTitle": "Apply for a job at",
+      "preTitle": "Submit Your Resume",
       "postTitle": "DANAT",
-      "subTitle": "This text is a placeholder and can be replaced in the same space. It has been generated as an initial example.",
+      "subTitle": "Please attach your resume",
       "fullName": "Full Name",
-      "fullNamePlaceHolder": "Enter your full name",
+      "fullNamePlaceHolder": "Enter your name",
       "required": "This field is required",
-      "email": "Enter your email address",
-      "emailPlaceHolder": "Email",
+      "email": "Email",
+      "emailPlaceHolder": "Enter your email",
       "emailError": "Enter a valid email",
-      "phone": "Mobile Number",
-      "phoneError": "Enter a valid number starting with 5",
-      "resume": "Resume"
+      "phone": "Phone",
+      "phoneError": "Enter a valid number starting with..."
     }
-  },
-  "servicePage": {
-    "send": "Send",
-    "delete": "Delete",
-    "thanks": "Thank you for contacting us,",
-    "workingOnRequest": "We are reviewing your request, and the coordinator will contact you as soon as possible.",
-    "reUpload": "Re-upload",
-    "browse": "Browse files",
-    "dragDrop": "Drag and drop files here",
-    "improve": {
-      "preTitle": "Improve performance levels in your management",
-      "postTitle": "immediately",
-      "subTitle": "This text is an example of placeholder text that can be replaced in the same space. This text has been initially generated now.",
-      "1main": "This is the main text",
-      "2main": "This is the main text",
-      "3main": "This is the main text",
-      "1sub": "Track time by recording attendance and departure",
-      "2sub": "Assign company-specific tasks to employees",
-      "3sub": "Plan and schedule your team's shifts accurately"
-    },
-    "requestService": {
-      "preTitle": "Request a job inside",
-      "postTitle": "DANAT",
-      "subTitle": "This text is an example of placeholder text that can be replaced in the same space. This text has been initially generated now.",
-      "fullName": "Full Name",
-      "fullNamePlaceHolder": "Enter your full name",
-      "required": "This field is required",
-      "email": "Enter your email",
-      "emailPlaceHolder": "Email",
-      "emailError": "Enter a valid email",
-      "phone": "Mobile number",
-      "phoneError": "Enter a valid number starting with 5",
-      "inquiryDetails": "Inquiry details"
-    }
-  },
-  "footer": {
-    "contactUs": "Contact Us",
-    "address": "Riyadh, Saudi Arabia",
-    "links": "Links",
-    "rightsReserved": "All rights reserved to Danat Company",
-    "aboutInfo": "This text is a placeholder text occupying temporary space. This text is a placeholder text occupying temporary space. This text is a placeholder text occupying temporary space."
   }
 }
