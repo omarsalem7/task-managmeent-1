@@ -1,6 +1,6 @@
 {
   "contactUs": "Contact Us Now",
-  "loadingSend": "Sending...",
+  "loadingSend": "Sending ...",
   "myHome": "Home",
   "about": "About Us",
   "whyUs": "Training",
@@ -12,102 +12,102 @@
   "partners": "Danat Partners",
   "optional": "Optional",
   "home": {
-    "title": "Certified Remote Employment Service Provider",
-    "heroSubTitle": "Developing, employing, and training national workforce by connecting remote workers through the Remote Work Platform",
+    "title": "Certified Service Provider for Remote Employment",
+    "heroSubTitle": "Development of recruitment and training of national cadres, connecting remote workers via a remote work platform",
     "startFreeTrial": "Start Your Free Trial",
     "subscribeNow": "Subscribe Now",
     "improve": {
       "preTitle": "Improve Performance Levels in Your Organization",
       "postTitle": "Immediately",
-      "subTitle": "This text is an example of a non-real text that can be replaced in the same space. This text has been generated as a placeholder.",
-      "1main": "Attracting National Workforce",
-      "2main": "Connecting Remote Workers",
-      "3main": "Training, Monitoring, and Performance Measurement"
+      "subTitle": "This text is an example of placeholder text that can be replaced within the same space. It has been generated initially.",
+      "1main": "Attract National Cadres",
+      "2main": "Connect Remote Workers",
+      "3main": "Training, Follow-Up, and Performance Measurement"
     },
     "choose": {
       "postTitle": "Training",
-      "subTitle": "Danat Al-Sharqiya is a leading Saudi company offering a wide range of services to enhance quality and improve organizational efficiency in Saudi Arabia through the employment and training of national workforce.",
+      "subTitle": "Danat Sharjah is a leading Saudi company that offers a wide range of services to enhance quality and improve the efficiency of organizations in the Kingdom of Saudi Arabia through recruitment and training of national cadres.",
       "1main": "Remote Training",
-      "2main": "On-Site Training",
+      "2main": "In-Person Training",
       "3main": "Diplomas",
-      "1sub": "Through accredited institutes for remote training for a period of 12 months",
-      "2sub": "Through specialized institutes accredited by the Technical and Vocational Training Corporation",
-      "3sub": "By establishing a strategic partnership with the Industrial Secondary Institute to provide employees with specialized and accredited training courses and diplomas"
+      "1sub": "Through accredited institutes for remote training for 12 months",
+      "2sub": "Through specialized and accredited institutes by the Technical and Vocational Training Corporation",
+      "3sub": "Through a strategic partnership with the secondary industrial institute to provide workers with specialized and accredited courses and diplomas"
     },
     "services": {
       "title": "Danat Services",
-      "list1": "Issuing all invoices related to sales and purchases",
-      "list2": "Including return invoices, tax invoices, and others",
-      "list3": "Tracking all reports related to sales, purchases, and other transactions over the year through the Al-Arabi platform.",
-      "list4": "Providing consultancy on structuring and managing remote workers",
-      "list5": "Connecting remote workers with the Ministry of Human Resources platform"
+      "list1": "E-learning and Training",
+      "list2": "Danat Platform to track attendance, departures, and performance for remote workers",
+      "list3": "Consulting Services and Human Resources Solutions",
+      "list4": "Providing consultations regarding structuring and managing remote workers",
+      "list5": "Connecting remote workers on the platform of the Ministry of Human Resources and Social Development"
     },
     "pricing": {
       "title": "Danat Subscriptions for Remote Work",
-      "subTitle": "Choose the subscription that suits you from Danat's remote work platform. Whether your company is small, medium, or large, we have the right subscription to meet your business needs and budget.",
+      "subTitle": "Choose the subscription that suits you from Danat's remote work platform subscriptions. Whether your company is small, medium, or large, you will find the suitable subscription to meet your business needs and budget.",
       "PLANS": {
         "BASIC": {
-          "NAME": "Danat Basic",
+          "NAME": "Basic Danat",
           "TYPE": "SAR / Monthly",
-          "title": "A limited-feature subscription suitable for small enterprises",
+          "title": "Subscription with limited features, suitable for small business needs",
           "FEATURES": {
             "FEATURE1": "Time tracking and productivity monitoring",
             "FEATURE2": "Sending periodic electronic reports",
-            "FEATURE3": "Employee registration in the Remote Work Portal of the Ministry of Human Resources and Social Development",
+            "FEATURE3": "Employee registration in the Ministry of Human Resources and Social Development remote work portal",
             "FEATURE4": "Employment services",
             "FEATURE5": "Training",
-            "FEATURE6": "Compatible with all operating systems and devices"
+            "FEATURE6": "Works on all operating systems and devices"
           }
         },
         "SILVER": {
-          "NAME": "Danat Silver",
+          "NAME": "Silver Danat",
           "TYPE": "SAR / Monthly",
-          "title": "A subscription that meets the basic needs of small and medium enterprises",
+          "title": "Subscription that meets the basic needs of small and medium businesses",
           "FEATURES": {
-            "FEATURE1": "Includes Danat Basic features",
-            "FEATURE2": "Complete management of the hiring process",
-            "FEATURE3": "Selection of remote employees who meet the requirements",
+            "FEATURE1": "Basic Danat features",
+            "FEATURE2": "Full management of the recruitment process",
+            "FEATURE3": "Selecting remote workers who meet the required criteria",
             "FEATURE4": "One-week self-training for employees and managers in the organization",
-            "FEATURE5": "Complete management of the hiring process, including selection, job interviews, scheduling and management of personal interviews, CV management, search, evaluation, classification, and nomination until the employment contract signing stage",
-            "FEATURE6": "Assistance in registering all remote employees in the Remote Work Portal of the Ministry of Human Resources and Social Development (through delegation to Danat Al-Sharqiya to complete and follow up all registration procedures)",
-            "FEATURE7": "Providing organizational, technical capabilities, and systems for companies to communicate with remote employees in measurable tasks.",
-            "FEATURE8": "Providing backup copies of all data",
-            "FEATURE9": "Managing all maintenance, operation, security, and software tools to benefit from technical advancements",
-            "FEATURE10": "Automated integration with the Ministry of Human Resources and Social Development systems",
-            "FEATURE11": "Continuous updates with no additional costs for the organization",
-            "FEATURE12": "Completion of hiring processes within a maximum of 10 working days"
+            "FEATURE5": "Complete management of the recruitment process, including selection of remote workers who meet recruitment criteria, conducting interviews, scheduling and managing personal interviews, managing resumes, evaluation, classification, and shortlisting for employment contracts",
+            "FEATURE6": "Assistance in registering remote workers in the Ministry of Human Resources and Social Development remote work portal (through authorizing Danat Sharjah to complete and follow up on all registration procedures)",
+            "FEATURE7": "Providing organizational, technical, systems, and applications capabilities for the organization to communicate with remote workers for tasks that need measurable performance",
+            "FEATURE8": "Providing backup for all data",
+            "FEATURE9": "Managing all operations for maintenance, operations, protection of systems, programs, tools, and utilizing the outcomes of technology",
+            "FEATURE10": "Automated integration with the Ministry of Human Resources and Social Development's sector systems",
+            "FEATURE11": "Continuous updates with no additional cost for the organization",
+            "FEATURE12": "Completing and finalizing recruitment processes within a maximum of 10 working days"
           }
         },
         "PLATINUM_REMOTE": {
-          "NAME": "Danat Gold",
+          "NAME": "Platinum Danat",
           "TYPE": "SAR / Monthly",
-          "title": "A subscription that meets the professional needs of large enterprises and those requiring specialized services",
+          "title": "Subscription that meets the professional needs of large businesses and organizations requiring professional services",
           "FEATURES": {
-            "FEATURE1": "Includes Silver Plan features",
+            "FEATURE1": "Silver subscription features",
             "FEATURE2": "Comprehensive training for 3 months",
-            "FEATURE3": "One-time employee replacement every 6 months at no extra charge",
+            "FEATURE3": "Replacing remote workers once every 6 months without charges",
             "FEATURE4": "Continuous productivity monitoring with monthly performance reports",
-            "FEATURE5": "Providing and implementing remote employment plans for each profession",
-            "FEATURE6": "Assisting in job classification for remote work and providing job classification details",
-            "FEATURE7": "Supervising remote employees during the first three months with a structured training and qualification program",
-            "FEATURE8": "Sending monthly reports for project management systems and remote employee performance measurement",
-            "FEATURE9": "Providing organizations with necessary reports to obtain direct financial support from the Human Resources Development Fund",
-            "FEATURE10": "24/7 technical, administrative, and consultancy support",
-            "FEATURE11": "Comprehensive remote work management solutions through a range of services tailored to remote work environments",
-            "FEATURE12": "A monthly visit by the service execution team to the organization's headquarters to complete implementation and address needs for better service utilization",
-            "FEATURE13": "Providing suitable replacements for remote employees in case of resignation"
+            "FEATURE5": "Providing and implementing remote work plans for the organization by profession",
+            "FEATURE6": "Assisting in classifying jobs that can be done remotely and providing job classification",
+            "FEATURE7": "Supervising remote workers during the first 3 months with providing training and development programs",
+            "FEATURE8": "Sending monthly reports to the project management system and remote employee performance monitoring",
+            "FEATURE9": "Providing any reports needed for direct financial support from the Human Resources Development Fund",
+            "FEATURE10": "Technical, administrative, and consulting support 24/7",
+            "FEATURE11": "Comprehensive solutions for managing remote work through a set of services for managing a remote work environment",
+            "FEATURE12": "Visiting the service implementation team at the organization’s location once a month to complete the implementation process and enhance service benefits",
+            "FEATURE13": "Providing a suitable alternative for remote workers during resignation with a recruitment process"
           }
         }
       }
     }
   },
   "employmentPage": {
-    "send": "Submit Your Application Now",
+    "send": "Send Request Now",
     "delete": "Delete",
-    "thanks": "Thank you for reaching out to us,",
-    "workingOnRequest": "Your request is under review, and a coordinator will contact you as soon as possible.",
+    "thanks": "Thank you for contacting us,",
+    "workingOnRequest": "Your request is being reviewed, and the coordinator will contact you as soon as possible",
     "reUpload": "Re-upload",
-    "browse": "Upload Resume *",
+    "browse": "Upload CV *",
     "dragDrop": "Drag and drop files here",
     "applyJob": {
       "preTitle": "Submit Your Resume",
@@ -119,8 +119,39 @@
       "email": "Email",
       "emailPlaceHolder": "Enter your email",
       "emailError": "Enter a valid email",
-      "phone": "Phone",
-      "phoneError": "Enter a valid number starting with..."
+      "phone": "Phone Number",
+      "phoneError": "Enter a valid number starting with 5",
+      "resume": "Resume"
     }
+  },
+  "servicePage": {
+    "send": "Send Request Now",
+    "delete": "Delete",
+    "thanks": "Thank you for contacting us,",
+    "workingOnRequest": "Your request is being reviewed, and the coordinator will contact you as soon as possible",
+    "reUpload": "Re-upload",
+    "browse": "Browse Files",
+    "dragDrop": "Drag and drop files here",
+    "requestService": {
+      "preTitle": "Request Your Service Now",
+      "postTitle": "DANAT",
+      "subTitle": "This text is an example of placeholder text that can be replaced within the same space. It has been generated initially.",
+      "fullName": "Full Name",
+      "fullNamePlaceHolder": "Enter the company name here",
+      "required": "This field is required",
+      "email": "Email",
+      "emailPlaceHolder": "Enter your email",
+      "emailError": "Enter a valid email",
+      "phone": "Phone Number",
+      "phoneError": "Enter a valid number starting with 5",
+      "inquiryDetails": "Inquiry Details"
+    }
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "address": "Riyadh - Saudi Arabia",
+    "links": "Links",
+    "rightsReserved": "All rights reserved to Danat Company",
+    "aboutInfo": "Development of recruitment and training of national cadres, connecting remote workers via the remote work platform"
   }
 }
